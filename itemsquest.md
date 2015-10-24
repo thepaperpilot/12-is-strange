@@ -6,17 +6,17 @@
 
 ###Chlorine Dioxide Pipe Bomb Puzzle
 
-    Sugar
-    Soda Can
-    Sodium Chlorate (weed killer)
-    Duct Tape
+    Sugar - done
+    Soda Can - done
+    Sodium Chlorate (weed killer) - done
+    Duct Tape - done
 
 ###Gun Puzzle
 
-    Gun
+    Gun - done
     Bottles
 
-###Squirrel Puzzle
+###Cat Puzzle
 
     Food
 
@@ -98,8 +98,8 @@ Outside Blackwell Academy
 
 ###Area 7
 
-Squirrel chases Blue Jay. Seems like QTE but it is not.
-Must feed the squirrel to make sure Blue Jay doesn't destroy itself and area can open.
+Cat chases Blue Jay. Seems like QTE but it is not.
+Must feed the Cat to make sure Blue Jay doesn't destroy itself and area can open.
 The animals just move through the area and it seems like nothing for the most part.
 
 ###Area 8
@@ -179,4 +179,3 @@ Scenery
 -Citadel Tower
 -Planet Earth (with reaper attack)
 -Planet Earth (without reaper attack
-
