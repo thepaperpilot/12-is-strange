@@ -1,6 +1,7 @@
 package thepaperpilot.strange.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -27,10 +28,24 @@ public class ChoicesScreen implements Screen {
         decisionTable.setFillParent(true);
         decisionTable.debugAll();
 
+        // Look at if decisions have already been made
+        // And change the decisions based on the map
+        Main.decision3 = -1;
         String choice = "are you a terrible person?";
         String[] options = new String[]{"sacrifice arcadia bay",
                 "sacrifice arcadia bae"};
         setChoice(choice, options);
+
+        stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
+            public void clicked (InputEvent event, float x, float y) {
+                if(Main.decision2 != -1) {
+                    Main.decision2 = -1;
+                } else {
+                    Main.decision1 = -1;
+                }
+                setChoice("look at you reversing time", new String[]{"I was taught by the best!"});
+            }
+        });
     }
 
     private void setChoice(String choice, String[] options) {
@@ -51,7 +66,7 @@ public class ChoicesScreen implements Screen {
         for (int i = 0; i < optionButtons.length; i++) {
             decisionTable.add(optionButtons[i]).width((int) optionWidth).pad(5);
             final int decision = i;
-            optionButtons[i].addListener(new ClickListener() {
+            optionButtons[i].addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
                     // TODO add a graph of the different choices. Go to the next.
                     if (Main.decision1 == -1) {

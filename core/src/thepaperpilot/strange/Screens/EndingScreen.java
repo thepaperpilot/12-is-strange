@@ -1,6 +1,7 @@
 package thepaperpilot.strange.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Entities.Max;
@@ -48,9 +48,15 @@ public class EndingScreen implements Screen {
 
         stage.addActor(inventoryTable);
 
-        stage.addListener(new ClickListener() {
+        stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked (InputEvent event, float x, float y) {
                 max.target = (int) x - max.getWidth() / 2;
+            }
+        });
+
+        stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
+            public void clicked (InputEvent event, float x, float y) {
+                Main.changeScreen(new ChoicesScreen());
             }
         });
 

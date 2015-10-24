@@ -2,6 +2,7 @@ package thepaperpilot.strange;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,8 +26,11 @@ public class Main extends Game {
     public static final int pixelScaling = 6;
 
     public static void findEnding() {
-        inventory.add(new Item("testing an inventory item", new Image(Main.skin, "coin100")));
         instance.setScreen(new EndingScreen(0));
+    }
+
+    public static void changeScreen(Screen screen) {
+        instance.setScreen(screen);
     }
 
     @Override
