@@ -124,3 +124,48 @@ Keypad. Use Fortune Cookie note to get it.
 ###Area 13
 
 Pick up Liquor to enter the Vortex Club party. Door person doesn't let you through otherwise.
+
+Characters that need to be done
+
+-Maxine
+-Chloe
+-Nathan
+-Jefferson
+-David Madsen
+-Frank Bowers
+-Rachel Amber
+-Kate
+-Victoria
+-Warren
+-Alyssa
+
+-Squirell
+-Blue Jay
+-Blue Butterfly
+-Doe
+-Dog Pompidou
+
+ending 12
+
+-John Sheppard
+-Harbinger
+-Extra Reapers
+-Conrad Verner in SpaceShip
+-Fleet ships
+
+Scenery
+
+-Dorm Room
+-Hallway
+-Junkyard
+-bathroom/showerroom
+-Outside Blackwell Academy
+-Roadway with Cars
+-RV exterior
+-House Interior
+
+-Citadel Beam
+-Citadel Tower
+-Planet Earth (with reaper attack)
+-Planet Earth (without reaper attack
+
