@@ -3,6 +3,7 @@
 **Game Ending 1**
 
 Choices - Don't tell the Truth, Blame Jefferson, Warn
+
 b3x = Lie, Blame Jefferson, Warn
 
 * Nathan is the Hero
@@ -18,6 +19,7 @@ After taking advantage of his father, he snitches on his Dad forcing him to be a
 **Game Ending 2**
 
 Choices - Tell the Truth, Blame Nathan, Warn  
+
 a2x = Truth, Blame Nathan, Warn
 
 * Rachel Amber's Ghost
@@ -32,6 +34,7 @@ News reports show that Jefferson to have "committed suicide." The prescotts go t
 **Game Ending 3**
 
 Choices - Don't tell the Truth, Blame Nathan,  Warn
+
 b2x = Lie, Blame Nathan, Warn
 
 * Maxine sacrifices herself
@@ -47,6 +50,7 @@ Jefferson is arrested and the prescotts under investigation but everyone ends up
 **Game Ending 4**
 
 Choices - Don't tell the Truth, Blame David, Don't Warn
+
 b1y = Lie, Blame David, Don't Warn
 
 * Jefferson gets away with it all
@@ -59,6 +63,7 @@ Maxine is seen standing still in a room by herself in Seattle Washington with pi
 **Game Ending 5**
 
 Choices - Don't tell the Truth, Blame Jefferson, Don't Warn
+
 b3y = Lie, Blame Jefferson, Don't Warn
 
 * Maxine the Sole Survivor
@@ -72,6 +77,7 @@ Maxine becomes the world's greatest photographer at everyone else's expense.
 **Game Ending 6**
 
 Choices - Don't tell the Truth, Blame David, Warn
+
 b1x = Lie, Blame David, Warn
 
 * Life with Consequences
@@ -84,6 +90,7 @@ Half of the town survives. People are missing and no one seems really happy.
 **Game Ending 7**
 
 Choices - Tell the Truth, Blame David, Warn
+
 a1x = Truth, Blame David, Warn
 
 * Time Paradox
@@ -96,6 +103,7 @@ She ceases to exist in the current reality but Chloe has this memory of this gir
 **Game Ending 8**
 
 Choices - Tell the Truth, Blame Jefferson, Warn
+
 a3x = Truth, Blame Jefferson, Warn
 
 * David saves the day.
@@ -109,6 +117,7 @@ The butterfly flies away knowing all is well. Maxine smiles at the sky.
 **Game Ending 9**
 
 Choices - Don't tell the Truth, Blame Nathan, Don't Warn
+
 b2y = Lie, Blame Nathan, Don't Warn
 
 * Alpha Warren
@@ -120,6 +129,7 @@ The town isn't properly informed and a very small percentage of the town ends up
 **Game Ending 10**
 
 Choices - Tell the Truth, Blame Nathan, Don't Warn
+
 a2y = Truth, Blame Nathan, Don't Warn
 
 * It was a Snitch
@@ -131,6 +141,7 @@ Everything is reported early on and proper measures are taken. The town can be s
 **Game Ending 11**
 
 Choices - Tell the Truth, Blame David, Don't Warn
+
 a1y = Truth, Blame David, Don't Warn
 
 * Selfish Ending
@@ -141,6 +152,7 @@ Chloe and Maxine decide to live their life in Los Angeles and drive on their way
 **Game Ending 12**
 
 Choices - Tell the Truth, Blame Jefferson, Don't Warn
+
 a3y = Truth, Blame Jefferson, Don't Warn
 
 * Awaken from Indoctrination
