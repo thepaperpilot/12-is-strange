@@ -18,6 +18,7 @@ public class ChoicesScreen implements Screen {
     public void show() {
         stage = new Stage(new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.input.setInputProcessor(stage);
 
         decisionTable = new Table(Main.skin);
         decisionTable.setFillParent(true);
@@ -30,6 +31,7 @@ public class ChoicesScreen implements Screen {
     }
 
     public void setChoice(String choice, String[] options) {
+        decisionTable.clearChildren();
         Label choiceLabel = new Label(choice, Main.skin);
         choiceLabel.setWrap(true);
         choiceLabel.setAlignment(Align.center);
@@ -43,8 +45,23 @@ public class ChoicesScreen implements Screen {
         }
         optionWidth = Math.min(optionWidth, stage.getWidth() / (double) (options.length + 1)) + 20;
         decisionTable.add(choiceLabel).width((int) choiceWidth).colspan(options.length).padBottom(20).row();
-        for (TextButton optionButton : optionButtons) {
-            decisionTable.add(optionButton).width((int) optionWidth).padRight(optionWidth < choiceWidth ? 0 : 10);
+        for (int i = 0; i < optionButtons.length; i++) {
+            decisionTable.add(optionButtons[i]).width((int) optionWidth).padRight(optionWidth * options.length < choiceWidth ? 0 : 10);
+            final int decision = i;
+            optionButtons[i].addListener(new ClickListener() {
+                public void clicked (InputEvent event, float x, float y) {
+                    // TODO add a graph of the different choices. Go to the next.
+                    if(Main.decision1 == -1) {
+                        Main.decision1 = decision;
+                    } else if(Main.decision2 == -1) {
+                        Main.decision2 = decision;
+                    } else {
+                        Main.decision3 = decision;
+                        Main.findEnding();
+                    }
+                    setChoice("you made a decision. how does that make you feel?", new String[]{"Fucking terrible", "alright I guess", "could be better"});
+                }
+            });
         }
 
         stage.addActor(decisionTable);

@@ -6,28 +6,21 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import thepaperpilot.strange.Screens.ChoicesScreen;
+import thepaperpilot.strange.Screens.EndingScreen;
 
 public class Main extends Game {
+	private static Main instance;
+
 	public static Skin skin;
 	public static AssetManager manager = new AssetManager();
 
-	public static enum decision {
-		ENDING1,
-		ENDING2,
-		ENDING3,
-		ENDING4,
-		ENDING5,
-		ENDING6,
-		ENDING7,
-		ENDING8,
-		ENDING9,
-		ENDING10,
-		ENDING11,
-		ENDING12
-	}
+	public static int decision1 = -1;
+	public static int decision2 = -1;
+	public static int decision3 = -1;
 	
 	@Override
 	public void create () {
+		instance = this;
 		manager.load("assets/textures.json", Skin.class);
 	}
 
@@ -46,5 +39,9 @@ public class Main extends Game {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void findEnding() {
+		instance.setScreen(new EndingScreen(0));
 	}
 }
