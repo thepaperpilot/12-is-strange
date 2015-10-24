@@ -42,6 +42,7 @@ public class Main extends Game {
         manager.load("assets/maxStill.png", Texture.class);
         manager.load("assets/maxWalk.png", Texture.class);
         manager.load("assets/clock.png", Texture.class);
+        manager.load("assets/catIdle.png", Texture.class);
     }
 
     @Override

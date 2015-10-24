@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import thepaperpilot.strange.Entities.Cat;
 import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Main;
@@ -47,6 +48,7 @@ public class MenuScreen implements Screen {
         max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
         stage.addActor(clock);
+        stage.addActor(new Cat((int) stage.getWidth() / 3, 10));
     }
 
     @Override

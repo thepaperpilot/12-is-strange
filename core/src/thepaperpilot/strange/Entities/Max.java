@@ -21,16 +21,12 @@ public class Max extends Image {
     private float time;
 
     public Max(int x, int y) {
-        still = new TextureRegionDrawable(new TextureRegion(Main.manager.get("assets/maxStill.png", Texture.class), 16, 32));
+        still = new TextureRegionDrawable(new TextureRegion(Main.manager.get("assets/maxStill.png", Texture.class)));
         Texture maxWalkTexture = Main.manager.get("assets/maxWalk.png", Texture.class);
         setHeight(maxWalkTexture.getHeight());
         setWidth(maxWalkTexture.getWidth() / 14);
         TextureRegion[][] tmp = TextureRegion.split(maxWalkTexture, (int) getWidth(), (int) getHeight());
-        TextureRegion[] frames = new TextureRegion[14];
-        int index = 0;
-        for (int i = 0; i < 14; i++) {
-            frames[index++] = tmp[0][i];
-        }
+        TextureRegion[] frames = tmp[0];
         walk = new Animation(ANIM_SPEED, frames);
         time = 0;
         this.x = target = x;
