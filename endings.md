@@ -1,8 +1,3 @@
-**test**
-*test2*
-_another test_
-* yep, bullets to
-
 * 12 Game Endings *
 
 **Game Ending 1**
