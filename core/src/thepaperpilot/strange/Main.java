@@ -15,13 +15,13 @@ import thepaperpilot.strange.Screens.EndingScreen;
 import java.util.ArrayList;
 
 public class Main extends Game {
-    public static Skin skin;
     public static final AssetManager manager = new AssetManager();
+    public static Skin skin;
     public static int decision1 = -1;
     public static int decision2 = -1;
     public static int decision3 = -1;
     // TODO save/load-ing
-    public static ArrayList<Item> inventory = new ArrayList<Item>();
+    public static final ArrayList<Item> inventory = new ArrayList<Item>();
     private static Main instance;
 
     public static void findEnding() {

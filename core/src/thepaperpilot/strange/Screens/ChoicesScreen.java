@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thepaperpilot.strange.Main;
 
@@ -38,8 +37,8 @@ public class ChoicesScreen implements Screen {
         setChoice(choice, options);
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
-            public void clicked (InputEvent event, float x, float y) {
-                if(Main.decision2 != -1) {
+            public void clicked(InputEvent event, float x, float y) {
+                if (Main.decision2 != -1) {
                     Main.decision2 = -1;
                 } else {
                     Main.decision1 = -1;

@@ -13,12 +13,12 @@ public class Max extends Image {
     private static final float WALK_SPEED = .8f;
     private static final float ANIM_SPEED = .1f;
 
-    public float x;
-    public float y;
+    private float x;
+    private final float y;
     public int target;
-    public Animation walk;
-    public Drawable still;
-    float time;
+    private final Animation walk;
+    private final Drawable still;
+    private float time;
 
     public Max(int x, int y) {
         still = new TextureRegionDrawable(new TextureRegion(Main.manager.get("assets/maxStill.png", Texture.class), 16, 32));
@@ -38,12 +38,12 @@ public class Max extends Image {
     }
 
     public void act(float delta) {
-        if(x < target) {
+        if (x < target) {
             x = Math.min(x + WALK_SPEED, target);
-        } else if(x > target) {
+        } else if (x > target) {
             x = Math.max(x - WALK_SPEED, target);
         }
-        if(x == target) {
+        if (x == target) {
             setDrawable(still);
         } else {
             time += Gdx.graphics.getDeltaTime();

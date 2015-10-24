@@ -16,10 +16,10 @@ import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Main;
 
 public class EndingScreen implements Screen {
-    Stage stage;
     private final int ending;
-    Table inventoryTable;
-    Max max;
+    private Stage stage;
+    private Table inventoryTable;
+    private Max max;
 
     public EndingScreen(int ending) {
         this.ending = ending;
@@ -42,7 +42,7 @@ public class EndingScreen implements Screen {
         stage.addActor(inventoryTable);
 
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
-            public void clicked (InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 max.target = (int) (x - max.getWidth() / 2);
             }
         });
