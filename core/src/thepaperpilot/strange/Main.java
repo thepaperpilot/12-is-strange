@@ -23,9 +23,9 @@ public class Main extends Game {
     // TODO save/load-ing
     public static ArrayList<Item> inventory = new ArrayList<Item>();
     private static Main instance;
-    public static final int pixelScaling = 6;
 
     public static void findEnding() {
+        inventory.add(new Item("testing fonts", new Image(skin, "coin100")));
         instance.setScreen(new EndingScreen(0));
     }
 
@@ -47,7 +47,8 @@ public class Main extends Game {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (manager.update() && getScreen() == null) {
             skin = manager.get("assets/textures.json", Skin.class);
-            skin.getFont("font").getData().setScale(.5f);
+            skin.getFont("large").getData().setScale(.25f);
+            skin.getFont("font").getData().setScale(.25f);
 
             setScreen(new ChoicesScreen());
         } else

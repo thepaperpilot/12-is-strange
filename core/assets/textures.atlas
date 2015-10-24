@@ -149,10 +149,10 @@ default-slider
   index: -1
 default-round
   rotate: true
-  xy: 145, 38
-  size: 14, 22
-  split: 6, 5, 5, 5
-  orig: 14, 22
+  xy: 146, 39
+  size: 12, 20
+  split: 5, 5, 5, 5
+  orig: 12, 20
   offset: 0, 0
   index: -1
 default-round-large
