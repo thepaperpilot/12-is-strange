@@ -1,7 +1,7 @@
 **Put requests for art here**
 *Single star high priority assets*
 
-**Characters- name and required animations**
+##Characters- name and required animations**
 
 
 
@@ -12,7 +12,7 @@
 
 
 
-**Scenery- backgrounds etc**
+##Scenery- backgrounds etc
 
 
 
@@ -25,15 +25,9 @@
 
 
 
-**Items- Inventrory or world items**
+##Items- Inventrory or world items
 
 
 
 
-
-
-
-
-
-
-**UI**
+##UI
