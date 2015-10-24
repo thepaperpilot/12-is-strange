@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import thepaperpilot.strange.Items.Item;
@@ -21,6 +22,7 @@ public class Main extends Game {
     // TODO save/load-ing
     public static ArrayList<Item> inventory = new ArrayList<Item>();
     private static Main instance;
+    public static final int pixelScaling = 6;
 
     public static void findEnding() {
         inventory.add(new Item("testing an inventory item", new Image(Main.skin, "coin100")));
@@ -31,6 +33,8 @@ public class Main extends Game {
     public void create() {
         instance = this;
         manager.load("assets/textures.json", Skin.class);
+        manager.load("assets/maxStill.png", Texture.class);
+        manager.load("assets/maxWalk.png", Texture.class);
     }
 
     @Override
