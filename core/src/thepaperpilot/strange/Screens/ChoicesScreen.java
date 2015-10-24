@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -18,6 +21,9 @@ public class ChoicesScreen implements Screen {
     private Stage stage;
     private Table decisionTable;
 
+    public SpriteBatch batch;
+    public static ParticleEffect choicesParticle;
+
     @Override
     public void show() {
         stage = new Stage(new StretchViewport(256, 144));
@@ -26,7 +32,6 @@ public class ChoicesScreen implements Screen {
 
         decisionTable = new Table(Main.skin);
         decisionTable.setFillParent(true);
-        //decisionTable.debugAll();
 
         // Look at if decisions have already been made
         // And change the decisions based on the map
@@ -46,6 +51,11 @@ public class ChoicesScreen implements Screen {
                 setChoice("look at you reversing time", new String[]{"I was taught by the best!"});
             }
         });
+
+        batch = new SpriteBatch();
+        choicesParticle = new ParticleEffect();
+        choicesParticle.load(Gdx.files.internal("assets/swirls.p"), Gdx.files.internal("assets"));
+        choicesParticle.setPosition(stage.getWidth() / 2, stage.getHeight() / 2);
     }
 
     private void setChoice(String choice, String[] options) {
@@ -87,6 +97,12 @@ public class ChoicesScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        final Matrix4 trans = new Matrix4();
+        trans.scale(Gdx.graphics.getWidth() / stage.getWidth(), Gdx.graphics.getHeight() / stage.getHeight(), 1);
+        batch.setTransformMatrix(trans);
+        batch.begin();
+        choicesParticle.draw(batch, delta / 10f);
+        batch.end();
         stage.draw();
     }
 
@@ -113,5 +129,6 @@ public class ChoicesScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        batch.dispose();
     }
 }
