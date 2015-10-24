@@ -14,15 +14,15 @@
 ###Gun Puzzle
 
     Gun - done
-    Bottles
+    Bottles - done
 
 ###Cat Puzzle
 
-    Food
+    Food bowl - done
 
 ###Camera Puzzle
 
-    Camera
+    Camera - done
     Photo
 
 ###Exit School Puzzle
