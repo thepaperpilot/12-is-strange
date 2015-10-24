@@ -23,27 +23,27 @@
 ###Camera Puzzle
 
     Camera - done
-    Photo
+    Photo - done
 
 ###Exit School Puzzle
 
-    Hammer
+    Hammer - done
 
 ###Warren Puzzle
 
-    Flash Drive
+    Flash Drive - done
 
 ###Fat Girl Roadblock Puzzle
 
-    Soap
+    Soap - done
 
 ###Dog Puzzle
 
-    Dog Bone
+    Dog Bone - done
 
 ###Locked Door Puzzle
 
-    Keys
+    Keys - done
 
 ###Detective Puzzle
 
