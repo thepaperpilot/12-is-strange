@@ -23,7 +23,7 @@ public class RightClickIndicator extends Image {
         time = 0;
     }
 
-    public void draw (Batch batch, float parentAlpha) {
+    public void draw(Batch batch, float parentAlpha) {
         time += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = new TextureRegion(indicator.getKeyFrame(time, true));
         setDrawable(new TextureRegionDrawable(currentFrame));

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import thepaperpilot.strange.Items.Item;
-import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.EndingScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
 
@@ -17,12 +16,12 @@ import java.util.ArrayList;
 
 public class Main extends Game {
     public static final AssetManager manager = new AssetManager();
+    // TODO save/load-ing
+    public static final ArrayList<Item> inventory = new ArrayList<Item>();
     public static Skin skin;
     public static int decision1 = -1;
     public static int decision2 = -1;
     public static int decision3 = -1;
-    // TODO save/load-ing
-    public static final ArrayList<Item> inventory = new ArrayList<Item>();
     private static Main instance;
 
     public static void findEnding() {

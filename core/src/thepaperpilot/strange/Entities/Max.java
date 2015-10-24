@@ -12,12 +12,11 @@ import thepaperpilot.strange.Main;
 public class Max extends Image {
     private static final float WALK_SPEED = .8f;
     private static final float ANIM_SPEED = .1f;
-
-    private float x;
     private final float y;
-    public int target;
     private final Animation walk;
     private final Drawable still;
+    public int target;
+    private float x;
     private float time;
 
     public Max(int x, int y) {

@@ -19,11 +19,11 @@ import thepaperpilot.strange.Main;
 import java.util.Random;
 
 public class MenuScreen implements Screen {
+    private static final Random ran = new Random();
     private Stage stage;
     private Max max;
     private Clock clock;
     private float time;
-    private static final Random ran = new Random();
 
     @Override
     public void show() {
@@ -34,7 +34,7 @@ public class MenuScreen implements Screen {
         Label title = new Label("12 is Strange", Main.skin, "large");
         Button start = new TextButton("Start Game", Main.skin);
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
-            public void clicked (InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 Main.changeScreen(new ChoicesScreen());
             }
         });
@@ -54,7 +54,7 @@ public class MenuScreen implements Screen {
     @Override
     public void render(float delta) {
         time += ran.nextFloat() * delta;
-        if(time > 2) {
+        if (time > 2) {
             max.target = ran.nextInt((int) stage.getWidth());
             clock.setTime(ran.nextInt(12));
             time = 0;
