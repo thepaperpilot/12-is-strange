@@ -80,6 +80,10 @@ Drop Flash Drive in trash can to get him to move.
 
 Fat Girl Alyssa is in the way. Must use soap to get her out of the way.
 
+
+##Choice Dialogue Box 1 - Bae or Bay(Truth or Lie)
+
+
 ###Area 5
 
 Gun and Bottle must be collected to practice shooting
@@ -101,6 +105,10 @@ The animals just move through the area and it seems like nothing for the most pa
 ###Area 8
 
 Need key to get back in the school. Look under doormat to get in.
+
+
+##Choice Dialogue Box 2 - Blame Nathan, Jefferson, or David
+
 
 ###Area 9
 
@@ -124,6 +132,9 @@ Keypad. Use Fortune Cookie note to get it.
 ###Area 13
 
 Pick up Liquor to enter the Vortex Club party. Door person doesn't let you through otherwise.
+
+##Choice Dialogue Box 3 - Warn or Don't Warn
+
 
 Characters that need to be done
 
