@@ -25,7 +25,7 @@
 
 **Spirit Animals
 
-* Squirell
+* Cat
 * Blue Jay
 * Blue Butterfly
 * Doe

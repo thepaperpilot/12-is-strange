@@ -47,18 +47,18 @@
 
 ###Detective Puzzle
 
-    Notebook
-    Files
-    Burner Phone
-    Fire Extinguisher
+    Notebook - done
+    Files - done
+    Burner Phone - done
+    Fire Extinguisher - done
 
 ###Keypad Puzzle
 
-    Code from fortune Cookie
+    Code from fortune Cookie - done
 
 ###Vortex Club Puzzle
 
-    Liquor
+    Liquor - done
 
 ##Item Quest
 
