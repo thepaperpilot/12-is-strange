@@ -52,12 +52,12 @@ Scenery
 
 ##Items- Inventrory or world items
 
-* Combined Items Pipe Bomb
+* Combined Items Pipe Bomb - done
 
-* Sugar
-* Soda Can
-* Sodium Chlorate (weed killer)
-* Duct Tape
+* Sugar - done
+* Soda Can - done
+* Sodium Chlorate (weed killer) - done
+* Duct Tape - done
 
 * Gun
 * Bottles
