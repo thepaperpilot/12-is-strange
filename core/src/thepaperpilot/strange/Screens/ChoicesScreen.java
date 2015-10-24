@@ -5,15 +5,18 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import thepaperpilot.strange.Main;
 
 public class ChoicesScreen implements Screen {
-    Stage stage;
-    Table decisionTable;
+    private Stage stage;
+    private Table decisionTable;
+
     @Override
     public void show() {
         stage = new Stage(new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -26,34 +29,34 @@ public class ChoicesScreen implements Screen {
 
         String choice = "are you a terrible person?";
         String[] options = new String[]{"sacrifice arcadia bay",
-        "sacrifice arcadia bae"};
+                "sacrifice arcadia bae"};
         setChoice(choice, options);
     }
 
-    public void setChoice(String choice, String[] options) {
+    private void setChoice(String choice, String[] options) {
         decisionTable.clearChildren();
-        Label choiceLabel = new Label(choice, Main.skin);
+        Label choiceLabel = new Label(choice, Main.skin, "large");
         choiceLabel.setWrap(true);
         choiceLabel.setAlignment(Align.center);
         TextButton[] optionButtons = new TextButton[options.length];
-        double choiceWidth = Math.min(stage.getWidth() - 100, new GlyphLayout(Main.skin.getFont("font"), choice).width);
+        double choiceWidth = Math.min(stage.getWidth() - 100, new GlyphLayout(Main.skin.getFont("large"), choice).width);
         double optionWidth = new GlyphLayout(Main.skin.getFont("font"), options[0]).width;
         for (int i = 0; i < optionButtons.length; i++) {
-            optionButtons[i] = new TextButton(options[i], Main.skin);
+            optionButtons[i] = new TextButton(options[i], Main.skin, "large");
             optionButtons[i].getLabel().setWrap(true);
-            optionWidth = Math.max(choiceWidth, new GlyphLayout(Main.skin.getFont("font"), options[i]).width);
+            optionWidth = Math.max(choiceWidth, new GlyphLayout(Main.skin.getFont("large"), options[i]).width);
         }
         optionWidth = Math.min(optionWidth, stage.getWidth() / (double) (options.length + 1)) + 20;
         decisionTable.add(choiceLabel).width((int) choiceWidth).colspan(options.length).padBottom(20).row();
         for (int i = 0; i < optionButtons.length; i++) {
-            decisionTable.add(optionButtons[i]).width((int) optionWidth).padRight(optionWidth * options.length < choiceWidth ? 0 : 10);
+            decisionTable.add(optionButtons[i]).width((int) optionWidth).pad(5);
             final int decision = i;
             optionButtons[i].addListener(new ClickListener() {
-                public void clicked (InputEvent event, float x, float y) {
+                public void clicked(InputEvent event, float x, float y) {
                     // TODO add a graph of the different choices. Go to the next.
-                    if(Main.decision1 == -1) {
+                    if (Main.decision1 == -1) {
                         Main.decision1 = decision;
-                    } else if(Main.decision2 == -1) {
+                    } else if (Main.decision2 == -1) {
                         Main.decision2 = decision;
                     } else {
                         Main.decision3 = decision;
