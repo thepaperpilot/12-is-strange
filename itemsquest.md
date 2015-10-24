@@ -6,17 +6,17 @@
 
 ###Chlorine Dioxide Pipe Bomb Puzzle
 
-    Sugar
-    Soda Can
-    Sodium Chlorate (weed killer)
-    Duct Tape
+    Sugar - done
+    Soda Can - done
+    Sodium Chlorate (weed killer) - done
+    Duct Tape - done
 
 ###Gun Puzzle
 
-    Gun
+    Gun - done
     Bottles
 
-###Squirrel Puzzle
+###Cat Puzzle
 
     Food
 
@@ -80,6 +80,10 @@ Drop Flash Drive in trash can to get him to move.
 
 Fat Girl Alyssa is in the way. Must use soap to get her out of the way.
 
+
+##Choice Dialogue Box 1 - Bae or Bay(Truth or Lie)
+
+
 ###Area 5
 
 Gun and Bottle must be collected to practice shooting
@@ -94,13 +98,17 @@ Outside Blackwell Academy
 
 ###Area 7
 
-Squirrel chases Blue Jay. Seems like QTE but it is not.
-Must feed the squirrel to make sure Blue Jay doesn't destroy itself and area can open.
+Cat chases Blue Jay. Seems like QTE but it is not.
+Must feed the Cat to make sure Blue Jay doesn't destroy itself and area can open.
 The animals just move through the area and it seems like nothing for the most part.
 
 ###Area 8
 
 Need key to get back in the school. Look under doormat to get in.
+
+
+##Choice Dialogue Box 2 - Blame Nathan, Jefferson, or David
+
 
 ###Area 9
 
@@ -124,6 +132,9 @@ Keypad. Use Fortune Cookie note to get it.
 ###Area 13
 
 Pick up Liquor to enter the Vortex Club party. Door person doesn't let you through otherwise.
+
+##Choice Dialogue Box 3 - Warn or Don't Warn
+
 
 Characters that need to be done
 
@@ -168,4 +179,3 @@ Scenery
 -Citadel Tower
 -Planet Earth (with reaper attack)
 -Planet Earth (without reaper attack
-
