@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import thepaperpilot.strange.Items.Item;
-import thepaperpilot.strange.Screens.EndingScreen;
+import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
 
 import java.util.ArrayList;
@@ -19,14 +19,12 @@ public class Main extends Game {
     // TODO save/load-ing
     public static final ArrayList<Item> inventory = new ArrayList<Item>();
     public static Skin skin;
-    public static int decision1 = -1;
-    public static int decision2 = -1;
-    public static int decision3 = -1;
+    public static int[] decisions = new int[3];
     private static Main instance;
 
     public static void findEnding() {
         inventory.add(new Item("testing fonts", new Image(skin, "coin100")));
-        instance.setScreen(new EndingScreen(0));
+        instance.setScreen(new GameScreen(0));
     }
 
     public static void changeScreen(Screen screen) {

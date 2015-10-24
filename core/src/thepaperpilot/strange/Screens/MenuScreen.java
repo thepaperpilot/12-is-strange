@@ -35,7 +35,7 @@ public class MenuScreen implements Screen {
         Button start = new TextButton("Start Game", Main.skin);
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                Main.changeScreen(new ChoicesScreen());
+                Main.changeScreen(new GameScreen(0));
             }
         });
         Table table = new Table(Main.skin);

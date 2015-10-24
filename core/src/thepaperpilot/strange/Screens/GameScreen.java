@@ -12,20 +12,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import thepaperpilot.strange.Choice;
 import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 
-public class EndingScreen implements Screen {
-    private final int ending;
+public class GameScreen implements Screen {
+    private final int scene;
     private Stage stage;
     private Stage ui;
     private Table inventoryTable;
     private Max max;
 
-    public EndingScreen(int ending) {
-        this.ending = ending;
+    public GameScreen(int scene) {
+        this.scene = scene;
     }
 
     @Override
@@ -60,13 +61,13 @@ public class EndingScreen implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                Main.changeScreen(new ChoicesScreen());
+                Main.changeScreen(new ChoicesScreen(1, "look at you going back in time", new Choice[]{new Choice("I learned from the best", new GameScreen(2))}, GameScreen.this));
             }
         });
 
         max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
-        stage.addActor(new Clock(ending, (int) stage.getWidth() / 2, (int) stage.getHeight() / 2));
+        stage.addActor(new Clock(scene, (int) stage.getWidth() / 2, (int) stage.getHeight() / 2));
     }
 
     private void updateInventory() {

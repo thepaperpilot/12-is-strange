@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import thepaperpilot.strange.Choice;
 import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 
@@ -24,8 +25,10 @@ public class ChoicesScreen implements Screen {
     private Stage stage;
     private Table decisionTable;
 
-    @Override
-    public void show() {
+    int decision;
+
+    public ChoicesScreen(int decision, String question, Choice[] choices, final Screen previousScreen) {
+        this.decision = decision;
         stage = new Stage(new StretchViewport(640, 360));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
@@ -41,22 +44,11 @@ public class ChoicesScreen implements Screen {
 
         stage.addActor(table);
 
-        // Look at if decisions have already been made
-        // And change the decisions based on the map
-        Main.decision3 = -1;
-        String choice = "are you a terrible person?";
-        String[] options = new String[]{"sacrifice arcadia bay",
-                "sacrifice arcadia bae"};
-        setChoice(choice, options);
+        setChoice(question, choices);
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                if (Main.decision2 != -1) {
-                    Main.decision2 = -1;
-                } else {
-                    Main.decision1 = -1;
-                }
-                setChoice("look at you reversing time", new String[]{"I was taught by the best!"});
+                Main.changeScreen(previousScreen);
             }
         });
 
@@ -66,40 +58,35 @@ public class ChoicesScreen implements Screen {
         choicesParticle.setPosition(stage.getWidth() / 2, stage.getHeight() / 2);
     }
 
-    private void setChoice(String choice, String[] options) {
+    @Override
+    public void show() {
+    }
+
+    private void setChoice(String question, final Choice[] choices) {
         decisionTable.clearChildren();
-        Label choiceLabel = new Label(choice, Main.skin, "large");
+        Label choiceLabel = new Label(question, Main.skin, "large");
         choiceLabel.setWrap(true);
         choiceLabel.setAlignment(Align.center);
-        TextButton[] optionButtons = new TextButton[options.length];
-        double choiceWidth = Math.min(stage.getWidth() - 10, new GlyphLayout(Main.skin.getFont("large"), choice).width);
-        double optionWidth = new GlyphLayout(Main.skin.getFont("font"), options[0]).width;
+        TextButton[] optionButtons = new TextButton[choices.length];
+        double choiceWidth = Math.min(stage.getWidth() - 10, new GlyphLayout(Main.skin.getFont("large"), question).width);
+        double optionWidth = new GlyphLayout(Main.skin.getFont("font"), choices[0].name).width;
         for (int i = 0; i < optionButtons.length; i++) {
-            optionButtons[i] = new TextButton(options[i], Main.skin);
+            optionButtons[i] = new TextButton(choices[i].name, Main.skin);
             optionButtons[i].getLabel().setWrap(true);
-            optionWidth = Math.max(optionWidth, new GlyphLayout(Main.skin.getFont("font"), options[i]).width);
+            optionWidth = Math.max(optionWidth, new GlyphLayout(Main.skin.getFont("font"), choices[i].name).width);
         }
-        optionWidth = Math.min(choiceWidth, stage.getWidth() / (double) (options.length + 1)) + 2;
-        decisionTable.add(choiceLabel).width((int) choiceWidth).colspan(options.length).padBottom(2).row();
+        optionWidth = Math.min(choiceWidth, stage.getWidth() / (double) (choices.length + 1)) + 2;
+        decisionTable.add(choiceLabel).width((int) choiceWidth).colspan(choices.length).padBottom(2).row();
         for (int i = 0; i < optionButtons.length; i++) {
             decisionTable.add(optionButtons[i]).width((int) optionWidth).pad(5);
             final int decision = i;
             optionButtons[i].addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
-                    // TODO add a graph of the different choices. Go to the next.
-                    if (Main.decision1 == -1) {
-                        Main.decision1 = decision;
-                    } else if (Main.decision2 == -1) {
-                        Main.decision2 = decision;
-                    } else {
-                        Main.decision3 = decision;
-                        Main.findEnding();
-                    }
-                    setChoice("you made a decision. how does that make you feel?", new String[]{"Fucking terrible", "alright I guess", "could be better"});
+                    Main.decisions[ChoicesScreen.this.decision] = decision;
+                    Main.changeScreen(choices[decision].nextScene);
                 }
             });
         }
-
         stage.addActor(decisionTable);
     }
 
