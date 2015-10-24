@@ -2,6 +2,7 @@ package thepaperpilot.strange.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,6 +20,7 @@ import thepaperpilot.strange.Main;
 public class EndingScreen implements Screen {
     private final int ending;
     private Stage stage;
+    private Stage ui;
     private Table inventoryTable;
     private Max max;
 
@@ -30,23 +32,25 @@ public class EndingScreen implements Screen {
     public void show() {
         stage = new Stage(new StretchViewport(256, 144));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.input.setInputProcessor(stage);
+        ui = new Stage(new StretchViewport(640, 360));
+        ui.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.input.setInputProcessor(new InputMultiplexer(ui, stage));
 
         Table table = new Table(Main.skin);
         table.setFillParent(true);
         table.top().left().add(new RightClickIndicator());
         table.setColor(1, 1, 1, .5f);
-        stage.addActor(table);
+        ui.addActor(table);
 
         inventoryTable = new Table(Main.skin);
-        inventoryTable.setSize(stage.getWidth() - 30, 40);
-        inventoryTable.setPosition(30, stage.getHeight() - 40);
+        inventoryTable.setSize(ui.getWidth() - 30, 34);
+        inventoryTable.setPosition(30, ui.getHeight() - 34);
         inventoryTable.setBackground(Main.skin.getDrawable("default-round"));
         inventoryTable.pad(2);
 
         updateInventory();
 
-        stage.addActor(inventoryTable);
+        ui.addActor(inventoryTable);
 
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
@@ -71,10 +75,9 @@ public class EndingScreen implements Screen {
             Table item = new Table(Main.skin);
             item.add(new ImageButton(Main.inventory.get(i).image.getDrawable())).padBottom(1).row();
             Label invLabel = new Label(Main.inventory.get(i).name, Main.skin);
-            invLabel.setWrap(true);
             invLabel.setAlignment(Align.center);
-            item.add(invLabel).width(25);
-            inventoryTable.left().add(item).padRight(2);
+            item.add(invLabel);
+            inventoryTable.left().add(item).pad(2);
         }
     }
 
@@ -82,6 +85,8 @@ public class EndingScreen implements Screen {
     public void render(float delta) {
         stage.act(delta);
         stage.draw();
+        ui.act(delta);
+        ui.draw();
     }
 
     @Override
@@ -107,5 +112,6 @@ public class EndingScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        ui.dispose();
     }
 }

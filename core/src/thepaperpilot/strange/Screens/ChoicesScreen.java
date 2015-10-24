@@ -26,7 +26,7 @@ public class ChoicesScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(256, 144));
+        stage = new Stage(new StretchViewport(640, 360));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
 
@@ -77,9 +77,9 @@ public class ChoicesScreen implements Screen {
         for (int i = 0; i < optionButtons.length; i++) {
             optionButtons[i] = new TextButton(options[i], Main.skin);
             optionButtons[i].getLabel().setWrap(true);
-            optionWidth = Math.max(choiceWidth, new GlyphLayout(Main.skin.getFont("font"), options[i]).width);
+            optionWidth = Math.max(optionWidth, new GlyphLayout(Main.skin.getFont("font"), options[i]).width);
         }
-        optionWidth = Math.min(optionWidth, stage.getWidth() / (double) (options.length + 1)) + 2;
+        optionWidth = Math.min(choiceWidth, stage.getWidth() / (double) (options.length + 1)) + 2;
         decisionTable.add(choiceLabel).width((int) choiceWidth).colspan(options.length).padBottom(2).row();
         for (int i = 0; i < optionButtons.length; i++) {
             decisionTable.add(optionButtons[i]).width((int) optionWidth).pad(5);
