@@ -37,8 +37,10 @@ public class Main extends Game {
     public void create() {
         instance = this;
         manager.load("assets/textures.json", Skin.class);
+        // TODO make these a texture atlas
         manager.load("assets/maxStill.png", Texture.class);
         manager.load("assets/maxWalk.png", Texture.class);
+        manager.load("assets/clock.png", Texture.class);
     }
 
     @Override
