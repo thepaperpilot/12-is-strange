@@ -42,8 +42,8 @@ shape: square
 - Spawn Width - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 256.0
-highMax: 256.0
+highMin: 640.0
+highMax: 640.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -52,8 +52,8 @@ timeline0: 0.0
 - Spawn Height - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 144.0
-highMax: 144.0
+highMin: 360.0
+highMax: 360.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
