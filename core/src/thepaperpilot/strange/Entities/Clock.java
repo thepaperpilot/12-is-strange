@@ -7,12 +7,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import thepaperpilot.strange.Main;
 
 public class Clock extends Image {
+    Texture clockSheet;
+    TextureRegion[] frames;
+
     public Clock(int ending, int x, int y) {
-        Texture clockSheet = Main.manager.get("assets/clock.png", Texture.class);
+        clockSheet = Main.manager.get("assets/clock.png", Texture.class);
         setWidth(clockSheet.getWidth() / 12);
         setHeight(clockSheet.getHeight());
         TextureRegion[][] tmp = TextureRegion.split(clockSheet, (int) getWidth(), (int) getHeight());
-        setDrawable(new TextureRegionDrawable(tmp[0][ending]));
+        frames = tmp[0];
+        setTime(ending);
         setPosition(x, y);
+    }
+
+    public void setTime(int time) {
+        setDrawable(new TextureRegionDrawable(frames[time]));
     }
 }

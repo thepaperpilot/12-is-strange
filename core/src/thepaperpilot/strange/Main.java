@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import thepaperpilot.strange.Items.Item;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.EndingScreen;
+import thepaperpilot.strange.Screens.MenuScreen;
 
 import java.util.ArrayList;
 
@@ -49,10 +50,10 @@ public class Main extends Game {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (manager.update() && getScreen() == null) {
             skin = manager.get("assets/textures.json", Skin.class);
-            skin.getFont("large").getData().setScale(.25f);
+            skin.getFont("large").getData().setScale(.5f);
             skin.getFont("font").getData().setScale(.25f);
 
-            setScreen(new ChoicesScreen());
+            setScreen(new MenuScreen());
         } else
             try { //This makes it so that, if it errors, it just skips the frame as opposed to stopping the entire program
                 getScreen().render(Gdx.graphics.getDeltaTime());

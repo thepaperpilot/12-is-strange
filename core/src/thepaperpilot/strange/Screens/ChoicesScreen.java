@@ -67,9 +67,9 @@ public class ChoicesScreen implements Screen {
         double choiceWidth = Math.min(stage.getWidth() - 10, new GlyphLayout(Main.skin.getFont("large"), choice).width);
         double optionWidth = new GlyphLayout(Main.skin.getFont("font"), options[0]).width;
         for (int i = 0; i < optionButtons.length; i++) {
-            optionButtons[i] = new TextButton(options[i], Main.skin, "large");
+            optionButtons[i] = new TextButton(options[i], Main.skin);
             optionButtons[i].getLabel().setWrap(true);
-            optionWidth = Math.max(choiceWidth, new GlyphLayout(Main.skin.getFont("large"), options[i]).width);
+            optionWidth = Math.max(choiceWidth, new GlyphLayout(Main.skin.getFont("font"), options[i]).width);
         }
         optionWidth = Math.min(optionWidth, stage.getWidth() / (double) (options.length + 1)) + 2;
         decisionTable.add(choiceLabel).width((int) choiceWidth).colspan(options.length).padBottom(2).row();
