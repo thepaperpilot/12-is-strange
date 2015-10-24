@@ -36,7 +36,7 @@ public class ChoicesScreen implements Screen {
         Table table = new Table(Main.skin);
         table.setFillParent(true);
         table.top().left().add(new RightClickIndicator());
-        table.add(new Label(" rewind time", Main.skin));
+        table.add(new Label(" rewind time by right clicking", Main.skin));
         table.setColor(1, 1, 1, .5f);
 
         stage.addActor(table);

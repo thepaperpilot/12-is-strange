@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Max;
+import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 
 public class EndingScreen implements Screen {
@@ -31,9 +32,15 @@ public class EndingScreen implements Screen {
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
 
+        Table table = new Table(Main.skin);
+        table.setFillParent(true);
+        table.top().left().add(new RightClickIndicator());
+        table.setColor(1, 1, 1, .5f);
+        stage.addActor(table);
+
         inventoryTable = new Table(Main.skin);
-        inventoryTable.setSize(40, stage.getHeight());
-        inventoryTable.setPosition(stage.getWidth() - 40, 0);
+        inventoryTable.setSize(stage.getWidth() - 30, 40);
+        inventoryTable.setPosition(30, stage.getHeight() - 40);
         inventoryTable.setBackground(Main.skin.getDrawable("default-round"));
         inventoryTable.pad(2);
 
@@ -61,11 +68,13 @@ public class EndingScreen implements Screen {
     private void updateInventory() {
         inventoryTable.clearChildren();
         for (int i = 0; i < Main.inventory.size(); i++) {
-            inventoryTable.add(new ImageButton(Main.inventory.get(i).image.getDrawable())).padBottom(1).row();
+            Table item = new Table(Main.skin);
+            item.add(new ImageButton(Main.inventory.get(i).image.getDrawable())).padBottom(1).row();
             Label invLabel = new Label(Main.inventory.get(i).name, Main.skin);
             invLabel.setWrap(true);
             invLabel.setAlignment(Align.center);
-            inventoryTable.add(invLabel).width(38).padBottom(2).row();
+            item.add(invLabel).width(25);
+            inventoryTable.left().add(item).padRight(2);
         }
     }
 
