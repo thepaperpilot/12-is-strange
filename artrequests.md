@@ -3,56 +3,56 @@
 
 ##Characters- name and required animations
 
-*Maxine
-*Chloe
-*Nathan
-*Jefferson
-*David Madsen
-*Frank Bowers
-*Rachel Amber
-*Kate
-*Victoria
-*Warren
-*Alyssa
+* Maxine
+* Chloe
+* Nathan
+* Jefferson
+* David Madsen
+* Frank Bowers
+* Rachel Amber
+* Kate
+* Victoria
+* Warren
+* Alyssa
 
-**ending 12
+** ending 12
 
-*John Sheppard
-*Harbinger
-*Extra Reapers
-*Conrad Verner in SpaceShip
-*Fleet ships
+* John Sheppard
+* Harbinger
+* Extra Reapers
+* Conrad Verner in SpaceShip
+* Fleet ships
 
 **Spirit Animals
 
-*Squirell
-*Blue Jay
-*Blue Butterfly
-*Doe
-*Dog Pompidou
+* Squirell
+* Blue Jay
+* Blue Butterfly
+* Doe
+* Dog Pompidou
 
 
 ##Scenery- backgrounds etc
 
 Scenery
 
-*Dorm Room
-*Hallway
-*Junkyard
-*bathroom/showerroom
-*Outside Blackwell Academy
-*Roadway with Cars
-*RV exterior
-*House Interior
+* Dorm Room
+* Hallway
+* Junkyard
+* bathroom/showerroom
+* Outside Blackwell Academy
+* Roadway with Cars
+* RV exterior
+* House Interior
 
-*Citadel Beam
-*Citadel Tower
-*Planet Earth (with reaper attack)
-*Planet Earth (without reaper attack
+* Citadel Beam
+* Citadel Tower
+* Planet Earth (with reaper attack)
+* Planet Earth (without reaper attack
 
 ##Items- Inventrory or world items
 
-*Combined Items Pipe Bomb
+* Combined Items Pipe Bomb
 
 * Sugar
 * Soda Can
@@ -88,14 +88,14 @@ Scenery
 
 ###Background Item Interactions
 
-*Keypad
-*Fire Alarm
-*Trash Can
-*Car
-*Desk
-*Computer
-*Vortex Club Curtains
+* Keypad
+* Fire Alarm
+* Trash Can
+* Car
+* Desk
+* Computer
+* Vortex Club Curtains
 
 ##UI
 
-*Arrows with Namess of Items
+* Arrows with Namess of Items
