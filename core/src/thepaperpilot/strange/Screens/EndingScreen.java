@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Main;
 
@@ -31,7 +32,6 @@ public class EndingScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         inventoryTable = new Table(Main.skin);
-        inventoryTable.debugAll();
         inventoryTable.setSize(40, stage.getHeight());
         inventoryTable.setPosition(stage.getWidth() - 40, 0);
         inventoryTable.setBackground(Main.skin.getDrawable("default-round"));
@@ -48,13 +48,14 @@ public class EndingScreen implements Screen {
         });
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
-            public void clicked (InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 Main.changeScreen(new ChoicesScreen());
             }
         });
 
-        max = new Max((int) stage.getWidth() / 2, 10);
+        max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
+        stage.addActor(new Clock(ending, (int) stage.getWidth() / 2, (int) stage.getHeight() / 2));
     }
 
     private void updateInventory() {
