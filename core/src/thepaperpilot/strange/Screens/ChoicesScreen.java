@@ -3,18 +3,21 @@ package thepaperpilot.strange.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 
 public class ChoicesScreen implements Screen {
@@ -32,6 +35,14 @@ public class ChoicesScreen implements Screen {
 
         decisionTable = new Table(Main.skin);
         decisionTable.setFillParent(true);
+
+        Table table = new Table(Main.skin);
+        table.setFillParent(true);
+        table.top().left().add(new RightClickIndicator());
+        table.add(new Label(" rewind time", Main.skin));
+        table.setColor(1, 1, 1, .5f);
+
+        stage.addActor(table);
 
         // Look at if decisions have already been made
         // And change the decisions based on the map
