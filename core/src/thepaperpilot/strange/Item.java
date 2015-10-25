@@ -13,28 +13,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Item {
-    ALCOHOL("alcohol", "alcohol", Scene.SEVENTH, 0, 0),
+    ALCOHOL("alcohol", "alcohol", Scene.SEVENTH, 20, 20),
     BOTTLES("bottles", "bottles"),
     CAMERA("camera", "camera"),
     CAT_FOOD("cat food", "catFood"),
-    DOG_BONE("dog bone", "dogBone", Scene.SECOND, 20, 23),
+    DOG_BONE("dog bone", "dogBone", Scene.SECOND, 200, 14),
     DUCT_TAPE("duct tape", "ductTape", Scene.FIFTH, 120, 21),
-    FILES("files", "files", Scene.SIXTH, 24, 120),
-    FIRE_EXTINGUISHER("fire extinguisher", "fireExtinguish", Scene.EIGTH, 233, 2),
+    FILES("files", "files", Scene.SIXTH, 24, 40),
+    FIRE_EXTINGUISHER("fire extinguisher", "fireExtinguish", Scene.EIGTH, 100, 16),
     FORTUNE_COOKIE_CODE("fortune cookie code", "fortuneCookieCode"),
     FORTUNE_COOKIE("fortune cookie", "fortuneCookie"),
     GUN("gun", "gun"),
-    HAMMER("hammer", "hammer", Scene.SEVENTH, 0, 0),
+    HAMMER("hammer", "hammer", Scene.SEVENTH, 120, 20),
     KEYS("keys", "keys"),
     MAKE_SHIFT_BOMB("make-shift bomb", "makeShiftBomb"),
     NOTEBOOK("notebook", "notebook"),
     PHONE("phone", "phone"),
     PHOTO("photo", "photo"),
     SOAP("soap", "soap", Scene.FIRST, 230, 16),
-    SODA("soda", "soda", Scene.THIRD, 80, 90),
+    SODA("soda", "soda", Scene.THIRD, 80, 16),
     SUGAR("sugar", "sugar"),
     USB("usb", "usb"),
-    WEED_KILLER("weed killer", "weedKiller", Scene.FOURTH, 23, 56);
+    WEED_KILLER("weed killer", "weedKiller", Scene.FOURTH, 10, 12);
 
     public static final Map<Item[], Item> combinations = new HashMap<Item[], Item>();
     static {
