@@ -16,6 +16,7 @@ public class Main extends Game {
     public static final AssetManager manager = new AssetManager();
     // TODO save/load-ing
     public static final ArrayList<Item> inventory = new ArrayList<Item>();
+    public static final ArrayList<Item> selected = new ArrayList<Item>();
     public static Skin skin;
     public static int[] decisions = new int[3];
     private static Main instance;
@@ -34,6 +35,28 @@ public class Main extends Game {
         manager.load("assets/clock.png", Texture.class);
         manager.load("assets/catIdle.png", Texture.class);
         manager.load("assets/rightClickIndicator.png", Texture.class);
+        manager.load("assets/alcoholInv.png", Texture.class);
+        manager.load("assets/bottlesInv.png", Texture.class);
+        manager.load("assets/cameraInv.png", Texture.class);
+        manager.load("assets/catFoodInv.png", Texture.class);
+        manager.load("assets/dogBoneInv.png", Texture.class);
+        manager.load("assets/ductTapeInv.png", Texture.class);
+        manager.load("assets/filesInv.png", Texture.class);
+        manager.load("assets/fireExtinguishInv.png", Texture.class);
+        manager.load("assets/fortuneCookieCodeInv.png", Texture.class);
+        manager.load("assets/fortuneCookieInv.png", Texture.class);
+        manager.load("assets/gunInv.png", Texture.class);
+        manager.load("assets/hammerInv.png", Texture.class);
+        manager.load("assets/keysInv.png", Texture.class);
+        manager.load("assets/makeShiftBombInv.png", Texture.class);
+        manager.load("assets/notebookInv.png", Texture.class);
+        manager.load("assets/phoneInv.png", Texture.class);
+        manager.load("assets/photoInv.png", Texture.class);
+        manager.load("assets/soapInv.png", Texture.class);
+        manager.load("assets/sodaInv.png", Texture.class);
+        manager.load("assets/sugarInv.png", Texture.class);
+        manager.load("assets/usbInv.png", Texture.class);
+        manager.load("assets/weedKillerInv.png", Texture.class);
     }
 
     @Override

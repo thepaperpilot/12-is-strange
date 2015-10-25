@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Entities.RightClickIndicator;
+import thepaperpilot.strange.Items.Item;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Scene;
 
@@ -38,8 +40,8 @@ public class GameScreen implements Screen {
         }
 
         inventoryTable = new Table(Main.skin);
-        inventoryTable.setSize(ui.getWidth() - 30, 34);
-        inventoryTable.setPosition(30, ui.getHeight() - 34);
+        inventoryTable.setSize(ui.getWidth() - 30, 38);
+        inventoryTable.setPosition(30, ui.getHeight() - 38);
         inventoryTable.setBackground(Main.skin.getDrawable("default-round"));
         inventoryTable.pad(2);
 
@@ -72,15 +74,27 @@ public class GameScreen implements Screen {
         // TODO add a particle effect to show next screen
     }
 
-    private void updateInventory() {
+    public void updateInventory() {
         inventoryTable.clearChildren();
         for (int i = 0; i < Main.inventory.size(); i++) {
-            Table item = new Table(Main.skin);
+            Button item = new Button(Main.skin, "toggle");
             item.add(new ImageButton(Main.inventory.get(i).image.getDrawable())).padBottom(1).row();
             Label invLabel = new Label(Main.inventory.get(i).name, Main.skin);
             invLabel.setAlignment(Align.center);
             item.add(invLabel);
-            inventoryTable.left().add(item).pad(2);
+            inventoryTable.left().add(item).pad(2).height(32);
+            if(Main.selected.contains(Main.inventory.get(i)))
+                item.toggle();
+            final int index = i;
+            item.addListener(new ClickListener(Input.Buttons.LEFT) {
+                public void clicked(InputEvent event, float x, float y) {
+                    if(Main.selected.contains(Main.inventory.get(index))) {
+                        Main.selected.remove(Main.inventory.get(index));
+                    } else Main.selected.add(Main.inventory.get(index));
+                    Item.combine();
+                    Scene.updateInventory();
+                }
+            });
         }
     }
 

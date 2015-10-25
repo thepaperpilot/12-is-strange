@@ -3,6 +3,7 @@ package thepaperpilot.strange;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import thepaperpilot.strange.Items.Item;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
@@ -221,7 +222,18 @@ public enum Scene {
     public abstract void previous();
 
     Scene() {
+        Main.inventory.clear();
+        Main.inventory.add(Item.DUCT_TAPE);
+        Main.inventory.add(Item.SODA);
+        Main.inventory.add(Item.SUGAR);
+        Main.inventory.add(Item.WEED_KILLER);
         screen = new GameScreen(this);
         init();
+    }
+
+    public static void updateInventory() {
+        for(Scene scene : Scene.values()) {
+            scene.screen.updateInventory();
+        }
     }
 }
