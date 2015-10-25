@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -27,6 +28,7 @@ public class Main extends Game {
     public void create() {
         instance = this;
         manager.load("assets/textures.json", Skin.class);
+        manager.load("assets/bgm.ogg", Music.class);
         // TODO make these a texture atlas
         manager.load("assets/schoolBackground.png", Texture.class);
         manager.load("assets/schoolDoor.png", Texture.class);
@@ -90,6 +92,8 @@ public class Main extends Game {
             Item.combine(); //trick to instantiate all the items
             inventory.add(Item.NOTEBOOK);
             Scene.updateInventory();
+            manager.get("assets/bgm.ogg", Music.class).setLooping(true);
+            manager.get("assets/bgm.ogg", Music.class).play();
 
             setScreen(new MenuScreen());
         } else

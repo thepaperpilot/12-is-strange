@@ -1,5 +1,7 @@
 package thepaperpilot.strange;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -67,6 +69,7 @@ public enum Item {
                 }
                 if(!found) continue outer;
             }
+            Gdx.audio.newSound(new FileHandle("assets/pickup.wav")).play();
             ArrayList<Item> tmp = new ArrayList<Item>();
             Collections.addAll(tmp, combo);
             Main.inventory.removeAll(tmp);
@@ -84,6 +87,7 @@ public enum Item {
         }
 
         public void onTouch() {
+            Gdx.audio.newSound(new FileHandle("assets/pickup.wav")).play();
             Main.inventory.add(Item.values()[parent]);
             Scene.updateInventory();
             remove();

@@ -3,6 +3,7 @@ package thepaperpilot.strange.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,11 +22,10 @@ import thepaperpilot.strange.Main;
 public class ChoicesScreen implements Screen {
     public static ParticleEffect choicesParticle;
     public SpriteBatch batch;
-    private Stage stage;
-    private Table decisionTable;
-
     int decision;
     Screen nextScreen;
+    private Stage stage;
+    private Table decisionTable;
 
     public ChoicesScreen(int decision, String question, String[] choices, Screen nextScreen, final Screen previousScreen) {
         this.decision = decision;
@@ -49,6 +49,7 @@ public class ChoicesScreen implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
+                Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
                 Main.changeScreen(previousScreen);
             }
         });
@@ -83,6 +84,7 @@ public class ChoicesScreen implements Screen {
             final int decision = i;
             optionButtons[i].addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
+                    Gdx.audio.newSound(new FileHandle("assets/select.wav")).play();
                     Main.decisions[ChoicesScreen.this.decision - 1] = decision;
                     Main.changeScreen(nextScreen);
                 }

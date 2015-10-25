@@ -1,6 +1,8 @@
 package thepaperpilot.strange;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -41,6 +43,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -68,6 +71,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -87,6 +91,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, THIRD.screen));
         }
     },
@@ -100,6 +105,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -132,6 +138,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(FOURTH.screen);
         }
     },
@@ -150,6 +157,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(new ChoicesScreen(2, "Who is at fault?", new String[]{"Blame David", "Blame Nathan", "Blame Jefferson"}, SEVENTH.screen, SIXTH.screen));
         }
     },
@@ -163,6 +171,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(SEVENTH.screen);
         }
     },
@@ -180,6 +189,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(SEVENTH.screen);
         }
     },
@@ -199,6 +209,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, NINTH.screen));
         }
     },
@@ -227,6 +238,7 @@ public enum Scene {
         }
 
         public void previous() {
+            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
             Main.changeScreen(TENTH.screen);
         }
     },
