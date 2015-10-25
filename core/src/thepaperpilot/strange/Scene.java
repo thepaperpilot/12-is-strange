@@ -14,7 +14,7 @@ import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
 
 public enum Scene {
-    FIRST {
+    FIRST("bathroom") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -213,7 +213,7 @@ public enum Scene {
             Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, NINTH.screen));
         }
     },
-    ELEVENTH {
+    ELEVENTH("bathroom") {
         public void init() {
 
         }

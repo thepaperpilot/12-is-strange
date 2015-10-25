@@ -31,7 +31,7 @@ public enum Item {
     NOTEBOOK("notebook", "notebook"),
     PHONE("phone", "phone"),
     PHOTO("photo", "photo"),
-    SOAP("soap", "soap", Scene.FIRST, 56, 56),
+    SOAP("soap", "soap", Scene.FIRST, 230, 16),
     SODA("soda", "soda", Scene.THIRD, 80, 90),
     SUGAR("sugar", "sugar"),
     USB("usb", "usb"),
