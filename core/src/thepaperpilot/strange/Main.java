@@ -57,6 +57,26 @@ public class Main extends Game {
         manager.load("assets/sugarInv.png", Texture.class);
         manager.load("assets/usbInv.png", Texture.class);
         manager.load("assets/weedKillerInv.png", Texture.class);
+        manager.load("assets/alcoholWorld.png", Texture.class);
+        manager.load("assets/bottlesWorld.png", Texture.class);
+        manager.load("assets/cameraWorld.png", Texture.class);
+        manager.load("assets/catFoodWorld.png", Texture.class);
+        manager.load("assets/dogBoneWorld.png", Texture.class);
+        manager.load("assets/ductTapeWorld.png", Texture.class);
+        manager.load("assets/filesWorld.png", Texture.class);
+        manager.load("assets/fireExtinguishWorld.png", Texture.class);
+        manager.load("assets/fortuneCookieWorld.png", Texture.class);
+        manager.load("assets/gunWorld.png", Texture.class);
+        manager.load("assets/hammerWorld.png", Texture.class);
+        manager.load("assets/keysWorld.png", Texture.class);
+        manager.load("assets/makeShiftBombWorld.png", Texture.class);
+        manager.load("assets/notebookWorld.png", Texture.class);
+        manager.load("assets/phoneWorld.png", Texture.class);
+        manager.load("assets/soapWorld.png", Texture.class);
+        manager.load("assets/sodaWorld.png", Texture.class);
+        manager.load("assets/sugarWorld.png", Texture.class);
+        manager.load("assets/usbWorld.png", Texture.class);
+        manager.load("assets/weedKillerWorld.png", Texture.class);
     }
 
     @Override
@@ -67,6 +87,7 @@ public class Main extends Game {
             skin = manager.get("assets/textures.json", Skin.class);
             skin.getFont("large").getData().setScale(.5f);
             skin.getFont("font").getData().setScale(.25f);
+            Item.combine(); //trick to instantiate all the items
 
             setScreen(new MenuScreen());
         } else

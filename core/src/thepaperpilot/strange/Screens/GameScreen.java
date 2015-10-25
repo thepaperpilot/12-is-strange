@@ -21,17 +21,18 @@ import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Scene;
 
 public class GameScreen implements Screen {
-    private Stage stage;
+    public Stage stage;
+    public Max max;
+    public Clock clock;
+    public Item.ItemImage target;
     private Stage ui;
     private Table inventoryTable;
-    private Max max;
-    public Clock clock;
 
     public GameScreen(final Scene scene) {
         stage = new Stage(new StretchViewport(256, 144));
         ui = new Stage(new StretchViewport(640, 360));
 
-        if(scene.ordinal() != 0) {
+        if (scene.ordinal() != 0 && scene.ordinal() != 12) {
             Table table = new Table(Main.skin);
             table.setFillParent(true);
             table.top().left().add(new RightClickIndicator());
@@ -100,6 +101,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if (target != null && max.getX() == (int) target.getX()) {
+            Main.inventory.add(Item.values()[target.parent]);
+            Scene.updateInventory();
+            target.remove();
+            target = null;
+        }
         stage.act(delta);
         stage.draw();
         ui.act(delta);
