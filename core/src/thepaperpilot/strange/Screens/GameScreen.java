@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -136,7 +137,15 @@ public class GameScreen implements Screen {
         ui.dispose();
     }
 
-    public void say(String name, String message) {
-        // TODO implement this
+    public void say(String message, int x, int y) {
+        final Label label = new Label(message, Main.skin);
+        label.setPosition((int) (x * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), (int) (y * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f));
+        label.addAction(Actions.sequence(Actions.moveBy(0, 0, .5f), Actions.parallel(Actions.moveBy(0, 50, 1), Actions.fadeOut(1)), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                label.remove();
+            }
+        })));
+        ui.addActor(label);
     }
 }

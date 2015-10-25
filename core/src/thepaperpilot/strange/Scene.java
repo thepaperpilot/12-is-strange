@@ -52,13 +52,13 @@ public enum Scene {
                 }
             });
             new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
-                public boolean locked = false;
+                public boolean locked = true;
 
                 public void onTouch() {
                     if (!locked || Main.selected.contains(Item.KEYS)) {
                         next(-1);
                         locked = false;
-                    } else screen.say(null, "it's locked");
+                    } else screen.say("it's locked", 56, 60);
                 }
             };
         }
@@ -117,7 +117,7 @@ public enum Scene {
                     if (!locked || Main.selected.contains(Item.MAKE_SHIFT_BOMB)) {
                         // TODO change image, and go to sub level
                         locked = false;
-                    } else screen.say(null, "it's locked");
+                    } else screen.say("it's locked", 56, 60);
                 }
             };
             new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 192, 16) {
