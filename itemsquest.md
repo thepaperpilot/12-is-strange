@@ -50,6 +50,8 @@
     Notebook - done
     Files - done
     Burner Phone - done
+
+###Break Door Puzzle
     Fire Extinguisher - done
 
 ###Keypad Puzzle
