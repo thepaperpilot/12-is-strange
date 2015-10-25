@@ -40,6 +40,7 @@ public enum Scene {
     SECOND("outside") {
         public void init() {
             screen.stage.addActor(new Cat((int) screen.stage.getWidth() / 3, 10));
+            screen.clock.setPosition(148, 55);
         }
 
         public void next(int direction) {
@@ -86,6 +87,7 @@ public enum Scene {
                     next(1);
                 }
             });
+            screen.clock.setPosition(148, 55);
         }
 
         public void next(int direction) {
