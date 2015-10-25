@@ -16,7 +16,7 @@ public class RightClickIndicator extends Image {
     private float time;
 
     public RightClickIndicator() {
-        Texture indicatorSheet = Main.manager.get("assets/rightClickIndicator.png", Texture.class);
+        Texture indicatorSheet = Main.manager.get("rightClickIndicator.png", Texture.class);
         TextureRegion[][] tmp = TextureRegion.split(indicatorSheet, indicatorSheet.getWidth() / 2, indicatorSheet.getHeight());
         TextureRegion[] frames = tmp[0];
         indicator = new Animation(ANIM_SPEED, frames);

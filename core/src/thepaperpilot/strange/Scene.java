@@ -1,8 +1,7 @@
 package thepaperpilot.strange;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -43,7 +42,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -54,7 +53,7 @@ public enum Scene {
                     next(1);
                 }
             });
-            new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
+            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
                 public boolean locked = true;
 
                 public void onTouch() {
@@ -71,7 +70,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -91,7 +90,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, THIRD.screen));
         }
     },
@@ -105,7 +104,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -116,7 +115,7 @@ public enum Scene {
                     next(1);
                 }
             });
-            new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
+            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
                 public boolean locked = false;
 
                 public void onTouch() {
@@ -126,7 +125,7 @@ public enum Scene {
                     } else screen.say("it's locked", 56, 60);
                 }
             };
-            new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 192, 16) {
+            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 192, 16) {
                 public void onTouch() {
                     next(-1);
                 }
@@ -138,7 +137,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FOURTH.screen);
         }
     },
@@ -157,7 +156,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(new ChoicesScreen(2, "Who is at fault?", new String[]{"Blame David", "Blame Nathan", "Blame Jefferson"}, SEVENTH.screen, SIXTH.screen));
         }
     },
@@ -171,7 +170,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(SEVENTH.screen);
         }
     },
@@ -189,7 +188,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(SEVENTH.screen);
         }
     },
@@ -209,7 +208,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, NINTH.screen));
         }
     },
@@ -238,7 +237,7 @@ public enum Scene {
         }
 
         public void previous() {
-            Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(TENTH.screen);
         }
     },
@@ -258,12 +257,12 @@ public enum Scene {
     public GameScreen screen;
 
     Scene() {
-        screen = new GameScreen(this, new Image(Main.manager.get("assets/schoolBackground.png", Texture.class)));
+        screen = new GameScreen(this, new Image(Main.manager.get("schoolBackground.png", Texture.class)));
         init();
     }
 
     Scene(String bg) {
-        screen = new GameScreen(this, new Image(Main.manager.get("assets/" + bg + "Background.png", Texture.class)));
+        screen = new GameScreen(this, new Image(Main.manager.get("" + bg + "Background.png", Texture.class)));
         init();
     }
 

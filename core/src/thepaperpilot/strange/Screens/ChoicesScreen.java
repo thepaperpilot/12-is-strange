@@ -3,7 +3,7 @@ package thepaperpilot.strange.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -49,14 +49,14 @@ public class ChoicesScreen implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.audio.newSound(new FileHandle("assets/rewind.wav")).play();
+                Main.manager.get("rewind.wav", Sound.class).play();
                 Main.changeScreen(previousScreen);
             }
         });
 
         batch = new SpriteBatch();
         choicesParticle = new ParticleEffect();
-        choicesParticle.load(Gdx.files.internal("assets/swirls.p"), Gdx.files.internal("assets"));
+        choicesParticle.load(Gdx.files.internal("swirls.p"), Gdx.files.internal(""));
         choicesParticle.setPosition(stage.getWidth() / 2, stage.getHeight() / 2);
     }
 
@@ -84,7 +84,7 @@ public class ChoicesScreen implements Screen {
             final int decision = i;
             optionButtons[i].addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
-                    Gdx.audio.newSound(new FileHandle("assets/select.wav")).play();
+                    Main.manager.get("select.wav", Sound.class).play();
                     Main.decisions[ChoicesScreen.this.decision - 1] = decision;
                     Main.changeScreen(nextScreen);
                 }

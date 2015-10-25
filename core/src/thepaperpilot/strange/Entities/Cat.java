@@ -15,7 +15,7 @@ public class Cat extends Image {
     private float time;
 
     public Cat(int x, int y) {
-        Texture catSheet = Main.manager.get("assets/catIdle.png", Texture.class);
+        Texture catSheet = Main.manager.get("catIdle.png", Texture.class);
         setHeight(catSheet.getHeight());
         setWidth(catSheet.getWidth() / 14);
         TextureRegion[][] tmp = TextureRegion.split(catSheet, (int) getWidth(), (int) getHeight());

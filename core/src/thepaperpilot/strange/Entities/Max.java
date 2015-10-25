@@ -19,12 +19,12 @@ public class Max extends Image {
     private float time;
 
     public Max(int x, int y) {
-        Texture maxWalkTexture = Main.manager.get("assets/maxWalk.png", Texture.class);
+        Texture maxWalkTexture = Main.manager.get("maxWalk.png", Texture.class);
         setHeight(maxWalkTexture.getHeight());
         setWidth(maxWalkTexture.getWidth() / 14);
         TextureRegion[][] tmp = TextureRegion.split(maxWalkTexture, (int) getWidth(), (int) getHeight());
         walk = new Animation(ANIM_SPEED, tmp[0]);
-        Texture maxIdleTexture = Main.manager.get("assets/maxIdle.png", Texture.class);
+        Texture maxIdleTexture = Main.manager.get("maxIdle.png", Texture.class);
         tmp = TextureRegion.split(maxIdleTexture, (int) getWidth(), (int) getHeight());
         idle = new Animation(ANIM_SPEED, tmp[0]);
         time = 0;

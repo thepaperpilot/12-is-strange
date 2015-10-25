@@ -3,7 +3,7 @@ package thepaperpilot.strange.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -37,7 +37,7 @@ public class MenuScreen implements Screen {
         Button start = new TextButton("Start Game", Main.skin);
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.audio.newSound(new FileHandle("assets/select.wav")).play();
+                Main.manager.get("select.wav", Sound.class).play();
                 Main.changeScreen(Scene.FIRST.screen);
             }
         });

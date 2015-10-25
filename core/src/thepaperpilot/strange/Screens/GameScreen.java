@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -139,7 +139,7 @@ public class GameScreen implements Screen {
     }
 
     public void say(String message, int x, int y) {
-        Gdx.audio.newSound(new FileHandle("assets/error.wav")).play();
+        Main.manager.get("error.wav", Sound.class).play();
         final Label label = new Label(message, Main.skin);
         label.setPosition((int) (x * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), (int) (y * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f));
         label.addAction(Actions.sequence(Actions.moveBy(0, 0, .5f), Actions.parallel(Actions.moveBy(0, 50, 1), Actions.fadeOut(1)), Actions.run(new Runnable() {

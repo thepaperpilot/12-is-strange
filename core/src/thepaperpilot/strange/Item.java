@@ -1,7 +1,6 @@
 package thepaperpilot.strange;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -48,13 +47,13 @@ public enum Item {
 
     Item(String name, String image, Scene scene, int x, int y) {
         this.name = name;
-        this.image = new Image(Main.manager.get("assets/" + image + "Inv.png", Texture.class));
-        new ItemImage(new Image(Main.manager.get("assets/" + image + "World.png", Texture.class)).getDrawable(), scene.screen, x, y, ordinal());
+        this.image = new Image(Main.manager.get("" + image + "Inv.png", Texture.class));
+        new ItemImage(new Image(Main.manager.get("" + image + "World.png", Texture.class)).getDrawable(), scene.screen, x, y, ordinal());
     }
 
     Item(String name, String image) {
         this.name = name;
-        this.image = new Image(Main.manager.get("assets/" + image + "Inv.png", Texture.class));
+        this.image = new Image(Main.manager.get("" + image + "Inv.png", Texture.class));
     }
 
     public static void combine() {
@@ -69,7 +68,7 @@ public enum Item {
                 }
                 if(!found) continue outer;
             }
-            Gdx.audio.newSound(new FileHandle("assets/pickup.wav")).play();
+            Main.manager.get("pickup.wav", Sound.class).play();
             ArrayList<Item> tmp = new ArrayList<Item>();
             Collections.addAll(tmp, combo);
             Main.inventory.removeAll(tmp);
@@ -87,7 +86,7 @@ public enum Item {
         }
 
         public void onTouch() {
-            Gdx.audio.newSound(new FileHandle("assets/pickup.wav")).play();
+            Main.manager.get("pickup.wav", Sound.class).play();
             Main.inventory.add(Item.values()[parent]);
             Scene.updateInventory();
             remove();

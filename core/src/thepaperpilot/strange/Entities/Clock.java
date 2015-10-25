@@ -11,7 +11,7 @@ public class Clock extends Image {
     TextureRegion[] frames;
 
     public Clock(int scene, int x, int y) {
-        clockSheet = Main.manager.get("assets/clock.png", Texture.class);
+        clockSheet = Main.manager.get("clock.png", Texture.class);
         setWidth(clockSheet.getWidth() / 12);
         setHeight(clockSheet.getHeight());
         TextureRegion[][] tmp = TextureRegion.split(clockSheet, (int) getWidth(), (int) getHeight());
