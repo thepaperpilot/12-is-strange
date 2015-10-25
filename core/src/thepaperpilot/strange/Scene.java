@@ -1,8 +1,11 @@
 package thepaperpilot.strange;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import thepaperpilot.strange.Entities.Cat;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
@@ -29,7 +32,7 @@ public enum Scene {
     },
     SECOND {
         public void init() {
-
+            screen.stage.addActor(new Cat((int) screen.stage.getWidth() / 3, 10));
         }
 
         public void next(int direction) {
@@ -40,7 +43,7 @@ public enum Scene {
             Main.changeScreen(FIRST.screen);
         }
     },
-    THIRD {
+    THIRD("school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -89,7 +92,7 @@ public enum Scene {
             Main.changeScreen(FIRST.screen);
         }
     },
-    SIXTH {
+    SIXTH("school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -137,7 +140,7 @@ public enum Scene {
             Main.changeScreen(SEVENTH.screen);
         }
     },
-    NINTH {
+    NINTH("school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -185,7 +188,7 @@ public enum Scene {
             Main.changeScreen(TENTH.screen);
         }
     },
-    TWELTH {
+    TWELTH("school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -217,7 +220,12 @@ public enum Scene {
     public GameScreen screen;
 
     Scene() {
-        screen = new GameScreen(this);
+        screen = new GameScreen(this, new Image(Main.manager.get("assets/schoolBackground.png", Texture.class)));
+        init();
+    }
+
+    Scene(String bg) {
+        screen = new GameScreen(this, new Image(Main.manager.get("assets/" + bg + "Background.png", Texture.class)));
         init();
     }
 

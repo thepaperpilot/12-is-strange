@@ -6,10 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -29,7 +26,7 @@ public class GameScreen implements Screen {
     private Stage ui;
     private Table inventoryTable;
 
-    public GameScreen(final Scene scene) {
+    public GameScreen(final Scene scene, Image background) {
         stage = new Stage(new StretchViewport(256, 144));
         ui = new Stage(new StretchViewport(640, 360));
 
@@ -65,6 +62,7 @@ public class GameScreen implements Screen {
 
         max = new Max((int) stage.getWidth() / 4, 10);
         clock = new Clock(scene.ordinal(), (int) stage.getWidth() / 2, (int) stage.getHeight() / 2);
+        stage.addActor(background);
         stage.addActor(max);
         stage.addActor(clock);
     }
