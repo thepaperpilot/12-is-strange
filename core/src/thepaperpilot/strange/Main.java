@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class Main extends Game {
     public static final AssetManager manager = new AssetManager();
-    // TODO save/load-ing
     public static final ArrayList<Item> inventory = new ArrayList<Item>();
     public static final ArrayList<Item> selected = new ArrayList<Item>();
     public static Skin skin;
@@ -29,8 +28,8 @@ public class Main extends Game {
         instance = this;
         manager.load("assets/textures.json", Skin.class);
         // TODO make these a texture atlas
-        manager.load("assets/maxStill.png", Texture.class);
         manager.load("assets/maxWalk.png", Texture.class);
+        manager.load("assets/maxIdle.png", Texture.class);
         manager.load("assets/clock.png", Texture.class);
         manager.load("assets/catIdle.png", Texture.class);
         manager.load("assets/rightClickIndicator.png", Texture.class);
