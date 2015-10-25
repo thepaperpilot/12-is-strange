@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import thepaperpilot.strange.Entities.Cat;
+import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
@@ -50,6 +51,16 @@ public enum Scene {
                     next(1);
                 }
             });
+            new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
+                public boolean locked = false;
+
+                public void onTouch() {
+                    if (!locked || Main.selected.contains(Item.KEYS)) {
+                        next(-1);
+                        locked = false;
+                    } else screen.say(null, "it's locked");
+                }
+            };
         }
 
         public void next(int direction) {
@@ -99,6 +110,21 @@ public enum Scene {
                     next(1);
                 }
             });
+            new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
+                public boolean locked = false;
+
+                public void onTouch() {
+                    if (!locked || Main.selected.contains(Item.MAKE_SHIFT_BOMB)) {
+                        // TODO change image, and go to sub level
+                        locked = false;
+                    } else screen.say(null, "it's locked");
+                }
+            };
+            new Entity(new Image(Main.manager.get("assets/schoolDoor.png", Texture.class)).getDrawable(), screen, 192, 16) {
+                public void onTouch() {
+                    next(-1);
+                }
+            };
         }
 
         public void next(int direction) {

@@ -135,4 +135,8 @@ public class GameScreen implements Screen {
         stage.dispose();
         ui.dispose();
     }
+
+    public void say(String name, String message) {
+        // TODO implement this
+    }
 }

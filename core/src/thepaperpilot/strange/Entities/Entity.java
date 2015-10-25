@@ -13,6 +13,7 @@ public class Entity extends Image {
         setPosition(x, y);
         setSize(drawable.getMinWidth(), drawable.getMinHeight());
         game.stage.addActor(this);
+        this.setZIndex(1);
         addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 game.max.target = (int) Entity.this.getX();
