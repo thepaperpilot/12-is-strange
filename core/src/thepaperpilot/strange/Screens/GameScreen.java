@@ -14,9 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thepaperpilot.strange.Entities.Clock;
+import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Entities.RightClickIndicator;
-import thepaperpilot.strange.Items.Item;
+import thepaperpilot.strange.Item;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Scene;
 
@@ -24,7 +25,7 @@ public class GameScreen implements Screen {
     public Stage stage;
     public Max max;
     public Clock clock;
-    public Item.ItemImage target;
+    public Entity target;
     private Stage ui;
     private Table inventoryTable;
 
@@ -102,9 +103,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         if (target != null && max.getX() == (int) target.getX()) {
-            Main.inventory.add(Item.values()[target.parent]);
-            Scene.updateInventory();
-            target.remove();
+            target.onTouch();
             target = null;
         }
         stage.act(delta);

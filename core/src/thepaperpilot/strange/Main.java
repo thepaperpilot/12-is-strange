@@ -7,7 +7,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import thepaperpilot.strange.Items.Item;
 import thepaperpilot.strange.Screens.MenuScreen;
 
 import java.util.ArrayList;
@@ -88,6 +87,8 @@ public class Main extends Game {
             skin.getFont("large").getData().setScale(.5f);
             skin.getFont("font").getData().setScale(.25f);
             Item.combine(); //trick to instantiate all the items
+            inventory.add(Item.NOTEBOOK);
+            Scene.updateInventory();
 
             setScreen(new MenuScreen());
         } else
