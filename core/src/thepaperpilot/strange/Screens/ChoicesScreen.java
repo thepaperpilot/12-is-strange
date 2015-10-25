@@ -54,6 +54,12 @@ public class ChoicesScreen implements Screen {
         table.top().left().add(new RightClickIndicator());
         table.add(new Label(" rewind time by right clicking", Main.skin));
         table.setColor(1, 1, 1, .5f);
+        table.addListener(new ClickListener(Input.Buttons.RIGHT) {
+            public void clicked(InputEvent event, float x, float y) {
+                Main.manager.get("rewind.wav", Sound.class).play();
+                Main.changeScreen(previousScreen);
+            }
+        });
 
         stage.addActor(table);
 
