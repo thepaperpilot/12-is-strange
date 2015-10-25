@@ -19,17 +19,29 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 
+import java.util.Arrays;
+
 public class ChoicesScreen implements Screen {
     public static ParticleEffect choicesParticle;
     public SpriteBatch batch;
     int decision;
-    Screen nextScreen;
+    Screen[] nextScreen;
     private Stage stage;
     private Table decisionTable;
 
-    public ChoicesScreen(int decision, String question, String[] choices, Screen nextScreen, final Screen previousScreen) {
+    public ChoicesScreen(int decision, String question, String[] choices, Screen nextScreen, Screen previousScreen) {
+        Screen[] screens = new Screen[choices.length];
+        Arrays.fill(screens, nextScreen);
+        init(decision, question, choices, screens, previousScreen);
+    }
+
+    public ChoicesScreen(int decision, String question, String[] choices, Screen[] nextScreens, Screen previousScreen) {
+        init(decision, question, choices, nextScreens, previousScreen);
+    }
+
+    private void init(int decision, String question, String[] choices, Screen[] nextScreens, final Screen previousScreen) {
         this.decision = decision;
-        this.nextScreen = nextScreen;
+        this.nextScreen = nextScreens;
         stage = new Stage(new StretchViewport(640, 360));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
@@ -86,7 +98,7 @@ public class ChoicesScreen implements Screen {
                 public void clicked(InputEvent event, float x, float y) {
                     Main.manager.get("select.wav", Sound.class).play();
                     Main.decisions[ChoicesScreen.this.decision - 1] = decision;
-                    Main.changeScreen(nextScreen);
+                    Main.changeScreen(nextScreen[decision]);
                 }
             });
         }

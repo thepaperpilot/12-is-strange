@@ -37,6 +37,11 @@ public class GameScreen implements Screen {
             table.setFillParent(true);
             table.top().left().add(new RightClickIndicator());
             table.setColor(1, 1, 1, .5f);
+            table.addListener(new ClickListener(Input.Buttons.LEFT) {
+                public void clicked(InputEvent event, float x, float y) {
+                    scene.previous();
+                }
+            });
             ui.addActor(table);
         }
 

@@ -20,6 +20,11 @@ public enum Scene {
                     next(1);
                 }
             });
+            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 10, 32) {
+                public void onTouch() {
+                    Main.changeScreen(new ChoicesScreen(1, "Where do you want to go?", new String[]{"Hang outside", "Study inside"}, new GameScreen[]{SECOND.screen, THIRD.screen}, screen));
+                }
+            };
         }
 
         public void next(int direction) {
@@ -32,7 +37,7 @@ public enum Scene {
             // lol
         }
     },
-    SECOND {
+    SECOND("outside") {
         public void init() {
             screen.stage.addActor(new Cat((int) screen.stage.getWidth() / 3, 10));
         }
@@ -74,7 +79,7 @@ public enum Scene {
             Main.changeScreen(FIRST.screen);
         }
     },
-    FOURTH {
+    FOURTH("outside") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
