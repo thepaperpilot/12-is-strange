@@ -38,6 +38,7 @@ public class Main extends Game {
         manager.load("schoolBackground.png", Texture.class);
         manager.load("bathroomBackground.png", Texture.class);
         manager.load("outsideBackground.png", Texture.class);
+        manager.load("junkyardBackground.png", Texture.class);
         manager.load("schoolDoor.png", Texture.class);
         manager.load("maxWalk.png", Texture.class);
         manager.load("maxIdle.png", Texture.class);

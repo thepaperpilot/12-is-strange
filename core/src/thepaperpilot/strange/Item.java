@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Item {
-    ALCOHOL("alcohol", "alcohol", Scene.SEVENTH, 20, 20),
+    ALCOHOL("alcohol", "alcohol", Scene.SEVENTH, 15, 32),
     BOTTLES("bottles", "bottles"),
     CAMERA("camera", "camera", Scene.OFFICE, 48, 40),
     CAT_FOOD("cat food", "catFood"),
@@ -24,7 +24,7 @@ public enum Item {
     FORTUNE_COOKIE_CODE("fortune cookie code", "fortuneCookieCode"),
     FORTUNE_COOKIE("fortune cookie", "fortuneCookie"),
     GUN("gun", "gun"),
-    HAMMER("hammer", "hammer", Scene.SEVENTH, 120, 20),
+    HAMMER("hammer", "hammer", Scene.SEVENTH, 170, 16),
     KEYS("keys", "keys"),
     MAKE_SHIFT_BOMB("make-shift bomb", "makeShiftBomb"),
     NOTEBOOK("notebook", "notebook"),

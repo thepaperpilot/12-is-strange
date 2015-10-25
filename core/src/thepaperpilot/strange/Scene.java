@@ -101,7 +101,7 @@ public enum Scene {
             Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, THIRD.screen));
         }
     },
-    FIFTH(5) {
+    FIFTH(5, "junkyard") {
         public void init() {
 
         }
@@ -167,7 +167,7 @@ public enum Scene {
             Main.changeScreen(SIXTH.screen);
         }
     },
-    SEVENTH(7) {
+    SEVENTH(7, "junkyard") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -284,13 +284,13 @@ public enum Scene {
     public int scene;
 
     Scene(int scene) {
-        this.scene = scene;
+        this.scene = scene - 1; //just to make it index properly (start at 0)
         screen = new GameScreen(this, new Image(Main.manager.get("schoolBackground.png", Texture.class)));
         init();
     }
 
     Scene(int scene, String bg) {
-        this.scene = scene;
+        this.scene = scene - 1;
         screen = new GameScreen(this, new Image(Main.manager.get("" + bg + "Background.png", Texture.class)));
         init();
     }
