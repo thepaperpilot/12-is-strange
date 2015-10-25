@@ -12,36 +12,30 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import thepaperpilot.strange.Choice;
 import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
+import thepaperpilot.strange.Scene;
 
 public class GameScreen implements Screen {
-    private final int scene;
     private Stage stage;
     private Stage ui;
     private Table inventoryTable;
     private Max max;
+    public Clock clock;
 
-    public GameScreen(int scene) {
-        this.scene = scene;
-    }
-
-    @Override
-    public void show() {
+    public GameScreen(final Scene scene) {
         stage = new Stage(new StretchViewport(256, 144));
-        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         ui = new Stage(new StretchViewport(640, 360));
-        ui.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.input.setInputProcessor(new InputMultiplexer(ui, stage));
 
-        Table table = new Table(Main.skin);
-        table.setFillParent(true);
-        table.top().left().add(new RightClickIndicator());
-        table.setColor(1, 1, 1, .5f);
-        ui.addActor(table);
+        if(scene.ordinal() != 0) {
+            Table table = new Table(Main.skin);
+            table.setFillParent(true);
+            table.top().left().add(new RightClickIndicator());
+            table.setColor(1, 1, 1, .5f);
+            ui.addActor(table);
+        }
 
         inventoryTable = new Table(Main.skin);
         inventoryTable.setSize(ui.getWidth() - 30, 34);
@@ -61,13 +55,21 @@ public class GameScreen implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                Main.changeScreen(new ChoicesScreen(1, "look at you going back in time", new Choice[]{new Choice("I learned from the best", new GameScreen(2))}, GameScreen.this));
+                scene.previous();
             }
         });
 
         max = new Max((int) stage.getWidth() / 4, 10);
+        clock = new Clock(scene.ordinal(), (int) stage.getWidth() / 2, (int) stage.getHeight() / 2);
         stage.addActor(max);
-        stage.addActor(new Clock(scene, (int) stage.getWidth() / 2, (int) stage.getHeight() / 2));
+        stage.addActor(clock);
+    }
+
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(new InputMultiplexer(ui, stage));
+        max.target = (int) max.x;
+        // TODO add a particle effect to show next screen
     }
 
     private void updateInventory() {

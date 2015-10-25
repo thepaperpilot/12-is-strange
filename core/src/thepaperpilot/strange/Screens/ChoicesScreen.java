@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import thepaperpilot.strange.Choice;
 import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 
@@ -26,9 +25,11 @@ public class ChoicesScreen implements Screen {
     private Table decisionTable;
 
     int decision;
+    Screen nextScreen;
 
-    public ChoicesScreen(int decision, String question, Choice[] choices, final Screen previousScreen) {
+    public ChoicesScreen(int decision, String question, String[] choices, Screen nextScreen, final Screen previousScreen) {
         this.decision = decision;
+        this.nextScreen = nextScreen;
         stage = new Stage(new StretchViewport(640, 360));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
@@ -62,18 +63,18 @@ public class ChoicesScreen implements Screen {
     public void show() {
     }
 
-    private void setChoice(String question, final Choice[] choices) {
+    private void setChoice(String question, final String[] choices) {
         decisionTable.clearChildren();
         Label choiceLabel = new Label(question, Main.skin, "large");
         choiceLabel.setWrap(true);
         choiceLabel.setAlignment(Align.center);
         TextButton[] optionButtons = new TextButton[choices.length];
         double choiceWidth = Math.min(stage.getWidth() - 10, new GlyphLayout(Main.skin.getFont("large"), question).width);
-        double optionWidth = new GlyphLayout(Main.skin.getFont("font"), choices[0].name).width;
+        double optionWidth = new GlyphLayout(Main.skin.getFont("font"), choices[0]).width;
         for (int i = 0; i < optionButtons.length; i++) {
-            optionButtons[i] = new TextButton(choices[i].name, Main.skin);
+            optionButtons[i] = new TextButton(choices[i], Main.skin);
             optionButtons[i].getLabel().setWrap(true);
-            optionWidth = Math.max(optionWidth, new GlyphLayout(Main.skin.getFont("font"), choices[i].name).width);
+            optionWidth = Math.max(optionWidth, new GlyphLayout(Main.skin.getFont("font"), choices[i]).width);
         }
         optionWidth = Math.min(choiceWidth, stage.getWidth() / (double) (choices.length + 1)) + 2;
         decisionTable.add(choiceLabel).width((int) choiceWidth).colspan(choices.length).padBottom(2).row();
@@ -82,8 +83,8 @@ public class ChoicesScreen implements Screen {
             final int decision = i;
             optionButtons[i].addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
-                    Main.decisions[ChoicesScreen.this.decision] = decision;
-                    Main.changeScreen(choices[decision].nextScene);
+                    Main.decisions[ChoicesScreen.this.decision - 1] = decision;
+                    Main.changeScreen(nextScreen);
                 }
             });
         }

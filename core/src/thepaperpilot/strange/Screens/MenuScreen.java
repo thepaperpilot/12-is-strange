@@ -15,6 +15,7 @@ import thepaperpilot.strange.Entities.Cat;
 import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Main;
+import thepaperpilot.strange.Scene;
 
 import java.util.Random;
 
@@ -35,7 +36,7 @@ public class MenuScreen implements Screen {
         Button start = new TextButton("Start Game", Main.skin);
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                Main.changeScreen(new GameScreen(0));
+                Main.changeScreen(Scene.FIRST.screen);
             }
         });
         Table table = new Table(Main.skin);

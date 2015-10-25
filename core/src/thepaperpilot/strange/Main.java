@@ -6,10 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import thepaperpilot.strange.Items.Item;
-import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
 
 import java.util.ArrayList;
@@ -21,11 +19,6 @@ public class Main extends Game {
     public static Skin skin;
     public static int[] decisions = new int[3];
     private static Main instance;
-
-    public static void findEnding() {
-        inventory.add(new Item("testing fonts", new Image(skin, "coin100")));
-        instance.setScreen(new GameScreen(0));
-    }
 
     public static void changeScreen(Screen screen) {
         instance.setScreen(screen);

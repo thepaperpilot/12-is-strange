@@ -16,7 +16,7 @@ public class Max extends Image {
     private final Animation walk;
     private final Drawable still;
     public int target;
-    private float x;
+    public float x;
     private float time;
 
     public Max(int x, int y) {
