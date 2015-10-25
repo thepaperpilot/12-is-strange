@@ -1,11 +1,11 @@
 ##Level 1 (1>>2/3)##
-Setting: Outside
+Setting: Bathroom
 Puzzle: Fire Alarm (Needs: Hammer >> Gives: Gun)
 Contains: Soap
 
 
 ##Level 2 (1<<2)##
-Setting: Bathroom
+Setting: Outside
 Puzzle: Bird (Needs: Cat Food >> Gives: Sugar )
 Contains: Bone
 
