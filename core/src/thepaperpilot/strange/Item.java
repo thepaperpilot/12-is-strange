@@ -15,11 +15,11 @@ import java.util.Map;
 public enum Item {
     ALCOHOL("alcohol", "alcohol", Scene.SEVENTH, 20, 20),
     BOTTLES("bottles", "bottles"),
-    CAMERA("camera", "camera"),
+    CAMERA("camera", "camera", Scene.OFFICE, 48, 40),
     CAT_FOOD("cat food", "catFood"),
     DOG_BONE("dog bone", "dogBone", Scene.SECOND, 200, 14),
     DUCT_TAPE("duct tape", "ductTape", Scene.FIFTH, 120, 21),
-    FILES("files", "files", Scene.SIXTH, 24, 40),
+    FILES("files", "files", Scene.OFFICE, 24, 40),
     FIRE_EXTINGUISHER("fire extinguisher", "fireExtinguish", Scene.EIGTH, 100, 16),
     FORTUNE_COOKIE_CODE("fortune cookie code", "fortuneCookieCode"),
     FORTUNE_COOKIE("fortune cookie", "fortuneCookie"),

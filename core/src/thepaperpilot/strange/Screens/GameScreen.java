@@ -32,7 +32,7 @@ public class GameScreen implements Screen {
         stage = new Stage(new StretchViewport(256, 144));
         ui = new Stage(new StretchViewport(640, 360));
 
-        if (scene.ordinal() != 0 && scene.ordinal() != 12) {
+        if (scene.scene != 0 && scene.scene != 12) {
             Table table = new Table(Main.skin);
             table.setFillParent(true);
             table.top().left().add(new RightClickIndicator());
@@ -68,7 +68,7 @@ public class GameScreen implements Screen {
         });
 
         max = new Max((int) stage.getWidth() / 4, 10);
-        clock = new Clock(scene.ordinal(), 3 * (int) stage.getWidth() / 4, 2 * (int) stage.getHeight() / 3);
+        clock = new Clock(scene.scene, 3 * (int) stage.getWidth() / 4, 2 * (int) stage.getHeight() / 3);
         stage.addActor(background);
         stage.addActor(max);
         stage.addActor(clock);

@@ -13,7 +13,7 @@ import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
 
 public enum Scene {
-    FIRST("bathroom") {
+    FIRST(1, "bathroom") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -37,7 +37,7 @@ public enum Scene {
             // lol
         }
     },
-    SECOND("outside") {
+    SECOND(2, "outside") {
         public void init() {
             screen.stage.addActor(new Cat((int) screen.stage.getWidth() / 3, 10));
             screen.clock.setPosition(148, 55);
@@ -52,7 +52,7 @@ public enum Scene {
             Main.changeScreen(FIRST.screen);
         }
     },
-    THIRD("school") {
+    THIRD(3, "school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -80,7 +80,7 @@ public enum Scene {
             Main.changeScreen(FIRST.screen);
         }
     },
-    FOURTH("outside") {
+    FOURTH(4, "outside") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -101,7 +101,7 @@ public enum Scene {
             Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, THIRD.screen));
         }
     },
-    FIFTH {
+    FIFTH(5) {
         public void init() {
 
         }
@@ -115,7 +115,7 @@ public enum Scene {
             Main.changeScreen(FIRST.screen);
         }
     },
-    SIXTH("school") {
+    SIXTH(6, "school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -123,7 +123,7 @@ public enum Scene {
                 }
             });
             new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
-                public boolean locked = false;
+                public boolean locked = true;
 
                 public void onTouch() {
                     if (!locked || Main.selected.contains(Item.MAKE_SHIFT_BOMB)) {
@@ -148,7 +148,26 @@ public enum Scene {
             Main.changeScreen(FOURTH.screen);
         }
     },
-    SEVENTH {
+    OFFICE(6) { // sub-level of 6
+
+        public void init() {
+            screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
+                public void clicked(InputEvent event, float x, float y) {
+                    next(1);
+                }
+            });
+        }
+
+        public void next(int direction) {
+            // dead end :(
+        }
+
+        public void previous() {
+            Main.manager.get("rewind.wav", Sound.class).play();
+            Main.changeScreen(SIXTH.screen);
+        }
+    },
+    SEVENTH(7) {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -167,7 +186,7 @@ public enum Scene {
             Main.changeScreen(new ChoicesScreen(2, "Who is at fault?", new String[]{"Blame David", "Blame Nathan", "Blame Jefferson"}, SEVENTH.screen, SIXTH.screen));
         }
     },
-    EIGTH {
+    EIGTH(8) {
         public void init() {
 
         }
@@ -181,7 +200,7 @@ public enum Scene {
             Main.changeScreen(SEVENTH.screen);
         }
     },
-    NINTH("school") {
+    NINTH(9, "school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -199,7 +218,7 @@ public enum Scene {
             Main.changeScreen(SEVENTH.screen);
         }
     },
-    TENTH {
+    TENTH(10) {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -219,7 +238,7 @@ public enum Scene {
             Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, NINTH.screen));
         }
     },
-    ELEVENTH("bathroom") {
+    ELEVENTH(11, "bathroom") {
         public void init() {
 
         }
@@ -231,7 +250,7 @@ public enum Scene {
             Main.changeScreen(TENTH.screen);
         }
     },
-    TWELTH("school") {
+    TWELTH(12, "school") {
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
@@ -248,7 +267,7 @@ public enum Scene {
             Main.changeScreen(TENTH.screen);
         }
     },
-    FINAL {
+    FINAL(12) {
         public void init() {
             // show them one of 12 end cutscenes based on their choices
         }
@@ -262,13 +281,16 @@ public enum Scene {
     };
 
     public GameScreen screen;
+    public int scene;
 
-    Scene() {
+    Scene(int scene) {
+        this.scene = scene;
         screen = new GameScreen(this, new Image(Main.manager.get("schoolBackground.png", Texture.class)));
         init();
     }
 
-    Scene(String bg) {
+    Scene(int scene, String bg) {
+        this.scene = scene;
         screen = new GameScreen(this, new Image(Main.manager.get("" + bg + "Background.png", Texture.class)));
         init();
     }
