@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import thepaperpilot.strange.Entities.Cat;
 import thepaperpilot.strange.Entities.Entity;
+import thepaperpilot.strange.Entities.Explosion;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.MenuScreen;
@@ -126,9 +127,13 @@ public enum Scene {
                 public boolean locked = true;
 
                 public void onTouch() {
-                    if (!locked || Main.selected.contains(Item.MAKE_SHIFT_BOMB)) {
-                        // TODO change image, and go to sub level
+                    if (locked && Main.selected.contains(Item.MAKE_SHIFT_BOMB)) {
+                        Main.manager.get("explosion.wav", Sound.class).play();
+                        setDrawable(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable());
+                        screen.stage.addActor(new Explosion(((int) getX()), ((int) getY()) + 8));
                         locked = false;
+                    } else if (!locked) {
+                        Main.changeScreen(OFFICE.screen);
                     } else screen.say("it's locked", 56, 60);
                 }
             };
@@ -149,7 +154,6 @@ public enum Scene {
         }
     },
     OFFICE(6) { // sub-level of 6
-
         public void init() {
             screen.clock.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {

@@ -31,6 +31,7 @@ public class Main extends Game {
         manager.load("textures.json", Skin.class);
         manager.load("bgm.ogg", Music.class);
         manager.load("error.wav", Sound.class);
+        manager.load("explosion.wav", Sound.class);
         manager.load("pickup.wav", Sound.class);
         manager.load("rewind.wav", Sound.class);
         manager.load("select.wav", Sound.class);
@@ -39,6 +40,8 @@ public class Main extends Game {
         manager.load("bathroomBackground.png", Texture.class);
         manager.load("outsideBackground.png", Texture.class);
         manager.load("junkyardBackground.png", Texture.class);
+        manager.load("breakableDoorPuzzle.png", Texture.class);
+        manager.load("explosion.png", Texture.class);
         manager.load("schoolDoor.png", Texture.class);
         manager.load("maxWalk.png", Texture.class);
         manager.load("maxIdle.png", Texture.class);
