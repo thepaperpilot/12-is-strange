@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -12,19 +13,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import thepaperpilot.strange.Entities.Clock;
-import thepaperpilot.strange.Entities.Entity;
-import thepaperpilot.strange.Entities.Max;
-import thepaperpilot.strange.Entities.RightClickIndicator;
+import thepaperpilot.strange.Entities.*;
 import thepaperpilot.strange.Item;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Scene;
 
+import java.util.ArrayList;
+
 public class GameScreen implements Screen {
+    public static Bird bird; //because
     public Stage stage;
     public Max max;
     public Clock clock;
     public Entity target;
+    public ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
     private Stage ui;
     private Table inventoryTable;
 
@@ -57,7 +59,14 @@ public class GameScreen implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
+                for (Rectangle obstacle : obstacles) {
+                    if (x >= obstacle.x && max.x <= obstacle.x)
+                        x = obstacle.x - 2;
+                    if (x <= obstacle.x + obstacle.width && max.x >= obstacle.x)
+                        x = obstacle.x + obstacle.width + 2;
+                }
                 max.target = (int) (x - max.getWidth() / 2);
+                target = null;
             }
         });
 
@@ -78,7 +87,6 @@ public class GameScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(new InputMultiplexer(ui, stage));
         max.target = (int) max.x;
-        // TODO add a particle effect to show next screen
     }
 
     public void updateInventory() {
@@ -107,7 +115,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (target != null && max.getX() == (int) target.getX()) {
+        if (target != null && max.getX() == max.target) {
             target.onTouch();
             target = null;
         }
@@ -143,11 +151,11 @@ public class GameScreen implements Screen {
         ui.dispose();
     }
 
-    public void say(String message, int x, int y) {
+    public void say(String message) {
         Main.manager.get("error.wav", Sound.class).play();
         final Label label = new Label(message, Main.skin);
-        label.setPosition((int) (x * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), (int) (y * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f));
-        label.addAction(Actions.sequence(Actions.moveBy(0, 0, .5f), Actions.parallel(Actions.moveBy(0, 50, 1), Actions.fadeOut(1)), Actions.run(new Runnable() {
+        label.setPosition((int) ((max.x + max.getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
+        label.addAction(Actions.sequence(Actions.moveBy(0, 0, 1f), Actions.parallel(Actions.moveBy(0, 50, 1), Actions.fadeOut(1)), Actions.run(new Runnable() {
             @Override
             public void run() {
                 label.remove();

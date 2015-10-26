@@ -4,16 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import thepaperpilot.strange.Entities.Cat;
+import thepaperpilot.strange.Entities.AnimatedEntity;
 import thepaperpilot.strange.Entities.Clock;
+import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Scene;
@@ -22,6 +25,10 @@ import java.util.Random;
 
 public class MenuScreen implements Screen {
     private static final Random ran = new Random();
+    public static ParticleEffect choicesParticle;
+    public SpriteBatch batch;
+    private Image[] backgrounds;
+    private Image background;
     private Stage stage;
     private Max max;
     private Clock clock;
@@ -38,7 +45,7 @@ public class MenuScreen implements Screen {
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 Main.manager.get("select.wav", Sound.class).play();
-                Main.changeScreen(Scene.FIRST.screen);
+                Main.changeScreen(Scene.SIXTH.screen);
             }
         });
         Table table = new Table(Main.skin);
@@ -51,17 +58,58 @@ public class MenuScreen implements Screen {
         max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
         stage.addActor(clock);
-        stage.addActor(new Cat((int) stage.getWidth() / 3, 10));
+        Entity cat = new AnimatedEntity(Scene.FIRST.screen, (int) stage.getWidth() / 3, 10, Main.manager.get("catIdle.png", Texture.class), 14, 1 / 6f);
+        cat.remove();
+        stage.addActor(cat);
+
+        backgrounds = new Image[]{
+                new Image(Main.manager.get("schoolBackground.png", Texture.class)),
+                new Image(Main.manager.get("bathroomBackground.png", Texture.class)),
+                new Image(Main.manager.get("outsideBackground.png", Texture.class)),
+                new Image(Main.manager.get("junkyardBackground.png", Texture.class)),
+                new Image(Main.manager.get("vortexBackground.png", Texture.class)),
+                //new Image(Main.manager.get("officeBackground.png", Texture.class)),
+                //new Image(Main.manager.get("dormBackground.png", Texture.class))
+        };
+        background = backgrounds[ran.nextInt(backgrounds.length)];
+        stage.addActor(background);
+        background.setZIndex(0);
+
+        batch = new SpriteBatch();
+        choicesParticle = new ParticleEffect();
+        choicesParticle.load(Gdx.files.internal("swirls.p"), Gdx.files.internal(""));
+        choicesParticle.setPosition(stage.getWidth() / 2, stage.getHeight() / 2);
     }
 
     @Override
     public void render(float delta) {
         time += ran.nextFloat() * delta;
-        if (time > 2) {
-            max.target = ran.nextInt((int) stage.getWidth());
+        if (time > 1) {
+            if (ran.nextInt(5) == 0)
+                background.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        background.remove();
+                        Image oldBackground = background;
+                        while (oldBackground == background)
+                            background = backgrounds[ran.nextInt(backgrounds.length)];
+                        stage.addActor(background);
+                        background.setZIndex(0);
+                        background.setColor(1, 1, 1, 0);
+                        background.addAction(Actions.fadeIn(.5f));
+                    }
+                })));
+            if (ran.nextInt(3) == 0)
+                max.target = ran.nextInt((int) stage.getWidth());
             clock.setTime(ran.nextInt(12));
             time = 0;
         }
+        final Matrix4 trans = new Matrix4();
+        trans.scale(Gdx.graphics.getWidth() / stage.getWidth(), Gdx.graphics.getHeight() / stage.getHeight(), 1);
+        batch.setTransformMatrix(trans);
+        batch.begin();
+        choicesParticle.draw(batch, delta);
+        batch.end();
         stage.act(delta);
         stage.draw();
     }
@@ -89,5 +137,6 @@ public class MenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        batch.dispose();
     }
 }

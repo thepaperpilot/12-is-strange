@@ -103,7 +103,8 @@ public class ChoicesScreen implements Screen {
             optionButtons[i].addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
                     Main.manager.get("select.wav", Sound.class).play();
-                    Main.decisions[ChoicesScreen.this.decision - 1] = decision;
+                    if (ChoicesScreen.this.decision != -1)
+                        Main.decisions[ChoicesScreen.this.decision - 1] = decision;
                     Main.changeScreen(nextScreen[decision]);
                 }
             });
