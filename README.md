@@ -1,25 +1,7 @@
-**Theme:** 12
+#12 is Strange
 
-**Team:** Me & Dominic & Grant
+This is a game made in under 48 hours for UT Dallas' SDGA Fall 2015 Game Jam!
 
-Ideas:
-12 endings
+The theme was "12"!
 
-don't show what happened before the endings
-
-but make the players make decisions anyways
-
-each ending will help the player piece together what happened before the endings
-
-3 choices: 2 options, 2 options, 3 options
-
-Have a clock in the background, each ending a different hour
-
-Gameplay:
-point and click
-each ending has items that help with the other endings
-to win you need to "finish" each ending
-persistent inventory
-rewind to go to other endings
-
-For story wise, just replicate Life is Strange
+*12 is Strange* is a point and click adventure making homage to "Life is Strange" by Dontnod, concluding in one of 12 different endings, none of which were in Life is Strange.
