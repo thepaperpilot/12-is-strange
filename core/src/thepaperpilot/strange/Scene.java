@@ -13,6 +13,7 @@ import thepaperpilot.strange.Entities.Bird;
 import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Entities.Explosion;
 import thepaperpilot.strange.Screens.ChoicesScreen;
+import thepaperpilot.strange.Screens.FinalScreen;
 import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.JunkyardCutscene;
 
@@ -420,7 +421,16 @@ public enum Scene {
     },
     FINAL(12, "school") { //placeholder, obviously
         public void init() {
-            // show them one of 12 end cutscenes based on their choices
+            // TODO Only time to copy paste one ending. Oh the humanity!
+            String[] dialogs = new String[]{
+                    "Maxine and Chloe decide to warn only the people they care about. ",
+                    "Chloe:\n\"Max, did you warn your family and close friends?\"",
+                    "Maxine:\n\"Yes, and did you?\"",
+                    "Chloe:\n\"Just my mom and even step douche. Now let's watch this hellhole go to the ground.\"",
+                    "The tornado rips through Arcadia Bay. Max and Chloe hold hands and the tornado destroys the town.",
+                    "Chloe:\n\"Later a-holes. Won't be missing you.\""
+            };
+            Main.changeScreen(new FinalScreen(new Image(Main.manager.get("butterfly.png", Texture.class)), dialogs));
         }
 
         public void previous() {
@@ -433,7 +443,7 @@ public enum Scene {
 
     Scene(int scene, String bg) {
         this.scene = scene - 1;
-        screen = new GameScreen(this, new Image(Main.manager.get("" + bg + "Background.png", Texture.class)));
+        screen = new GameScreen(this, new Image(Main.manager.get(bg + "Background.png", Texture.class)));
         init();
     }
 

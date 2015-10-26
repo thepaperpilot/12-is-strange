@@ -63,6 +63,7 @@ public class Main extends Game {
         manager.load("catEating.png", Texture.class);
         manager.load("crowdCameraPuzzle.png", Texture.class);
         manager.load("detective.png", Texture.class);
+        manager.load("butterfly.png", Texture.class);
         manager.load("clock.png", Texture.class);
         manager.load("catIdle.png", Texture.class);
         manager.load("dogIdle.png", Texture.class);
