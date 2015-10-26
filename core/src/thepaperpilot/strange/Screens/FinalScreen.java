@@ -19,6 +19,7 @@ public class FinalScreen implements Screen {
     public FinalScreen(Image background, String[] dialogs) {
         // TODO flesh this out more
         stage = new Stage(new StretchViewport(256, 144));
+        Gdx.input.setInputProcessor(stage);
         ui = new Stage(new StretchViewport(640, 360));
         this.dialogs = dialogs;
 
@@ -72,5 +73,6 @@ public class FinalScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        ui.dispose();
     }
 }

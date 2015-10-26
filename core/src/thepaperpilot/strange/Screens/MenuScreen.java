@@ -45,7 +45,7 @@ public class MenuScreen implements Screen {
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 Main.manager.get("select.wav", Sound.class).play();
-                Main.changeScreen(Scene.SIXTH.screen);
+                Main.changeScreen(Scene.FIRST.screen);
             }
         });
         Table table = new Table(Main.skin);

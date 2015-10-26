@@ -422,7 +422,7 @@ public enum Scene {
     FINAL(12, "school") { //placeholder, obviously
         public void init() {
             // TODO Only time to copy paste one ending. Oh the humanity!
-            String[] dialogs = new String[]{
+            final String[] dialogs = new String[]{
                     "Maxine and Chloe decide to warn only the people they care about. ",
                     "Chloe:\n\"Max, did you warn your family and close friends?\"",
                     "Maxine:\n\"Yes, and did you?\"",
@@ -430,7 +430,12 @@ public enum Scene {
                     "The tornado rips through Arcadia Bay. Max and Chloe hold hands and the tornado destroys the town.",
                     "Chloe:\n\"Later a-holes. Won't be missing you.\""
             };
-            Main.changeScreen(new FinalScreen(new Image(Main.manager.get("butterfly.png", Texture.class)), dialogs));
+            screen.stage.addAction(Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    Main.changeScreen(new FinalScreen(new Image(Main.manager.get("butterfly.png", Texture.class)), dialogs));
+                }
+            }));
         }
 
         public void previous() {
