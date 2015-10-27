@@ -24,24 +24,24 @@ public class Dialogue {
                 Dialogue dialogue1 = new Dialogue();
                 Line line = new Line();
                 line.name = "Max";
-                line.mesage = "Alyssa! Do you know why that door over there is locked?";
+                line.message = "Alyssa! Do you know why that door over there is locked?";
                 line.face = "maxStill.png";
                 dialogue1.dialogue.add(line);
 
                 line = new Line();
                 line.name = "Alyssa";
-                line.mesage = "Yeah, actually. Jefferson asked me to lock up. But I tell you what, I'll give you the keys in return for some soap.";
+                line.message = "Yeah, actually. Jefferson asked me to lock up. But I tell you what, I'll give you the keys in return for some soap.";
                 dialogue1.dialogue.add(line);
 
                 line = new Line();
                 line.name = "Max";
-                line.mesage = "Soap? Isn't that a bit asinine?";
+                line.message = "Soap? Isn't that a bit asinine?";
                 line.face = "maxStill.png";
                 dialogue1.dialogue.add(line);
 
                 line = new Line();
                 line.name = "Alyssa";
-                line.mesage = "Oh, absolutely. But a lot of tutorials are a lot worse. Just go do it.";
+                line.message = "Oh, absolutely. But a lot of tutorials are a lot worse. Just go do it.";
                 dialogue1.dialogue.add(line);
 
                 String fileName = "Alyssa1.json";
@@ -58,7 +58,7 @@ public class Dialogue {
 
     static class Line {
         public String name;
-        public String mesage;
+        public String message;
 
         public String face;
     }
