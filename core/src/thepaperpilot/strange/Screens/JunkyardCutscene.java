@@ -101,7 +101,7 @@ public class JunkyardCutscene implements Screen {
             if (time > Max.ANIM_SPEED * 7) {
                 Main.manager.get("explosion.wav", Sound.class).play();
                 Main.inventory.remove(Item.GUN);
-                Main.inventory.remove(Item.GUN);
+                Main.selected.remove(Item.GUN);
                 Scene.updateInventory();
                 updateInventory();
                 carMoving = true;
