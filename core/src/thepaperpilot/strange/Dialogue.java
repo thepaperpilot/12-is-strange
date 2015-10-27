@@ -48,7 +48,7 @@ public class Dialogue {
                 String output = json.prettyPrint(dialogue1);
                 System.out.println(Gdx.files.getExternalStoragePath() + fileName);
                 System.out.println(output);
-                Gdx.files.external("Alyssa1.json").writeString(output, false);
+                Gdx.files.external(fileName).writeString(output, false);
 
                 Gdx.app.exit();
             }
