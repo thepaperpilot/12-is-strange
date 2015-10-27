@@ -22,8 +22,19 @@ import thepaperpilot.strange.Main;
 import java.util.Arrays;
 
 public class ChoicesScreen implements Screen {
-    public static ParticleEffect choicesParticle;
-    public SpriteBatch batch;
+    private static ParticleEffect choicesParticle;
+    private static SpriteBatch batch;
+
+    static {
+        choicesParticle = new ParticleEffect();
+        choicesParticle.load(Gdx.files.internal("swirls.p"), Gdx.files.internal(""));
+        choicesParticle.setPosition(320, 180);
+        for (int i = 0; i < 10; i++) {
+            choicesParticle.update(.1f);
+        }
+
+        batch = new SpriteBatch();
+    }
     int decision;
     Screen[] nextScreen;
     private Stage stage;
@@ -37,6 +48,15 @@ public class ChoicesScreen implements Screen {
 
     public ChoicesScreen(int decision, String question, String[] choices, Screen[] nextScreens, Screen previousScreen) {
         init(decision, question, choices, nextScreens, previousScreen);
+    }
+
+    public static void renderParticles(float delta) {
+        final Matrix4 trans = new Matrix4();
+        trans.scale(Gdx.graphics.getWidth() / 640, Gdx.graphics.getHeight() / 360, 1);
+        batch.setTransformMatrix(trans);
+        batch.begin();
+        choicesParticle.draw(batch, delta);
+        batch.end();
     }
 
     private void init(int decision, String question, String[] choices, Screen[] nextScreens, final Screen previousScreen) {
@@ -54,9 +74,8 @@ public class ChoicesScreen implements Screen {
         table.top().left().add(new RightClickIndicator());
         table.add(new Label(" rewind time by right clicking", Main.skin));
         table.setColor(1, 1, 1, .5f);
-        table.addListener(new ClickListener(Input.Buttons.RIGHT) {
+        table.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                Main.manager.get("rewind.wav", Sound.class).play();
                 Main.changeScreen(previousScreen);
             }
         });
@@ -67,15 +86,9 @@ public class ChoicesScreen implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                Main.manager.get("rewind.wav", Sound.class).play();
                 Main.changeScreen(previousScreen);
             }
         });
-
-        batch = new SpriteBatch();
-        choicesParticle = new ParticleEffect();
-        choicesParticle.load(Gdx.files.internal("swirls.p"), Gdx.files.internal(""));
-        choicesParticle.setPosition(stage.getWidth() / 2, stage.getHeight() / 2);
     }
 
     @Override
@@ -114,12 +127,7 @@ public class ChoicesScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        final Matrix4 trans = new Matrix4();
-        trans.scale(Gdx.graphics.getWidth() / stage.getWidth(), Gdx.graphics.getHeight() / stage.getHeight(), 1);
-        batch.setTransformMatrix(trans);
-        batch.begin();
-        choicesParticle.draw(batch, delta / 10f);
-        batch.end();
+        renderParticles(delta);
         stage.draw();
     }
 
@@ -146,6 +154,5 @@ public class ChoicesScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        batch.dispose();
     }
 }

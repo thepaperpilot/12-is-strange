@@ -155,7 +155,7 @@ public enum Scene {
 
         public void previous() {
             Main.manager.get("rewind.wav", Sound.class).play();
-            Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, THIRD.screen));
+            Main.changeScreen(THIRD.screen);
         }
     },
     FIFTH(5, "junkyard") {
@@ -284,7 +284,7 @@ public enum Scene {
 
         public void previous() {
             Main.manager.get("rewind.wav", Sound.class).play();
-            Main.changeScreen(new ChoicesScreen(2, "Who is at fault?", new String[]{"Blame David", "Blame Nathan", "Blame Jefferson"}, SEVENTH.screen, SIXTH.screen));
+            Main.changeScreen(SIXTH.screen);
         }
     },
     EIGTH(8, "vortex") {
@@ -364,7 +364,7 @@ public enum Scene {
 
         public void previous() {
             Main.manager.get("rewind.wav", Sound.class).play();
-            Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, NINTH.screen));
+            Main.changeScreen(NINTH.screen);
         }
     },
     ELEVENTH(11, "bathroom") {

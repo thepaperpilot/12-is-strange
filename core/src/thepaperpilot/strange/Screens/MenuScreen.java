@@ -5,9 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -25,8 +22,6 @@ import java.util.Random;
 
 public class MenuScreen implements Screen {
     private static final Random ran = new Random();
-    public static ParticleEffect choicesParticle;
-    public SpriteBatch batch;
     private Image[] backgrounds;
     private Image background;
     private Stage stage;
@@ -45,7 +40,13 @@ public class MenuScreen implements Screen {
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 Main.manager.get("select.wav", Sound.class).play();
-                Main.changeScreen(Scene.FIRST.screen);
+                stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        Main.reverse = true;
+                        Main.changeScreen(Scene.FIRST.screen);
+                    }
+                })));
             }
         });
         Table table = new Table(Main.skin);
@@ -74,11 +75,6 @@ public class MenuScreen implements Screen {
         background = backgrounds[ran.nextInt(backgrounds.length)];
         stage.addActor(background);
         background.setZIndex(0);
-
-        batch = new SpriteBatch();
-        choicesParticle = new ParticleEffect();
-        choicesParticle.load(Gdx.files.internal("swirls.p"), Gdx.files.internal(""));
-        choicesParticle.setPosition(stage.getWidth() / 2, stage.getHeight() / 2);
     }
 
     @Override
@@ -104,12 +100,7 @@ public class MenuScreen implements Screen {
             clock.setTime(ran.nextInt(12));
             time = 0;
         }
-        final Matrix4 trans = new Matrix4();
-        trans.scale(Gdx.graphics.getWidth() / stage.getWidth(), Gdx.graphics.getHeight() / stage.getHeight(), 1);
-        batch.setTransformMatrix(trans);
-        batch.begin();
-        choicesParticle.draw(batch, delta);
-        batch.end();
+        ChoicesScreen.renderParticles(delta);
         stage.act(delta);
         stage.draw();
     }
@@ -137,6 +128,5 @@ public class MenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        batch.dispose();
     }
 }

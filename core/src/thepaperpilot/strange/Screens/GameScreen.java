@@ -27,6 +27,7 @@ public class GameScreen implements Screen {
     public Clock clock;
     public Entity target;
     public ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
+    boolean transition = true;
     private Stage ui;
     private Table inventoryTable;
 
@@ -72,7 +73,15 @@ public class GameScreen implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                scene.previous();
+                transition = true;
+                stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        Main.reverse = true;
+                        transition = false;
+                        scene.previous();
+                    }
+                }), Actions.fadeIn(0)));
             }
         });
 
@@ -87,6 +96,16 @@ public class GameScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(new InputMultiplexer(ui, stage));
         max.target = (int) max.x;
+        if (Main.reverse) {
+            Main.reverse = false;
+            transition = true;
+            stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(.5f), Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    transition = false;
+                }
+            })));
+        }
     }
 
     public void updateInventory() {
@@ -115,6 +134,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if (transition)
+            ChoicesScreen.renderParticles(delta);
         if (target != null && max.getX() == max.target) {
             target.onTouch();
             target = null;
