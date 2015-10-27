@@ -381,9 +381,9 @@ public enum Scene {
                         Main.selected.remove(Item.PHOTO);
                         Main.inventory.remove(Item.PHOTO);
                         Main.selected.remove(Item.FILES);
-                        Main.inventory.remove(Item.FIRE_EXTINGUISHER);
-                        updateInventory();
+                        Main.inventory.remove(Item.FILES);
                         Main.inventory.add(Item.FORTUNE_COOKIE);
+                        updateInventory();
                     } else if (locked)
                         screen.say("This mysterious guy says he can give me the keypad code\nin exchange for a notebook, phone, a photo, and some files");
                     else screen.say("He may have been mysterious, but at least he was helpful");
