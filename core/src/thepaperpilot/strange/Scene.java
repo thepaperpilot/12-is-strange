@@ -218,7 +218,8 @@ public enum Scene {
                         updateInventory();
                     } else if (!locked) {
                         Main.changeScreen(OFFICE.screen);
-                    } else screen.say("it's locked");
+                    } else
+                        screen.say("it's locked. I think I can blow it open\nusing some sugar, weed killer, duct tape, and a soda can");
                 }
             };
             new Entity(new Image(Main.manager.get("crowdCameraPuzzle.png", Texture.class)).getDrawable(), screen, 180, 14) {
