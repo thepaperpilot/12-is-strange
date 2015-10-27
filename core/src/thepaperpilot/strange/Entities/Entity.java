@@ -26,12 +26,12 @@ public class Entity extends Image {
                 for (Rectangle obstacle : game.obstacles) {
                     if (x >= obstacle.x - game.max.getWidth() / 2f && game.max.x <= obstacle.x) {
                         x = obstacle.x - game.max.getWidth() / 2f - 2;
-                        if (Entity.this.getX() != obstacle.getX())
+                        if (Entity.this.getX() < x)
                             game.target = null;
                     }
                     if (x <= obstacle.x + obstacle.width + game.max.getWidth() / 2f && game.max.x >= obstacle.x) {
                         x = obstacle.x + obstacle.width + game.max.getWidth() / 2f + 2;
-                        if (Entity.this.getX() != obstacle.getX())
+                        if (Entity.this.getX() > x)
                             game.target = null;
                     }
                 }
