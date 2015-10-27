@@ -3,16 +3,11 @@ package thepaperpilot.strange;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import thepaperpilot.strange.Entities.AnimatedEntity;
-import thepaperpilot.strange.Entities.Bird;
-import thepaperpilot.strange.Entities.Entity;
-import thepaperpilot.strange.Entities.Explosion;
+import thepaperpilot.strange.Entities.*;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.FinalScreen;
 import thepaperpilot.strange.Screens.GameScreen;
@@ -26,18 +21,18 @@ public enum Scene {
                     Main.changeScreen(new ChoicesScreen(-1, "Where do you want to go?", new String[]{"Hang outside", "Study inside"}, new GameScreen[]{SECOND.screen, THIRD.screen}, screen));
                 }
             };
-            new Entity(new Image(Main.manager.get("fireAlarmPuzzle.png", Texture.class)).getDrawable(), screen, 210, 60) {
-                public void onTouch() {
-                    if (Main.selected.contains(Item.HAMMER)) {
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.inventory.remove(Item.HAMMER);
-                        Main.selected.remove(Item.HAMMER);
-                        Main.inventory.add(Item.GUN);
-                        setDrawable(new Image(Main.manager.get("fireAlarmPuzzleBroken.png", Texture.class)).getDrawable());
-                        updateInventory();
-                    } else screen.say("I need to find something to break this with");
+            new Puzzle(new Image(Main.manager.get("fireAlarmPuzzle.png", Texture.class)).getDrawable(), screen, 210, 60, Item.HAMMER) {
+                public void onFail() {
+                    screen.say("I need to find something to break this with");
+                }
+
+                public void onSuccess() {
+                    setDrawable(new Image(Main.manager.get("fireAlarmPuzzleBroken.png", Texture.class)).getDrawable());
+                    screen.say("whoah! what was a gun doing in there?");
+                    Main.inventory.add(Item.GUN);
                 }
             };
+            Item.SOAP.place(screen, 230, 16);
         }
 
         public void previous() {
@@ -46,32 +41,27 @@ public enum Scene {
     },
     SECOND(2, "outside") {
         public void init() {
-            new AnimatedEntity(screen, 81, 10, Main.manager.get("catIdle.png", Texture.class), 14, 1 / 6f) {
-                public boolean locked = true;
+            new AnimatedPuzzle(screen, 81, 10, Main.manager.get("catIdle.png", Texture.class), 14, 1 / 6f, Item.CAT_FOOD) {
+                public void onFail() {
+                    screen.say("This cat looks bored. I hear cats hunt birds when they're bored.");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.CAT_FOOD)) {
-                        TextureRegion[][] tmp = TextureRegion.split(Main.manager.get("catEating.png", Texture.class), (int) getWidth(), (int) getHeight());
-                        TextureRegion[] frames = tmp[0];
-                        animation = new Animation(animation.getFrameDuration(), frames);
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.CAT_FOOD);
-                        Main.inventory.remove(Item.CAT_FOOD);
-                        updateInventory();
-                        new Entity(new Image(Main.manager.get("sugarWorld.png", Texture.class)).getDrawable(), FOURTH.screen, (int) screen.stage.getWidth() / 3, 10) {
-                            public void onTouch() {
-                                Main.manager.get("pickup.wav", Sound.class).play();
-                                Main.inventory.add(Item.SUGAR);
-                                Scene.updateInventory();
-                                remove();
-                            }
-                        };
-                        GameScreen.bird.alive = true;
-                    }
+                public void onSuccess() {
+                    setAnimation(Main.manager.get("catEating.png", Texture.class), 2, 1 / 6f);
+                    screen.say("aww. it looks so happy now!");
+                    new Entity(new Image(Main.manager.get("sugarWorld.png", Texture.class)).getDrawable(), FOURTH.screen, (int) screen.stage.getWidth() / 3, 10) {
+                        public void onTouch() {
+                            Main.manager.get("pickup.wav", Sound.class).play();
+                            Main.inventory.add(Item.SUGAR);
+                            Scene.updateInventory();
+                            remove();
+                        }
+                    };
+                    GameScreen.bird.alive = true;
                 }
             };
             screen.clock.setPosition(148, 55);
+            Item.DOG_BONE.place(screen, 200, 14);
         }
 
         public void previous() {
@@ -80,36 +70,31 @@ public enum Scene {
     },
     THIRD(3, "school") {
         public void init() {
-            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16, Item.KEYS) {
+                public void onFail() {
+                    screen.say("it's locked");
+                }
 
-                public void onTouch() {
-                    if (!locked || Main.selected.contains(Item.KEYS)) {
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.KEYS);
-                        Main.inventory.remove(Item.KEYS);
-                        updateInventory();
-                        Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, screen));
-                    } else screen.say("it's locked");
+                public void open() {
+                    Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, screen));
                 }
             };
-            new Entity(new Image(Main.manager.get("AlyssaSoapPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("AlyssaSoapPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10, Item.SOAP) {
+                public void onFail() {
+                    screen.say("She'll give me the keys to the door in exchange for some soap\nI know its weird, just consider it a tutorial");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.SOAP)) {
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.SOAP);
-                        Main.inventory.remove(Item.SOAP);
-                        Main.inventory.add(Item.KEYS);
-                        updateInventory();
-                    } else if (locked)
-                        screen.say("She'll give me the keys to the door in exchange for some soap\nI know its weird, just consider it a tutorial");
-                    else screen.say("I already gave her the soap. What more do you want?");
+                public void onSuccess() {
+                    screen.say("thank you Alyssa!");
+                    Main.inventory.add(Item.KEYS);
+                }
+
+                public void open() {
+                    screen.say("I already gave her the soap. What more do you want?");
+
                 }
             };
+            Item.SODA.place(screen, 80, 16);
         }
 
         public void previous() {
@@ -128,27 +113,26 @@ public enum Scene {
                     Main.changeScreen(SIXTH.screen);
                 }
             };
-            new AnimatedEntity(screen, 160, 13, Main.manager.get("dogIdle.png", Texture.class), 14, 1 / 6f) {
-                public boolean locked = true;
+            new AnimatedPuzzle(screen, 160, 13, Main.manager.get("dogIdle.png", Texture.class), 14, 1 / 6f, Item.DOG_BONE) {
+                public void onFail() {
+                    screen.say("This dog won't let me through. It looks hungry");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.DOG_BONE)) {
-                        TextureRegion[][] tmp = TextureRegion.split(Main.manager.get("dogHappy.png", Texture.class), (int) getWidth(), (int) getHeight());
-                        TextureRegion[] frames = tmp[0];
-                        animation = new Animation(animation.getFrameDuration(), frames);
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.DOG_BONE);
-                        Main.inventory.remove(Item.DOG_BONE);
-                        updateInventory();
-                        screen.obstacles.remove(0); // there's only one, so this works
-                    } else if (locked) screen.say("This dog won't let me through. It looks hungry");
-                    else screen.say("The dog is much happier now that it has a bone");
+                public void onSuccess() {
+                    screen.say("look how cute it is!");
+                    setAnimation(Main.manager.get("dogHappy.png", Texture.class), 2, 1 / 6f);
+                    screen.obstacles.remove(0);
+                }
+
+                public void open() {
+                    screen.say("The dog is much happier now that it has a bone");
                 }
             };
             screen.clock.setPosition(148, 55);
             screen.obstacles.add(new Rectangle(160, 0, 16, screen.stage.getHeight()));
             GameScreen.bird = new Bird(screen, 73, 10);
+            Item.CAT_FOOD.place(screen, 170, 13);
+            Item.WEED_KILLER.place(screen, 21, 7);
         }
 
         public void previous() {
@@ -201,42 +185,37 @@ public enum Scene {
         boolean doorBlocked = true;
 
         public void init() {
-            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16, Item.MAKE_SHIFT_BOMB) {
+                public void onFail() {
+                    screen.say("it's locked. I think I can blow it open\nusing some sugar, weed killer, duct tape, and a soda can");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.MAKE_SHIFT_BOMB)) {
-                        Main.manager.get("explosion.wav", Sound.class).play();
-                        setDrawable(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable());
-                        screen.stage.addActor(new Explosion(((int) getX()), ((int) getY()) + 8));
-                        locked = false;
-                        Main.selected.remove(Item.MAKE_SHIFT_BOMB);
-                        Main.inventory.remove(Item.MAKE_SHIFT_BOMB);
-                        updateInventory();
-                    } else if (!locked) {
-                        Main.changeScreen(OFFICE.screen);
-                    } else
-                        screen.say("it's locked. I think I can blow it open\nusing some sugar, weed killer, duct tape, and a soda can");
+                public void onSuccess() {
+                    Main.manager.get("explosion.wav", Sound.class).play();
+                    setDrawable(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable());
+                    screen.stage.addActor(new Explosion(((int) getX()), ((int) getY()) + 8));
+                    screen.say("I sure hope no one heard that");
+                }
+
+                public void open() {
+                    Main.changeScreen(OFFICE.screen);
                 }
             };
-            new Entity(new Image(Main.manager.get("crowdCameraPuzzle.png", Texture.class)).getDrawable(), screen, 180, 14) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("crowdCameraPuzzle.png", Texture.class)).getDrawable(), screen, 180, 14, Item.CAMERA) {
+                public void onFail() {
+                    screen.say("This crowd of people would make a great shot");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.CAMERA)) {
-                        doorBlocked = false;
-                        locked = false;
-                        Main.selected.remove(Item.CAMERA);
-                        Main.inventory.remove(Item.CAMERA);
-                        Main.inventory.add(Item.PHOTO);
-                        updateInventory();
-                        addAction(Actions.sequence(Actions.moveBy(100, 0, 4), Actions.run(new Runnable() {
-                            @Override
-                            public void run() {
-                                remove();
-                            }
-                        })));
-                    } else if (locked) screen.say("This crowd of people would make a great shot");
+                public void onSuccess() {
+                    doorBlocked = false;
+                    Main.inventory.add(Item.PHOTO);
+                    addAction(Actions.sequence(Actions.moveBy(100, 0, 4), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            remove();
+                        }
+                    })));
+                    screen.say("they're going away. must be camera shy");
                 }
             };
             new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 192, 16) {
@@ -261,6 +240,8 @@ public enum Scene {
             screen.clock.setPosition(100, 57);
             screen.stage.getViewport().setWorldSize(120, 80);
             screen.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+            Item.CAMERA.place(screen, 46, 33);
+            Item.FILES.place(screen, 71, 30);
         }
 
         public void previous() {
@@ -269,11 +250,13 @@ public enum Scene {
     },
     SEVENTH(7, "junkyard") {
         public void init() {
-            new AnimatedEntity(screen, 230, 13, Main.manager.get("balloon.png", Texture.class), 14, .1f) {
+            new AnimatedPuzzle(screen, 230, 13, Main.manager.get("balloon.png", Texture.class), 14, .1f, new Item[0]) {
                 public void onTouch() {
                     Main.changeScreen(new ChoicesScreen(-1, "Are you a nerd?", new String[]{"Go party!", "Go study?"}, new GameScreen[]{EIGTH.screen, NINTH.screen}, screen));
                 }
             };
+            Item.ALCOHOL.place(screen, 15, 32);
+            Item.HAMMER.place(screen, 170, 16);
         }
 
         public void previous() {
@@ -282,23 +265,23 @@ public enum Scene {
     },
     EIGTH(8, "vortex") {
         public void init() {
-            new Entity(new Image(Main.manager.get("bouncer.png", Texture.class)).getDrawable(), screen, 192, 10) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("bouncer.png", Texture.class)).getDrawable(), screen, 192, 10, Item.ALCOHOL) {
+                public void onFail() {
+                    screen.say("I'm not allowed in the VIP area. Maybe if I brought him some alcohol");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.ALCOHOL)) {
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.ALCOHOL);
-                        Main.inventory.remove(Item.ALCOHOL);
-                        updateInventory();
-                        screen.obstacles.remove(0);
-                    } else if (locked)
-                        screen.say("I'm not allowed in the VIP area. Maybe if I brought him some alcohol");
-                    else screen.say("I bribed the bouncer with alcohol, and now he'll let me in the VIP area");
+                public void onSuccess() {
+                    screen.obstacles.remove(0);
+                    screen.say("here you go");
+                }
+
+                public void open() {
+                    screen.say("I bribed the bouncer with alcohol, and now he'll let me in the VIP area");
                 }
             };
             screen.obstacles.add(new Rectangle(192, 0, 16, screen.stage.getHeight()));
+            Item.BOTTLES.place(screen, 225, 13);
+            Item.FIRE_EXTINGUISHER.place(screen, 10, 16);
         }
 
         public void previous() {
@@ -307,20 +290,13 @@ public enum Scene {
     },
     NINTH(9, "school") {
         public void init() {
-            new Entity(new Image(Main.manager.get("warrenPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("warrenPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10, Item.USB) {
+                public void onFail() {
+                    screen.say("Warren needs his flash drive. I think I left it in the junkyard");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.USB)) {
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.USB);
-                        Main.inventory.remove(Item.USB);
-                        updateInventory();
-                        Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, screen));
-                    } else if (locked) screen.say("Warren needs his flash drive. I think I left it in the junkyard");
-                    else
-                        Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, screen));
+                public void open() {
+                    Main.changeScreen(new ChoicesScreen(3, "Warn Victoria her life is in danger?", new String[]{"Warn", "Don't Warn"}, TENTH.screen, screen));
                 }
             };
         }
@@ -331,26 +307,25 @@ public enum Scene {
     },
     TENTH(10, "dorm") {
         public void init() {
-            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 4, 16) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 4, 16, Item.FIRE_EXTINGUISHER) {
+                public void onFail() {
+                    screen.say("it's locked");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.FIRE_EXTINGUISHER)) {
-                        Main.manager.get("explosion.wav", Sound.class).play();
-                        setDrawable(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable());
-                        screen.stage.addActor(new Explosion(((int) getX()), ((int) getY()) + 8));
-                        locked = false;
-                        Main.inventory.remove(Item.FIRE_EXTINGUISHER);
-                        Main.selected.remove(Item.FIRE_EXTINGUISHER);
-                        updateInventory();
-                    } else if (!locked) {
-                        Main.changeScreen(new ChoicesScreen(-1, "Do you need to go?", new String[]{"Go to the bathroom", "Stay in class"}, new GameScreen[]{ELEVENTH.screen, TWELTH.screen}, screen));
-                    } else screen.say("it's locked");
+                public void onSuccess() {
+                    Main.manager.get("explosion.wav", Sound.class).play();
+                    setDrawable(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable());
+                    screen.stage.addActor(new Explosion(((int) getX()), ((int) getY()) + 8));
+                }
+
+                public void open() {
+                    Main.changeScreen(new ChoicesScreen(-1, "Do you need to go?", new String[]{"Go to the bathroom", "Stay in class"}, new GameScreen[]{ELEVENTH.screen, TWELTH.screen}, screen));
                 }
             };
             screen.clock.setPosition(100, 57);
             screen.stage.getViewport().setWorldSize(120, 80);
             screen.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+            Item.PHONE.place(screen, 56, 13);
         }
 
         public void previous() {
@@ -359,26 +334,18 @@ public enum Scene {
     },
     ELEVENTH(11, "bathroom") {
         public void init() {
-            new Entity(new Image(Main.manager.get("detective.png", Texture.class)).getDrawable(), screen, 48, 16) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("detective.png", Texture.class)).getDrawable(), screen, 48, 16, new Item[]{Item.NOTEBOOK, Item.PHONE, Item.PHOTO, Item.FILES}) {
+                public void onFail() {
+                    screen.say("This mysterious guy says he can give me the keypad code\nin exchange for a notebook, phone, a photo, and some files");
+                }
 
-                public void onTouch() {
-                    if (locked && Main.selected.contains(Item.NOTEBOOK) && Main.selected.contains(Item.PHONE) && Main.selected.contains(Item.PHOTO) && Main.selected.contains(Item.FILES)) {
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.NOTEBOOK);
-                        Main.inventory.remove(Item.NOTEBOOK);
-                        Main.selected.remove(Item.PHONE);
-                        Main.inventory.remove(Item.PHONE);
-                        Main.selected.remove(Item.PHOTO);
-                        Main.inventory.remove(Item.PHOTO);
-                        Main.selected.remove(Item.FILES);
-                        Main.inventory.remove(Item.FILES);
-                        Main.inventory.add(Item.FORTUNE_COOKIE);
-                        updateInventory();
-                    } else if (locked)
-                        screen.say("This mysterious guy says he can give me the keypad code\nin exchange for a notebook, phone, a photo, and some files");
-                    else screen.say("He may have been mysterious, but at least he was helpful");
+                public void onSuccess() {
+                    Main.inventory.add(Item.FORTUNE_COOKIE);
+                    screen.say("pleasure doing business");
+                }
+
+                public void open() {
+                    screen.say("He may have been mysterious, but at least he was helpful");
                 }
             };
         }
@@ -389,18 +356,13 @@ public enum Scene {
     },
     TWELTH(12, "school") {
         public void init() {
-            new Entity(new Image(Main.manager.get("schoolDoorKeypad.png", Texture.class)).getDrawable(), screen, 48, 16) {
-                public boolean locked = true;
+            new Puzzle(new Image(Main.manager.get("schoolDoorKeypad.png", Texture.class)).getDrawable(), screen, 48, 16, Item.FORTUNE_COOKIE_CODE) {
+                public void onFail() {
+                    screen.say("it's locked with a keypad.\nI'll need some sort of code to get in");
+                }
 
-                public void onTouch() {
-                    if (!locked || Main.selected.contains(Item.FORTUNE_COOKIE_CODE)) {
-                        locked = false;
-                        Main.manager.get("pickup.wav", Sound.class).play();
-                        Main.selected.remove(Item.FORTUNE_COOKIE_CODE);
-                        Main.inventory.remove(Item.FORTUNE_COOKIE_CODE);
-                        updateInventory();
-                        Main.changeScreen(FINAL.screen);
-                    } else screen.say("it's locked with a keypad.\nI'll need some sort of code to get in");
+                public void open() {
+                    Main.changeScreen(FINAL.screen);
                 }
             };
         }
@@ -411,7 +373,7 @@ public enum Scene {
     },
     FINAL(12, "school") { //placeholder, obviously
         public void init() {
-            // TODO Only time to copy paste one ending. Oh the humanity!
+            // TODO Dialogue system
             final String[] dialogs = new String[]{
                     "Maxine and Chloe decide to warn only the people they care about. ",
                     "Chloe:\n\"Max, did you warn your family and close friends?\"",

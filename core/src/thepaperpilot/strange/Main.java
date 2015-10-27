@@ -20,7 +20,6 @@ public class Main extends Game {
     public static Skin skin;
     public static int[] decisions = new int[3];
     public static boolean reverse;
-    public static long rewind;
     private static Main instance;
 
     public static void changeScreen(Screen screen) {

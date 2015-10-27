@@ -13,28 +13,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Item {
-    ALCOHOL("alcohol", "alcohol", Scene.SEVENTH, 15, 32),
-    BOTTLES("bottles", "bottles", Scene.EIGTH, 225, 13),
-    CAMERA("camera", "camera", Scene.OFFICE, 46, 33),
-    CAT_FOOD("cat food", "catFood", Scene.FOURTH, 170, 13),
-    DOG_BONE("dog bone", "dogBone", Scene.SECOND, 200, 14),
+    ALCOHOL("alcohol", "alcohol"),
+    BOTTLES("bottles", "bottles"),
+    CAMERA("camera", "camera"),
+    CAT_FOOD("cat food", "catFood"),
+    DOG_BONE("dog bone", "dogBone"),
     DUCT_TAPE("duct tape", "ductTape"),
-    FILES("files", "files", Scene.OFFICE, 71, 30),
-    FIRE_EXTINGUISHER("fire extinguisher", "fireExtinguish", Scene.EIGTH, 10, 16),
+    FILES("files", "files"),
+    FIRE_EXTINGUISHER("fire extinguisher", "fireExtinguish"),
     FORTUNE_COOKIE_CODE("fortune cookie code", "fortuneCookieCode"),
     FORTUNE_COOKIE("fortune cookie", "fortuneCookie"),
     GUN("gun", "gun"),
-    HAMMER("hammer", "hammer", Scene.SEVENTH, 170, 16),
+    HAMMER("hammer", "hammer"),
     KEYS("keys", "keys"),
     MAKE_SHIFT_BOMB("make-shift bomb", "makeShiftBomb"),
     NOTEBOOK("notebook", "notebook"),
-    PHONE("phone", "phone", Scene.TENTH, 56, 13),
+    PHONE("phone", "phone"),
     PHOTO("photo", "photo"),
-    SOAP("soap", "soap", Scene.FIRST, 230, 16),
-    SODA("soda", "soda", Scene.THIRD, 80, 16),
+    SOAP("soap", "soap"),
+    SODA("soda", "soda"),
     SUGAR("sugar", "sugar"),
     USB("usb", "usb"),
-    WEED_KILLER("weed killer", "weedKiller", Scene.FOURTH, 21, 7);
+    WEED_KILLER("weed killer", "weedKiller");
 
     public static final Map<Item[], Item> combinations = new HashMap<Item[], Item>();
     static {
@@ -44,15 +44,11 @@ public enum Item {
 
     public final String name;
     public final Image image;
-
-    Item(String name, String image, Scene scene, int x, int y) {
-        this.name = name;
-        this.image = new Image(Main.manager.get(image + "Inv.png", Texture.class));
-        new ItemImage(new Image(Main.manager.get(image + "World.png", Texture.class)).getDrawable(), scene.screen, x, y, ordinal());
-    }
+    public final String imageString;
 
     Item(String name, String image) {
         this.name = name;
+        this.imageString = image;
         this.image = new Image(Main.manager.get(image + "Inv.png", Texture.class));
     }
 
@@ -75,6 +71,10 @@ public enum Item {
             Main.inventory.add(combinations.get(combo));
             Main.selected.clear();
         }
+    }
+
+    public void place(GameScreen screen, int x, int y) {
+        new ItemImage(new Image(Main.manager.get(imageString + "World.png", Texture.class)).getDrawable(), screen, x, y, ordinal());
     }
 
     public class ItemImage extends Entity {

@@ -11,10 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import thepaperpilot.strange.Entities.AnimatedEntity;
+import thepaperpilot.strange.Entities.AnimatedPuzzle;
 import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Entities.Max;
+import thepaperpilot.strange.Item;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Scene;
 
@@ -59,7 +60,7 @@ public class MenuScreen implements Screen {
         max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
         stage.addActor(clock);
-        Entity cat = new AnimatedEntity(Scene.FIRST.screen, (int) stage.getWidth() / 3, 10, Main.manager.get("catIdle.png", Texture.class), 14, 1 / 6f);
+        Entity cat = new AnimatedPuzzle(Scene.FIRST.screen, (int) stage.getWidth() / 3, 10, Main.manager.get("catIdle.png", Texture.class), 14, 1 / 6f, new Item[0]);
         cat.remove();
         stage.addActor(cat);
 
