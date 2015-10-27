@@ -76,8 +76,8 @@ public class GameScreen implements Screen {
             }
         });
 
-        max = new Max((int) stage.getWidth() / 4, 10);
-        clock = new Clock(scene.scene, 3 * (int) stage.getWidth() / 4, 2 * (int) stage.getHeight() / 3);
+        max = new Max(64, 10);
+        clock = new Clock(scene.scene, 192, 96);
         stage.addActor(background);
         stage.addActor(max);
         stage.addActor(clock);

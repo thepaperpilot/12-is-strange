@@ -1,5 +1,6 @@
 package thepaperpilot.strange;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -257,14 +258,14 @@ public enum Scene {
     },
     OFFICE(6, "office") { // sub-level of 6
         public void init() {
-            new Entity(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable(), screen, 68, 16) {
+            new Entity(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable(), screen, 4, 16) {
                 public void onTouch() {
                     Main.changeScreen(SIXTH.screen);
                 }
             };
-            screen.clock.setPosition(168, 60);
-            screen.obstacles.add(new Rectangle(0, 0, 67, screen.stage.getHeight()));
-            screen.obstacles.add(new Rectangle(screen.stage.getWidth() - 68, 0, 67, screen.stage.getHeight()));
+            screen.clock.setPosition(100, 57);
+            screen.stage.getViewport().setWorldSize(120, 80);
+            screen.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         }
 
         public void previous() {
@@ -339,7 +340,7 @@ public enum Scene {
     },
     TENTH(10, "dorm") {
         public void init() {
-            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 68, 16) {
+            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 4, 16) {
                 public boolean locked = true;
 
                 public void onTouch() {
@@ -356,9 +357,9 @@ public enum Scene {
                     } else screen.say("it's locked");
                 }
             };
-            screen.clock.setPosition(168, 60);
-            screen.obstacles.add(new Rectangle(0, 0, 67, screen.stage.getHeight()));
-            screen.obstacles.add(new Rectangle(screen.stage.getWidth() - 68, 0, 67, screen.stage.getHeight()));
+            screen.clock.setPosition(100, 57);
+            screen.stage.getViewport().setWorldSize(120, 80);
+            screen.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         }
 
         public void previous() {
