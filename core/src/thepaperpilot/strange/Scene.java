@@ -75,7 +75,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -114,7 +113,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FIRST.screen);
         }
     },
@@ -154,7 +152,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(THIRD.screen);
         }
     },
@@ -197,7 +194,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FOURTH.screen);
         }
     },
@@ -252,7 +248,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FOURTH.screen);
         }
     },
@@ -269,7 +264,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(FOURTH.screen);
         }
     },
@@ -283,7 +277,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(SIXTH.screen);
         }
     },
@@ -309,7 +302,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(SEVENTH.screen);
         }
     },
@@ -334,7 +326,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(SEVENTH.screen);
         }
     },
@@ -363,7 +354,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(NINTH.screen);
         }
     },
@@ -394,7 +384,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(TENTH.screen);
         }
     },
@@ -417,7 +406,6 @@ public enum Scene {
         }
 
         public void previous() {
-            Main.manager.get("rewind.wav", Sound.class).play();
             Main.changeScreen(TENTH.screen);
         }
     },

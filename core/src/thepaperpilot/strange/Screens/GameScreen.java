@@ -74,6 +74,7 @@ public class GameScreen implements Screen {
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
                 transition = true;
+                Main.manager.get("rewind.wav", Sound.class).play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
