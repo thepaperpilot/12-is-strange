@@ -1,17 +1,22 @@
 package thepaperpilot.strange;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import thepaperpilot.strange.Entities.*;
 import thepaperpilot.strange.Screens.ChoicesScreen;
-import thepaperpilot.strange.Screens.FinalScreen;
 import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.JunkyardCutscene;
+import thepaperpilot.strange.Screens.MenuScreen;
 
 public enum Scene {
     FIRST(1, "bathroom") {
@@ -373,21 +378,13 @@ public enum Scene {
     },
     FINAL(12, "school") { //placeholder, obviously
         public void init() {
-            // TODO Dialogue system
-            final String[] dialogs = new String[]{
-                    "Maxine and Chloe decide to warn only the people they care about. ",
-                    "Chloe:\n\"Max, did you warn your family and close friends?\"",
-                    "Maxine:\n\"Yes, and did you?\"",
-                    "Chloe:\n\"Just my mom and even step douche. Now let's watch this hellhole go to the ground.\"",
-                    "The tornado rips through Arcadia Bay. Max and Chloe hold hands and the tornado destroys the town.",
-                    "Chloe:\n\"Later a-holes. Won't be missing you.\""
-            };
-            screen.stage.addAction(Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    Main.changeScreen(new FinalScreen(new Image(Main.manager.get("butterfly.png", Texture.class)), dialogs));
-                }
-            }));
+            screen.stage.clear();
+            screen.ui.clear();
+            Table goodbye = new Table();
+            goodbye.setFillParent(true);
+            goodbye.bottom().add(new Label("Thanks for Playing!", Main.skin, "large")).padBottom(20);
+            screen.ui.addActor(goodbye);
+            screen.ui.addActor(Dialogue.readDialogue("final1.json"));
         }
 
         public void previous() {

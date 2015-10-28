@@ -1,7 +1,10 @@
 package thepaperpilot.strange;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -56,7 +59,7 @@ public class Dialogue extends Table {
     // I'm going to leave this here as an example of how to write a dialogue and have it export to JSON.
     // The rest of the dialogues shouldn't be committed to the repo, just the exported JSON.
     // And absolutely make sure the code isn't running
-    /*
+    ///*
     public static void main(String[] args) {
         new LwjglApplication(new Game() {
             @Override
@@ -64,29 +67,29 @@ public class Dialogue extends Table {
                 DialoguePrototype dialoguePrototype = new DialoguePrototype();
                 LinePrototype linePrototype = new LinePrototype();
                 linePrototype.name = "Max";
-                linePrototype.message = "Alyssa! Do you know why that door over there is locked?";
+                linePrototype.message = "Oh man! Wasn't that fun! A bit confusing, but satisfactory. Pretty short as well, though. And, what's up with all the Life is Strange puzzles, plot, characters, etc?";
                 linePrototype.face = "maxStill.png";
-                dialoguePrototype.dialogue.add(linePrototype);
-
-                linePrototype = new LinePrototype();
-                linePrototype.name = "Alyssa";
-                linePrototype.message = "Yeah, actually. Jefferson asked me to lock up. But I tell you what, I'll give you the keys in return for some soap.";
-                linePrototype.face = "AlyssaSoapPuzzle.png";
                 dialoguePrototype.dialogue.add(linePrototype);
 
                 linePrototype = new LinePrototype();
                 linePrototype.name = "Max";
-                linePrototype.message = "Soap? Isn't that a bit asinine?";
+                linePrototype.message = "Well, I can't answer all those questions, but what I can tell you is that this is just the beginning! Now that the jam is over, this game is going to get some serious expansions. I'm talking 10x the content, no 100x the content! Yeah, maybe even, like, 200x. I guess it just depends on how you measure content. Hopefully not based on # of clicks or something stupid.";
                 linePrototype.face = "maxStill.png";
                 dialoguePrototype.dialogue.add(linePrototype);
 
                 linePrototype = new LinePrototype();
-                linePrototype.name = "Alyssa";
-                linePrototype.message = "Oh, absolutely. But a lot of tutorials are a lot worse. Just go do it.";
-                linePrototype.face = "AlyssaSoapPuzzle.png";
+                linePrototype.name = "Max";
+                linePrototype.message = "Whatever happens, I'm sure it'll be great. Bit of a shame this ending isn't that great, but, I mean, would you have preferred some rushed ending that didn't make sense? Like, less sense than this fourth wall breaking cop out? Yeah, exactly. The point is, keep watching this game, because it's going to get, like, a lot better. A lot a lot. For now, Thanks for Playing!!";
+                linePrototype.face = "maxStill.png";
                 dialoguePrototype.dialogue.add(linePrototype);
 
-                String fileName = "Alyssa1.json";
+                linePrototype = new LinePrototype();
+                linePrototype.name = "Max";
+                linePrototype.message = "Oh, and one last thing. There isn't actually currently a way to restart the game. No worries, that'll change, I've already worked out how to structure the scenes such that I can reset them all pretty easily. But for now, do me a solid and press refresh or re-open the application or whatever it is you kids do these days, and pretend it happened automatically. Cool? Cool.";
+                linePrototype.face = "maxStill.png";
+                dialoguePrototype.dialogue.add(linePrototype);
+
+                String fileName = "Final1.json";
                 String output = json.prettyPrint(dialoguePrototype);
                 System.out.println(Gdx.files.getExternalStoragePath() + fileName);
                 System.out.println(output);
