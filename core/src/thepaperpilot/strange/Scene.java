@@ -81,7 +81,7 @@ public enum Scene {
             };
             new Puzzle(new Image(Main.manager.get("AlyssaSoapPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10, Item.SOAP) {
                 public void onFail() {
-                    screen.say("She'll give me the keys to the door in exchange for some soap\nI know its weird, just consider it a tutorial");
+                    screen.ui.addActor(Dialogue.readDialogue("Alyssa1.json"));
                 }
 
                 public void onSuccess() {

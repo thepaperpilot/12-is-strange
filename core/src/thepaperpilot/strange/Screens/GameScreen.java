@@ -27,8 +27,8 @@ public class GameScreen implements Screen {
     public Clock clock;
     public Entity target;
     public ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
+    public Stage ui;
     boolean transition = true;
-    private Stage ui;
     private Table inventoryTable;
 
     public GameScreen(final Scene scene, Image background) {

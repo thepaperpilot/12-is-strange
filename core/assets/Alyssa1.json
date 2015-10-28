@@ -1,0 +1,47 @@
+{
+  dialogue: [
+    {
+      name: Max
+      message: Alyssa
+      !
+      Do
+      you
+      know
+      why
+      that
+      door
+      over
+      there
+      is
+      locked
+      ?
+      face: maxStill
+      .
+      png
+    }
+    {
+      name: Alyssa
+      message: "Yeah, actually. Jefferson asked me to lock up. But I tell you what, I'll give you the keys in return for some soap."
+      face: AlyssaSoapPuzzle
+      .
+      png
+    }
+    {
+      name: Max
+      message: Soap
+      ?
+      Isn
+      't that a bit asinine?
+      face: maxStill
+      .
+      png
+    }
+    {
+      name: Alyssa
+      message: "Oh, absolutely. But a lot of tutorials are a lot worse. Just go do it."
+      face: AlyssaSoapPuzzle
+      .
+      png
+    }
+  ]
+}
