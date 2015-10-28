@@ -44,12 +44,11 @@ public class Main extends Game {
         manager.load("audio/pickup.wav", Sound.class);
         manager.load("audio/rewind.wav", Sound.class);
         manager.load("audio/select.wav", Sound.class);
-
     }
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(34/256f, 34/256f, 34/256f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (manager.update() && getScreen() == null) {
             skin = manager.get("textures.json", Skin.class);

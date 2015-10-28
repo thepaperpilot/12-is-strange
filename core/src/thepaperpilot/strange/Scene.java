@@ -382,7 +382,7 @@ public enum Scene {
             goodbye.setFillParent(true);
             goodbye.bottom().add(new Label("Thanks for Playing!", Main.skin, "large")).padBottom(20);
             screen.ui.addActor(goodbye);
-            screen.ui.addActor(Dialogue.readDialogue("dialogue/final1.json"));
+            screen.ui.addActor(Dialogue.readDialogue("dialogue/Final1.json"));
         }
 
         public void previous() {
