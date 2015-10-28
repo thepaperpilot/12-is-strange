@@ -59,7 +59,7 @@ public class Dialogue extends Table {
     // I'm going to leave this here as an example of how to write a dialogue and have it export to JSON.
     // The rest of the dialogues shouldn't be committed to the repo, just the exported JSON.
     // And absolutely make sure the code isn't running
-    ///*
+    /*
     public static void main(String[] args) {
         new LwjglApplication(new Game() {
             @Override
