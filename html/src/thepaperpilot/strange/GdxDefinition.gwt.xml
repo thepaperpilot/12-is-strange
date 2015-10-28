@@ -8,4 +8,6 @@
     <entry-point class='thepaperpilot.strange.client.HtmlLauncher'/>
 
     <set-configuration-property name="gdx.assetpath" value="../core/assets"/>
+
+    <extend-configuration-property name="gdx.reflect.include" value="thepaperpilot.strange.Dialogue" />
 </module>

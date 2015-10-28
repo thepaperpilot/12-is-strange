@@ -374,7 +374,6 @@ public enum Scene {
         }
     },
     FINAL(12, "school") { //placeholder, obviously
-
         public void init() {
             screen.stage.clear();
             screen.ui.clear();
