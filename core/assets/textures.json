@@ -32,13 +32,7 @@
 },
   com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
   default: { font: font, fontColor: white },
-  dialogue: {
-    font: large,
-    fontColor: white,
-    background: default
-    -
-    round
-  },
+  dialogue: { font: large, fontColor: white, background: default-round },
   large: { font: large, fontColor: white }
 },
   com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
