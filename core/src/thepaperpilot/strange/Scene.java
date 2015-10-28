@@ -292,7 +292,7 @@ public enum Scene {
         public void init() {
             new Puzzle(new Image(Main.manager.get("warrenPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10, Item.USB) {
                 public void onFail() {
-                    screen.say("Warren needs his flash drive. I think I left it in the junkyard");
+                    screen.ui.addActor(Dialogue.readDialogue("Warren1.json"));
                 }
 
                 public void open() {
@@ -336,7 +336,7 @@ public enum Scene {
         public void init() {
             new Puzzle(new Image(Main.manager.get("detective.png", Texture.class)).getDrawable(), screen, 48, 16, new Item[]{Item.NOTEBOOK, Item.PHONE, Item.PHOTO, Item.FILES}) {
                 public void onFail() {
-                    screen.say("This mysterious guy says he can give me the keypad code\nin exchange for a notebook, phone, a photo, and some files");
+                    screen.ui.addActor(Dialogue.readDialogue("Detective1.json"));
                 }
 
                 public void onSuccess() {

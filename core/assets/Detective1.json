@@ -1,0 +1,34 @@
+{
+dialogue: [
+	{
+		name: Max
+		message: Hello?? Who are you?
+		face: maxStill.png
+	}
+	{
+		name: ???
+		message: "No one important. What is important, is this cookie I have here."
+		face: detective.png
+	}
+	{
+		name: Max
+		message: A cookie? Surely you're kidding.
+		face: maxStill.png
+	}
+	{
+		name: ???
+		message: "I am not. You'll understand in time. But, before you get this, I'm going to need something from you. Return back here when you have a phone, photo, notebook, and files."
+		face: detective.png
+	}
+	{
+		name: Max
+		message: That's... oddly specific. I suppose there's no point in asking you what you need them for?
+		face: warrenPuzzle.png
+	}
+	{
+		name: ???
+		message: "I'm afraid not. Now, hurry!"
+		face: detective.png
+	}
+]
+}

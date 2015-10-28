@@ -1,10 +1,7 @@
 package thepaperpilot.strange;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -59,7 +56,7 @@ public class Dialogue extends Table {
     // I'm going to leave this here as an example of how to write a dialogue and have it export to JSON.
     // The rest of the dialogues shouldn't be committed to the repo, just the exported JSON.
     // And absolutely make sure the code isn't running
-    ///*
+    /*
     public static void main(String[] args) {
         new LwjglApplication(new Game() {
             @Override
@@ -99,6 +96,7 @@ public class Dialogue extends Table {
             }
         }, new LwjglApplicationConfiguration());
     }
+    /**/
 
     private void next() {
         if (lines.size() <= line) {
@@ -112,7 +110,6 @@ public class Dialogue extends Table {
 
         line++;
     }
-    /**/
 
     static class Line {
         public String name;
