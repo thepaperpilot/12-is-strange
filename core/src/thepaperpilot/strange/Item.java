@@ -1,7 +1,6 @@
 package thepaperpilot.strange;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import thepaperpilot.strange.Entities.Entity;
@@ -37,6 +36,7 @@ public enum Item {
     WEED_KILLER("weed killer", "weedKiller");
 
     public static final Map<Item[], Item> combinations = new HashMap<Item[], Item>();
+
     static {
         combinations.put(new Item[]{DUCT_TAPE, SODA, SUGAR, WEED_KILLER}, MAKE_SHIFT_BOMB);
         combinations.put(new Item[]{FORTUNE_COOKIE}, FORTUNE_COOKIE_CODE);
@@ -49,22 +49,23 @@ public enum Item {
     Item(String name, String image) {
         this.name = name;
         this.imageString = image;
-        this.image = new Image(Main.manager.get(image + "Inv.png", Texture.class));
+        this.image = new Image(Main.entities.findRegion(image + "Inv"));
     }
 
     public static void combine() {
-        outer: for (int i = 0; i < combinations.keySet().size(); i++) {
+        outer:
+        for (int i = 0; i < combinations.keySet().size(); i++) {
             Item[] combo = (Item[]) combinations.keySet().toArray()[i];
-            if(Main.selected.size() != combo.length) continue;
+            if (Main.selected.size() != combo.length) continue;
             for (Item item : Main.selected) {
                 boolean found = false;
                 for (Item comboItem : combo) {
                     if (item == comboItem)
                         found = true;
                 }
-                if(!found) continue outer;
+                if (!found) continue outer;
             }
-            Main.manager.get("pickup.wav", Sound.class).play();
+            Main.manager.get("audio/pickup.wav", Sound.class).play();
             ArrayList<Item> tmp = new ArrayList<Item>();
             Collections.addAll(tmp, combo);
             Main.inventory.removeAll(tmp);
@@ -74,7 +75,7 @@ public enum Item {
     }
 
     public void place(GameScreen screen, int x, int y) {
-        new ItemImage(new Image(Main.manager.get(imageString + "World.png", Texture.class)).getDrawable(), screen, x, y, ordinal());
+        new ItemImage(new Image(Main.entities.findRegion(imageString + "World")).getDrawable(), screen, x, y, ordinal());
     }
 
     public class ItemImage extends Entity {
@@ -86,7 +87,7 @@ public enum Item {
         }
 
         public void onTouch() {
-            Main.manager.get("pickup.wav", Sound.class).play();
+            Main.manager.get("audio/pickup.wav", Sound.class).play();
             Main.inventory.add(Item.values()[parent]);
             Scene.updateInventory();
             remove();

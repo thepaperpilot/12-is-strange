@@ -74,7 +74,7 @@ public class GameScreen implements Screen {
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
                 transition = true;
-                Main.manager.get("rewind.wav", Sound.class).play(.4f); // 40% volume, because its really loud
+                Main.manager.get("audio/rewind.wav", Sound.class).play(.4f); // 40% volume, because its really loud
                 stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -118,12 +118,12 @@ public class GameScreen implements Screen {
             invLabel.setAlignment(Align.center);
             item.add(invLabel);
             inventoryTable.left().add(item).pad(2).height(32);
-            if(Main.selected.contains(Main.inventory.get(i)))
+            if (Main.selected.contains(Main.inventory.get(i)))
                 item.toggle();
             final int index = i;
             item.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
-                    if(Main.selected.contains(Main.inventory.get(index))) {
+                    if (Main.selected.contains(Main.inventory.get(index))) {
                         Main.selected.remove(Main.inventory.get(index));
                     } else Main.selected.add(Main.inventory.get(index));
                     Item.combine();
@@ -175,7 +175,7 @@ public class GameScreen implements Screen {
     }
 
     public void say(String message) {
-        Main.manager.get("error.wav", Sound.class).play();
+        Main.manager.get("audio/error.wav", Sound.class).play();
         final Label label = new Label(message, Main.skin);
         label.setPosition((int) ((max.x + max.getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
         label.addAction(Actions.sequence(Actions.moveBy(0, 0, 1f), Actions.parallel(Actions.moveBy(0, 50, 1), Actions.fadeOut(1)), Actions.run(new Runnable() {

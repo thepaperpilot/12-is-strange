@@ -1,6 +1,5 @@
 package thepaperpilot.strange.Entities;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -13,10 +12,10 @@ public class Explosion extends Image {
     private float time;
 
     public Explosion(int x, int y) {
-        Texture explosionTexture = Main.manager.get("explosion.png", Texture.class);
-        setHeight(explosionTexture.getHeight());
-        setWidth(explosionTexture.getWidth() / 4);
-        TextureRegion[][] tmp = TextureRegion.split(explosionTexture, (int) getWidth(), (int) getHeight());
+        TextureRegion explosionTexture = Main.animations.findRegion("explosion");
+        setHeight(explosionTexture.getRegionHeight());
+        setWidth(explosionTexture.getRegionWidth() / 4);
+        TextureRegion[][] tmp = explosionTexture.split((int) getWidth(), (int) getHeight());
         explosion = new Animation(ANIM_SPEED, tmp[0]);
         time = 0;
         setPosition(x, y);

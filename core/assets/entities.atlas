@@ -1,0 +1,403 @@
+entities.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+AlyssaSoapPuzzle
+  rotate: false
+  xy: 134, 2
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+alcoholInv
+  rotate: false
+  xy: 2, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+alcoholWorld
+  rotate: false
+  xy: 20, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+blueJayDead
+  rotate: false
+  xy: 38, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bottlesInv
+  rotate: false
+  xy: 56, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bottlesWorld
+  rotate: false
+  xy: 74, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bouncer
+  rotate: false
+  xy: 152, 2
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+breakableDoorPuzzle
+  rotate: false
+  xy: 256, 20
+  size: 16, 34
+  orig: 16, 34
+  offset: 0, 0
+  index: -1
+cameraInv
+  rotate: false
+  xy: 92, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+cameraWorld
+  rotate: false
+  xy: 110, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+carPuzzle
+  rotate: false
+  xy: 2, 2
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+catFoodInv
+  rotate: false
+  xy: 128, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+catFoodWorld
+  rotate: false
+  xy: 146, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+crowdCameraPuzzle
+  rotate: false
+  xy: 68, 2
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+detective
+  rotate: false
+  xy: 170, 2
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+dogBoneInv
+  rotate: false
+  xy: 164, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+dogBoneWorld
+  rotate: false
+  xy: 182, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+ductTapeInv
+  rotate: false
+  xy: 200, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+ductTapeWorld
+  rotate: false
+  xy: 218, 36
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+filesInv
+  rotate: false
+  xy: 247, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+filesWorld
+  rotate: false
+  xy: 265, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+fireAlarmPuzzle
+  rotate: false
+  xy: 283, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+fireAlarmPuzzleBroken
+  rotate: false
+  xy: 301, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+fireExtinguishInv
+  rotate: false
+  xy: 310, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+fireExtinguishWorld
+  rotate: false
+  xy: 319, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+fortuneCookieCodeInv
+  rotate: false
+  xy: 310, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+fortuneCookieInv
+  rotate: false
+  xy: 328, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+fortuneCookieWorld
+  rotate: false
+  xy: 337, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+gunInv
+  rotate: false
+  xy: 328, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+gunWorld
+  rotate: false
+  xy: 346, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+hammerInv
+  rotate: false
+  xy: 355, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+hammerWorld
+  rotate: false
+  xy: 346, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+keysInv
+  rotate: false
+  xy: 364, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+keysWorld
+  rotate: false
+  xy: 373, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+makeShiftBombInv
+  rotate: false
+  xy: 364, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+makeShiftBombWorld
+  rotate: false
+  xy: 382, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+maxStill
+  rotate: false
+  xy: 188, 2
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+notebookInv
+  rotate: false
+  xy: 391, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+notebookWorld
+  rotate: false
+  xy: 382, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+phoneInv
+  rotate: false
+  xy: 400, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+phoneWorld
+  rotate: false
+  xy: 409, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+photoInv
+  rotate: false
+  xy: 400, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+schoolDoor
+  rotate: false
+  xy: 274, 20
+  size: 16, 34
+  orig: 16, 34
+  offset: 0, 0
+  index: -1
+schoolDoorKeypad
+  rotate: false
+  xy: 292, 20
+  size: 16, 34
+  orig: 16, 34
+  offset: 0, 0
+  index: -1
+soapInv
+  rotate: false
+  xy: 418, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+soapWorld
+  rotate: false
+  xy: 427, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+sodaInv
+  rotate: false
+  xy: 418, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+sodaWorld
+  rotate: false
+  xy: 436, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+stairs
+  rotate: false
+  xy: 224, 2
+  size: 21, 21
+  orig: 21, 21
+  offset: 0, 0
+  index: -1
+sugarInv
+  rotate: false
+  xy: 445, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+sugarWorld
+  rotate: false
+  xy: 436, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+tirestack
+  rotate: false
+  xy: 236, 25
+  size: 18, 23
+  orig: 18, 23
+  offset: 0, 0
+  index: -1
+usbInv
+  rotate: false
+  xy: 454, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+usbWorld
+  rotate: false
+  xy: 463, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+warrenPuzzle
+  rotate: false
+  xy: 206, 2
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+weedKillerInv
+  rotate: false
+  xy: 454, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+weedKillerWorld
+  rotate: false
+  xy: 472, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

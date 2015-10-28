@@ -1,7 +1,6 @@
 package thepaperpilot.strange.Entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -21,16 +20,16 @@ public class Max extends Image {
     public boolean shooting;
 
     public Max(int x, int y) {
-        Texture maxWalkTexture = Main.manager.get("maxWalk.png", Texture.class);
-        setHeight(maxWalkTexture.getHeight());
-        setWidth(maxWalkTexture.getWidth() / 14);
-        TextureRegion[][] tmp = TextureRegion.split(maxWalkTexture, (int) getWidth(), (int) getHeight());
+        TextureRegion maxWalkTexture = Main.animations.findRegion("maxWalk");
+        setHeight(maxWalkTexture.getRegionHeight());
+        setWidth(maxWalkTexture.getRegionWidth() / 14);
+        TextureRegion[][] tmp = maxWalkTexture.split((int) getWidth(), (int) getHeight());
         walk = new Animation(ANIM_SPEED, tmp[0]);
-        Texture maxIdleTexture = Main.manager.get("maxIdle.png", Texture.class);
-        tmp = TextureRegion.split(maxIdleTexture, (int) getWidth(), (int) getHeight());
+        TextureRegion maxIdleTexture = Main.animations.findRegion("maxIdle");
+        tmp = maxIdleTexture.split((int) getWidth(), (int) getHeight());
         idle = new Animation(ANIM_SPEED, tmp[0]);
-        Texture maxShootingTexture = Main.manager.get("maxShooting.png", Texture.class);
-        tmp = TextureRegion.split(maxShootingTexture, (int) getWidth(), (int) getHeight());
+        TextureRegion maxShootingTexture = Main.animations.findRegion("maxShooting");
+        tmp = maxShootingTexture.split((int) getWidth(), (int) getHeight());
         shoot = new Animation(ANIM_SPEED, tmp[0]);
         time = 0;
         this.x = target = x;

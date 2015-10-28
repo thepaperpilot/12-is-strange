@@ -34,7 +34,7 @@ public class Puzzle extends Entity {
                 }
             }
             locked = false;
-            Main.manager.get("pickup.wav", Sound.class).play();
+            Main.manager.get("audio/pickup.wav", Sound.class).play();
             for (Item key : keys) {
                 Main.selected.remove(key);
                 Main.inventory.remove(key);

@@ -1,38 +1,33 @@
 package thepaperpilot.strange;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import thepaperpilot.strange.Entities.*;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 import thepaperpilot.strange.Screens.GameScreen;
 import thepaperpilot.strange.Screens.JunkyardCutscene;
-import thepaperpilot.strange.Screens.MenuScreen;
 
 public enum Scene {
     FIRST(1, "bathroom") {
         public void init() {
-            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 10, 32) {
+            new Entity(new Image(Main.entities.findRegion("schoolDoor")).getDrawable(), screen, 10, 32) {
                 public void onTouch() {
                     Main.changeScreen(new ChoicesScreen(-1, "Where do you want to go?", new String[]{"Hang outside", "Study inside"}, new GameScreen[]{SECOND.screen, THIRD.screen}, screen));
                 }
             };
-            new Puzzle(new Image(Main.manager.get("fireAlarmPuzzle.png", Texture.class)).getDrawable(), screen, 210, 60, Item.HAMMER) {
+            new Puzzle(new Image(Main.entities.findRegion("fireAlarmPuzzle")).getDrawable(), screen, 210, 60, Item.HAMMER) {
                 public void onFail() {
                     screen.say("I need to find something to break this with");
                 }
 
                 public void onSuccess() {
-                    setDrawable(new Image(Main.manager.get("fireAlarmPuzzleBroken.png", Texture.class)).getDrawable());
+                    setDrawable(new Image(Main.entities.findRegion("fireAlarmPuzzleBroken")).getDrawable());
                     screen.say("whoah! what was a gun doing in there?");
                     Main.inventory.add(Item.GUN);
                 }
@@ -46,17 +41,17 @@ public enum Scene {
     },
     SECOND(2, "outside") {
         public void init() {
-            new AnimatedPuzzle(screen, 81, 10, Main.manager.get("catIdle.png", Texture.class), 14, 1 / 6f, Item.CAT_FOOD) {
+            new AnimatedPuzzle(screen, 81, 10, Main.animations.findRegion("catIdle"), 14, 1 / 6f, Item.CAT_FOOD) {
                 public void onFail() {
                     screen.say("This cat looks bored. I hear cats hunt birds when they're bored.");
                 }
 
                 public void onSuccess() {
-                    setAnimation(Main.manager.get("catEating.png", Texture.class), 2, 1 / 6f);
+                    setAnimation(Main.animations.findRegion("catEating"), 2, 1 / 6f);
                     screen.say("aww. it looks so happy now!");
-                    new Entity(new Image(Main.manager.get("sugarWorld.png", Texture.class)).getDrawable(), FOURTH.screen, (int) screen.stage.getWidth() / 3, 10) {
+                    new Entity(new Image(Main.entities.findRegion("sugarWorld")).getDrawable(), FOURTH.screen, (int) screen.stage.getWidth() / 3, 10) {
                         public void onTouch() {
-                            Main.manager.get("pickup.wav", Sound.class).play();
+                            Main.manager.get("audio/pickup.wav", Sound.class).play();
                             Main.inventory.add(Item.SUGAR);
                             Scene.updateInventory();
                             remove();
@@ -75,7 +70,7 @@ public enum Scene {
     },
     THIRD(3, "school") {
         public void init() {
-            new Puzzle(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16, Item.KEYS) {
+            new Puzzle(new Image(Main.entities.findRegion("schoolDoor")).getDrawable(), screen, 48, 16, Item.KEYS) {
                 public void onFail() {
                     screen.say("it's locked");
                 }
@@ -84,9 +79,9 @@ public enum Scene {
                     Main.changeScreen(new ChoicesScreen(1, "Why were you in the bathroom?", new String[]{"Tell the Truth", "Hide the Truth"}, FOURTH.screen, screen));
                 }
             };
-            new Puzzle(new Image(Main.manager.get("AlyssaSoapPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10, Item.SOAP) {
+            new Puzzle(new Image(Main.entities.findRegion("AlyssaSoapPuzzle")).getDrawable(), screen, 192, 10, Item.SOAP) {
                 public void onFail() {
-                    screen.ui.addActor(Dialogue.readDialogue("Alyssa1.json"));
+                    screen.ui.addActor(Dialogue.readDialogue("dialogue/Alyssa1.json"));
                 }
 
                 public void onSuccess() {
@@ -108,24 +103,24 @@ public enum Scene {
     },
     FOURTH(4, "outside") {
         public void init() {
-            new Entity(new Image(Main.manager.get("tirestack.png", Texture.class)).getDrawable(), screen, 230, 13) {
+            new Entity(new Image(Main.entities.findRegion("tirestack")).getDrawable(), screen, 230, 13) {
                 public void onTouch() {
                     Main.changeScreen(FIFTH.screen);
                 }
             };
-            new Entity(new Image(Main.manager.get("stairs.png", Texture.class)).getDrawable(), screen, 0, 7) {
+            new Entity(new Image(Main.entities.findRegion("stairs")).getDrawable(), screen, 0, 7) {
                 public void onTouch() {
                     Main.changeScreen(SIXTH.screen);
                 }
             };
-            new AnimatedPuzzle(screen, 160, 13, Main.manager.get("dogIdle.png", Texture.class), 14, 1 / 6f, Item.DOG_BONE) {
+            new AnimatedPuzzle(screen, 160, 13, Main.animations.findRegion("dogIdle"), 14, 1 / 6f, Item.DOG_BONE) {
                 public void onFail() {
                     screen.say("This dog won't let me through. It looks hungry");
                 }
 
                 public void onSuccess() {
                     screen.say("look how cute it is!");
-                    setAnimation(Main.manager.get("dogHappy.png", Texture.class), 2, 1 / 6f);
+                    setAnimation(Main.animations.findRegion("dogHappy"), 2, 1 / 6f);
                     screen.obstacles.remove(0);
                 }
 
@@ -147,27 +142,28 @@ public enum Scene {
     FIFTH(5, "junkyard") {
         boolean carBlock = true;
         boolean ductTape = true;
+
         public void init() {
-            final Entity usb = new Entity(new Image(Main.manager.get("usbWorld.png", Texture.class)).getDrawable(), screen, 80, 16) {
+            final Entity usb = new Entity(new Image(Main.entities.findRegion("usbWorld")).getDrawable(), screen, 80, 16) {
                 public void onTouch() {
                     if (!carBlock) {
-                        Main.manager.get("pickup.wav", Sound.class).play();
+                        Main.manager.get("audio/pickup.wav", Sound.class).play();
                         Main.inventory.add(Item.USB);
                         Scene.updateInventory();
                         remove();
                     } else screen.say("it's blocked by this car");
                 }
             };
-            final Entity ductTapeEntity = new Entity(new Image(Main.manager.get("ductTapeWorld.png", Texture.class)).getDrawable(), screen, 40, 16) {
+            final Entity ductTapeEntity = new Entity(new Image(Main.entities.findRegion("ductTapeWorld")).getDrawable(), screen, 40, 16) {
                 public void onTouch() {
-                    Main.manager.get("pickup.wav", Sound.class).play();
+                    Main.manager.get("audio/pickup.wav", Sound.class).play();
                     Main.inventory.add(Item.DUCT_TAPE);
                     Scene.updateInventory();
                     remove();
                     ductTape = false;
                 }
             };
-            new Entity(new Image(Main.manager.get("carPuzzle.png", Texture.class)).getDrawable(), screen, 80, 16) {
+            new Entity(new Image(Main.entities.findRegion("carPuzzle")).getDrawable(), screen, 80, 16) {
                 public void onTouch() {
                     if (Main.selected.contains(Item.GUN) && Main.selected.contains(Item.BOTTLES)) {
                         carBlock = false;
@@ -190,14 +186,14 @@ public enum Scene {
         boolean doorBlocked = true;
 
         public void init() {
-            new Puzzle(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 48, 16, Item.MAKE_SHIFT_BOMB) {
+            new Puzzle(new Image(Main.entities.findRegion("schoolDoor")).getDrawable(), screen, 48, 16, Item.MAKE_SHIFT_BOMB) {
                 public void onFail() {
                     screen.say("it's locked. I think I can blow it open\nusing some sugar, weed killer, duct tape, and a soda can");
                 }
 
                 public void onSuccess() {
-                    Main.manager.get("explosion.wav", Sound.class).play();
-                    setDrawable(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable());
+                    Main.manager.get("audio/explosion.wav", Sound.class).play();
+                    setDrawable(new Image(Main.entities.findRegion("breakableDoorPuzzle")).getDrawable());
                     screen.stage.addActor(new Explosion(((int) getX()), ((int) getY()) + 8));
                     screen.say("I sure hope no one heard that");
                 }
@@ -206,7 +202,7 @@ public enum Scene {
                     Main.changeScreen(OFFICE.screen);
                 }
             };
-            new Puzzle(new Image(Main.manager.get("crowdCameraPuzzle.png", Texture.class)).getDrawable(), screen, 180, 14, Item.CAMERA) {
+            new Puzzle(new Image(Main.entities.findRegion("crowdCameraPuzzle")).getDrawable(), screen, 180, 14, Item.CAMERA) {
                 public void onFail() {
                     screen.say("This crowd of people would make a great shot");
                 }
@@ -223,7 +219,7 @@ public enum Scene {
                     screen.say("they're going away. must be camera shy");
                 }
             };
-            new Entity(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 192, 16) {
+            new Entity(new Image(Main.entities.findRegion("schoolDoor")).getDrawable(), screen, 192, 16) {
                 public void onTouch() {
                     if (!doorBlocked)
                         Main.changeScreen(new ChoicesScreen(2, "Who is at fault?", new String[]{"Blame David", "Blame Nathan", "Blame Jefferson"}, SEVENTH.screen, screen));
@@ -236,8 +232,9 @@ public enum Scene {
         }
     },
     OFFICE(6, "office") { // sub-level of 6
+
         public void init() {
-            new Entity(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable(), screen, 4, 16) {
+            new Entity(new Image(Main.entities.findRegion("breakableDoorPuzzle")).getDrawable(), screen, 4, 16) {
                 public void onTouch() {
                     Main.changeScreen(SIXTH.screen);
                 }
@@ -255,7 +252,7 @@ public enum Scene {
     },
     SEVENTH(7, "junkyard") {
         public void init() {
-            new AnimatedPuzzle(screen, 230, 13, Main.manager.get("balloon.png", Texture.class), 14, .1f, new Item[0]) {
+            new AnimatedPuzzle(screen, 230, 13, Main.animations.findRegion("balloon"), 14, .1f, new Item[0]) {
                 public void onTouch() {
                     Main.changeScreen(new ChoicesScreen(-1, "Are you a nerd?", new String[]{"Go party!", "Go study?"}, new GameScreen[]{EIGTH.screen, NINTH.screen}, screen));
                 }
@@ -270,7 +267,7 @@ public enum Scene {
     },
     EIGTH(8, "vortex") {
         public void init() {
-            new Puzzle(new Image(Main.manager.get("bouncer.png", Texture.class)).getDrawable(), screen, 192, 10, Item.ALCOHOL) {
+            new Puzzle(new Image(Main.entities.findRegion("bouncer")).getDrawable(), screen, 192, 10, Item.ALCOHOL) {
                 public void onFail() {
                     screen.say("I'm not allowed in the VIP area. Maybe if I brought him some alcohol");
                 }
@@ -295,9 +292,9 @@ public enum Scene {
     },
     NINTH(9, "school") {
         public void init() {
-            new Puzzle(new Image(Main.manager.get("warrenPuzzle.png", Texture.class)).getDrawable(), screen, 192, 10, Item.USB) {
+            new Puzzle(new Image(Main.entities.findRegion("warrenPuzzle")).getDrawable(), screen, 192, 10, Item.USB) {
                 public void onFail() {
-                    screen.ui.addActor(Dialogue.readDialogue("Warren1.json"));
+                    screen.ui.addActor(Dialogue.readDialogue("dialogue/Warren1.json"));
                 }
 
                 public void open() {
@@ -312,14 +309,14 @@ public enum Scene {
     },
     TENTH(10, "dorm") {
         public void init() {
-            new Puzzle(new Image(Main.manager.get("schoolDoor.png", Texture.class)).getDrawable(), screen, 4, 16, Item.FIRE_EXTINGUISHER) {
+            new Puzzle(new Image(Main.entities.findRegion("schoolDoor")).getDrawable(), screen, 4, 16, Item.FIRE_EXTINGUISHER) {
                 public void onFail() {
                     screen.say("it's locked");
                 }
 
                 public void onSuccess() {
-                    Main.manager.get("explosion.wav", Sound.class).play();
-                    setDrawable(new Image(Main.manager.get("breakableDoorPuzzle.png", Texture.class)).getDrawable());
+                    Main.manager.get("audio/explosion.wav", Sound.class).play();
+                    setDrawable(new Image(Main.entities.findRegion("breakableDoorPuzzle")).getDrawable());
                     screen.stage.addActor(new Explosion(((int) getX()), ((int) getY()) + 8));
                 }
 
@@ -339,9 +336,9 @@ public enum Scene {
     },
     ELEVENTH(11, "bathroom") {
         public void init() {
-            new Puzzle(new Image(Main.manager.get("detective.png", Texture.class)).getDrawable(), screen, 48, 16, new Item[]{Item.NOTEBOOK, Item.PHONE, Item.PHOTO, Item.FILES}) {
+            new Puzzle(new Image(Main.entities.findRegion("detective")).getDrawable(), screen, 48, 16, new Item[]{Item.NOTEBOOK, Item.PHONE, Item.PHOTO, Item.FILES}) {
                 public void onFail() {
-                    screen.ui.addActor(Dialogue.readDialogue("Detective1.json"));
+                    screen.ui.addActor(Dialogue.readDialogue("dialogue/Detective1.json"));
                 }
 
                 public void onSuccess() {
@@ -361,7 +358,7 @@ public enum Scene {
     },
     TWELTH(12, "school") {
         public void init() {
-            new Puzzle(new Image(Main.manager.get("schoolDoorKeypad.png", Texture.class)).getDrawable(), screen, 48, 16, Item.FORTUNE_COOKIE_CODE) {
+            new Puzzle(new Image(Main.entities.findRegion("schoolDoorKeypad")).getDrawable(), screen, 48, 16, Item.FORTUNE_COOKIE_CODE) {
                 public void onFail() {
                     screen.say("it's locked with a keypad.\nI'll need some sort of code to get in");
                 }
@@ -377,6 +374,7 @@ public enum Scene {
         }
     },
     FINAL(12, "school") { //placeholder, obviously
+
         public void init() {
             screen.stage.clear();
             screen.ui.clear();
@@ -384,7 +382,7 @@ public enum Scene {
             goodbye.setFillParent(true);
             goodbye.bottom().add(new Label("Thanks for Playing!", Main.skin, "large")).padBottom(20);
             screen.ui.addActor(goodbye);
-            screen.ui.addActor(Dialogue.readDialogue("final1.json"));
+            screen.ui.addActor(Dialogue.readDialogue("dialogue/final1.json"));
         }
 
         public void previous() {
@@ -397,7 +395,7 @@ public enum Scene {
 
     Scene(int scene, String bg) {
         this.scene = scene - 1;
-        screen = new GameScreen(this, new Image(Main.manager.get(bg + "Background.png", Texture.class)));
+        screen = new GameScreen(this, new Image(Main.backgrounds.findRegion(bg + "Background")));
         init();
     }
 

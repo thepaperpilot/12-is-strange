@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -39,14 +38,14 @@ public class JunkyardCutscene implements Screen {
         stage = new Stage(new StretchViewport(256, 144));
         ui = new Stage(new StretchViewport(640, 360));
 
-        stage.addActor(new Image(Main.manager.get("junkyardBackground.png", Texture.class)));
+        stage.addActor(new Image(Main.backgrounds.findRegion("junkyardBackground")));
         for (Actor actor : actors) {
             stage.addActor(actor);
         }
         stage.addActor(car);
         stage.addActor(max);
 
-        bottles = new Entity(new Image(Main.manager.get("bottlesWorld.png", Texture.class)).getDrawable(), Scene.FIFTH.screen, 140, 16);
+        bottles = new Entity(new Image(Main.entities.findRegion("bottlesWorld")).getDrawable(), Scene.FIFTH.screen, 140, 16);
         bottles.remove();
         bottles.clearListeners();
 
@@ -99,7 +98,7 @@ public class JunkyardCutscene implements Screen {
         if (shooting) {
             time += delta;
             if (time > Max.ANIM_SPEED * 7) {
-                Main.manager.get("explosion.wav", Sound.class).play();
+                Main.manager.get("audio/explosion.wav", Sound.class).play();
                 Main.inventory.remove(Item.GUN);
                 Main.selected.remove(Item.GUN);
                 Scene.updateInventory();
@@ -130,7 +129,7 @@ public class JunkyardCutscene implements Screen {
                 car.clearListeners();
                 // TODO glass breaking sound?
                 Stage toStage = Scene.FIFTH.screen.stage;
-                toStage.addActor(new Image(Main.manager.get("junkyardBackground.png", Texture.class)));
+                toStage.addActor(new Image(Main.backgrounds.findRegion("junkyardBackground")));
                 for (Actor actor : entities) {
                     toStage.addActor(actor);
                 }

@@ -1,0 +1,24 @@
+{
+dialogue: [
+	{
+		name: Max
+		message: "Warren, what are you doing here?"
+		face: maxStill
+	}
+	{
+		name: Warren
+		message: I was looking for you. Remember that USB I let you borrow? I need it back.
+		face: warrenPuzzle
+	}
+	{
+		name: Max
+		message: "Well, fair enough. It's yours, after all. I think I left it in the junkyard."
+		face: maxStill
+	}
+	{
+		name: Alyssa
+		message: "Awesome. After you get it back, there's some guy looking for you. Something about a code. He looked kinda creepy. Anyways, I'll show you where he is once you get me my flash drive back."
+		face: warrenPuzzle
+	}
+]
+}

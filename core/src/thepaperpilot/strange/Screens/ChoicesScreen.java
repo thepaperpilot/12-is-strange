@@ -35,6 +35,7 @@ public class ChoicesScreen implements Screen {
 
         batch = new SpriteBatch();
     }
+
     int decision;
     Screen[] nextScreen;
     private Stage stage;
@@ -115,7 +116,7 @@ public class ChoicesScreen implements Screen {
             final int decision = i;
             optionButtons[i].addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
-                    Main.manager.get("select.wav", Sound.class).play();
+                    Main.manager.get("audio/select.wav", Sound.class).play();
                     if (ChoicesScreen.this.decision != -1)
                         Main.decisions[ChoicesScreen.this.decision - 1] = decision;
                     Main.changeScreen(nextScreen[decision]);

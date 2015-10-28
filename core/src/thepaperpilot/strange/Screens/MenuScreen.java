@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -40,7 +39,7 @@ public class MenuScreen implements Screen {
         Button start = new TextButton("Start Game", Main.skin);
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                Main.manager.get("select.wav", Sound.class).play();
+                Main.manager.get("audio/select.wav", Sound.class).play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -60,18 +59,16 @@ public class MenuScreen implements Screen {
         max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
         stage.addActor(clock);
-        Entity cat = new AnimatedPuzzle(Scene.FIRST.screen, (int) stage.getWidth() / 3, 10, Main.manager.get("catIdle.png", Texture.class), 14, 1 / 6f, new Item[0]);
+        Entity cat = new AnimatedPuzzle(Scene.FIRST.screen, (int) stage.getWidth() / 3, 10, Main.animations.findRegion("catIdle"), 14, 1 / 6f, new Item[0]);
         cat.remove();
         stage.addActor(cat);
 
         backgrounds = new Image[]{
-                new Image(Main.manager.get("schoolBackground.png", Texture.class)),
-                new Image(Main.manager.get("bathroomBackground.png", Texture.class)),
-                new Image(Main.manager.get("outsideBackground.png", Texture.class)),
-                new Image(Main.manager.get("junkyardBackground.png", Texture.class)),
-                new Image(Main.manager.get("vortexBackground.png", Texture.class)),
-                //new Image(Main.manager.get("officeBackground.png", Texture.class)),
-                //new Image(Main.manager.get("dormBackground.png", Texture.class))
+                new Image(Main.backgrounds.findRegion("schoolBackground")),
+                new Image(Main.backgrounds.findRegion("bathroomBackground")),
+                new Image(Main.backgrounds.findRegion("outsideBackground")),
+                new Image(Main.backgrounds.findRegion("junkyardBackground")),
+                new Image(Main.backgrounds.findRegion("vortexBackground"))
         };
         background = backgrounds[ran.nextInt(backgrounds.length)];
         stage.addActor(background);

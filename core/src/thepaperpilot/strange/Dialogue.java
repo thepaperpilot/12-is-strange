@@ -2,7 +2,6 @@ package thepaperpilot.strange;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -65,25 +64,25 @@ public class Dialogue extends Table {
                 LinePrototype linePrototype = new LinePrototype();
                 linePrototype.name = "Max";
                 linePrototype.message = "Oh man! Wasn't that fun! A bit confusing, but satisfactory. Pretty short as well, though. And, what's up with all the Life is Strange puzzles, plot, characters, etc?";
-                linePrototype.face = "maxStill.png";
+                linePrototype.face = "maxStill";
                 dialoguePrototype.dialogue.add(linePrototype);
 
                 linePrototype = new LinePrototype();
                 linePrototype.name = "Max";
                 linePrototype.message = "Well, I can't answer all those questions, but what I can tell you is that this is just the beginning! Now that the jam is over, this game is going to get some serious expansions. I'm talking 10x the content, no 100x the content! Yeah, maybe even, like, 200x. I guess it just depends on how you measure content. Hopefully not based on # of clicks or something stupid.";
-                linePrototype.face = "maxStill.png";
+                linePrototype.face = "maxStill";
                 dialoguePrototype.dialogue.add(linePrototype);
 
                 linePrototype = new LinePrototype();
                 linePrototype.name = "Max";
                 linePrototype.message = "Whatever happens, I'm sure it'll be great. Bit of a shame this ending isn't that great, but, I mean, would you have preferred some rushed ending that didn't make sense? Like, less sense than this fourth wall breaking cop out? Yeah, exactly. The point is, keep watching this game, because it's going to get, like, a lot better. A lot a lot. For now, Thanks for Playing!!";
-                linePrototype.face = "maxStill.png";
+                linePrototype.face = "maxStill";
                 dialoguePrototype.dialogue.add(linePrototype);
 
                 linePrototype = new LinePrototype();
                 linePrototype.name = "Max";
                 linePrototype.message = "Oh, and one last thing. There isn't actually currently a way to restart the game. No worries, that'll change, I've already worked out how to structure the scenes such that I can reset them all pretty easily. But for now, do me a solid and press refresh or re-open the application or whatever it is you kids do these days, and pretend it happened automatically. Cool? Cool.";
-                linePrototype.face = "maxStill.png";
+                linePrototype.face = "maxStill";
                 dialoguePrototype.dialogue.add(linePrototype);
 
                 String fileName = "Final1.json";
@@ -120,7 +119,7 @@ public class Dialogue extends Table {
             name = prototype.name;
             message = prototype.message;
             if (prototype.face != null) {
-                face = new Image(Main.manager.get(prototype.face, Texture.class)).getDrawable();
+                face = new Image(Main.entities.findRegion(prototype.face)).getDrawable();
             }
         }
     }

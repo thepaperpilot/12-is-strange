@@ -1,0 +1,88 @@
+animations.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+balloon
+  rotate: false
+  xy: 452, 2
+  size: 224, 32
+  orig: 224, 32
+  offset: 0, 0
+  index: -1
+blueJayIdle
+  rotate: false
+  xy: 1196, 2
+  size: 224, 16
+  orig: 224, 16
+  offset: 0, 0
+  index: -1
+catEating
+  rotate: false
+  xy: 1616, 20
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+catIdle
+  rotate: false
+  xy: 1196, 20
+  size: 224, 16
+  orig: 224, 16
+  offset: 0, 0
+  index: -1
+clock
+  rotate: false
+  xy: 1422, 20
+  size: 192, 16
+  orig: 192, 16
+  offset: 0, 0
+  index: -1
+dogHappy
+  rotate: false
+  xy: 1650, 20
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+dogIdle
+  rotate: false
+  xy: 1422, 2
+  size: 224, 16
+  orig: 224, 16
+  offset: 0, 0
+  index: -1
+explosion
+  rotate: false
+  xy: 1648, 2
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+maxIdle
+  rotate: false
+  xy: 2, 2
+  size: 448, 32
+  orig: 448, 32
+  offset: 0, 0
+  index: -1
+maxShooting
+  rotate: false
+  xy: 678, 2
+  size: 224, 32
+  orig: 224, 32
+  offset: 0, 0
+  index: -1
+maxWalk
+  rotate: false
+  xy: 904, 2
+  size: 224, 32
+  orig: 224, 32
+  offset: 0, 0
+  index: -1
+rightClickIndicator
+  rotate: false
+  xy: 1130, 2
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1

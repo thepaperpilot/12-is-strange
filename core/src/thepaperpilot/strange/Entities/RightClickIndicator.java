@@ -1,7 +1,6 @@
 package thepaperpilot.strange.Entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,8 +15,8 @@ public class RightClickIndicator extends Image {
     private float time;
 
     public RightClickIndicator() {
-        Texture indicatorSheet = Main.manager.get("rightClickIndicator.png", Texture.class);
-        TextureRegion[][] tmp = TextureRegion.split(indicatorSheet, indicatorSheet.getWidth() / 2, indicatorSheet.getHeight());
+        TextureRegion indicatorSheet = Main.animations.findRegion("rightClickIndicator");
+        TextureRegion[][] tmp = indicatorSheet.split(indicatorSheet.getRegionWidth() / 2, indicatorSheet.getRegionHeight());
         TextureRegion[] frames = tmp[0];
         indicator = new Animation(ANIM_SPEED, frames);
         time = 0;
