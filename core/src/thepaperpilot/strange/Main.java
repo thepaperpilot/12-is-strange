@@ -32,7 +32,7 @@ public class Main extends Game {
     @Override
     public void create() {
         instance = this;
-        manager.load("textures.json", Skin.class);
+        manager.load("skin.json", Skin.class);
 
         manager.load("animations.atlas", TextureAtlas.class);
         manager.load("backgrounds.atlas", TextureAtlas.class);
@@ -51,7 +51,7 @@ public class Main extends Game {
         Gdx.gl.glClearColor(34/256f, 34/256f, 34/256f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (manager.update() && getScreen() == null) {
-            skin = manager.get("textures.json", Skin.class);
+            skin = manager.get("skin.json", Skin.class);
             animations = manager.get("animations.atlas", TextureAtlas.class);
             backgrounds = manager.get("backgrounds.atlas", TextureAtlas.class);
             entities = manager.get("entities.atlas", TextureAtlas.class);
