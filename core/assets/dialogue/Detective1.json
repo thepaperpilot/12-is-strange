@@ -3,7 +3,7 @@ dialogue: [
 	{
 		name: Max
 		message: Hello?? Who are you?
-		face: maxStill
+		face: maxcloseup
 	}
 	{
 		name: ???
@@ -13,7 +13,7 @@ dialogue: [
 	{
 		name: Max
 		message: A cookie? Surely you're kidding.
-		face: maxStill
+		face: maxcloseup
 	}
 	{
 		name: ???
@@ -23,7 +23,7 @@ dialogue: [
 	{
 		name: Max
 		message: That's... oddly specific. I suppose there's no point in asking you what you need them for?
-		face: warrenPuzzle
+		face: maxcloseup
 	}
 	{
 		name: ???

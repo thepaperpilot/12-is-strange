@@ -3,7 +3,7 @@ dialogue: [
 	{
 		name: Max
 		message: "Warren, what are you doing here?"
-		face: maxStill
+		face: maxcloseup
 	}
 	{
 		name: Warren
@@ -13,7 +13,7 @@ dialogue: [
 	{
 		name: Max
 		message: "Well, fair enough. It's yours, after all. I think I left it in the junkyard."
-		face: maxStill
+		face: maxcloseup
 	}
 	{
 		name: Alyssa

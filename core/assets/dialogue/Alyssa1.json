@@ -3,7 +3,7 @@ dialogue: [
 	{
 		name: Max
 		message: Alyssa! Do you know why that door over there is locked?
-		face: maxStill
+		face: maxcloseup
 	}
 	{
 		name: Alyssa
@@ -13,7 +13,7 @@ dialogue: [
 	{
 		name: Max
 		message: Soap? Isn't that a bit asinine?
-		face: maxStill
+		face: maxcloseup
 	}
 	{
 		name: Alyssa
