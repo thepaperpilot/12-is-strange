@@ -8,12 +8,16 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import thepaperpilot.strange.Screens.MenuScreen;
 
 import java.util.ArrayList;
 
-public class Main extends Game {
+public class Main extends Game implements Screen {
     public static final AssetManager manager = new AssetManager();
     public static final ArrayList<Item> inventory = new ArrayList<Item>();
     public static final ArrayList<Item> selected = new ArrayList<Item>();
@@ -24,6 +28,7 @@ public class Main extends Game {
     public static int[] decisions = new int[3];
     public static boolean reverse;
     private static Main instance;
+    private Stage loadingStage;
 
     public static void changeScreen(Screen screen) {
         instance.setScreen(screen);
@@ -32,6 +37,7 @@ public class Main extends Game {
     @Override
     public void create() {
         instance = this;
+
         manager.load("skin.json", Skin.class);
 
         manager.load("animations.atlas", TextureAtlas.class);
@@ -44,13 +50,28 @@ public class Main extends Game {
         manager.load("audio/pickup.wav", Sound.class);
         manager.load("audio/rewind.wav", Sound.class);
         manager.load("audio/select.wav", Sound.class);
+
+        setScreen(this);
     }
 
     @Override
-    public void render() {
-        Gdx.gl.glClearColor(34/256f, 34/256f, 34/256f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        if (manager.update() && getScreen() == null) {
+    public void show() {
+        loadingStage = new Stage(new ExtendViewport(200, 200));
+
+        Label loadingLabel = new Label("Loading...", new Skin(Gdx.files.internal("skin.json")));
+        loadingLabel.setFillParent(true);
+        loadingLabel.setAlignment(Align.center);
+        loadingStage.addActor(loadingLabel);
+
+        Gdx.input.setInputProcessor(loadingStage);
+    }
+
+    @Override
+    public void render(float delta) {
+        loadingStage.act();
+        loadingStage.draw();
+
+        if (manager.update()) {
             skin = manager.get("skin.json", Skin.class);
             animations = manager.get("animations.atlas", TextureAtlas.class);
             backgrounds = manager.get("backgrounds.atlas", TextureAtlas.class);
@@ -64,12 +85,48 @@ public class Main extends Game {
             manager.get("audio/bgm.ogg", Music.class).play();
 
             setScreen(new MenuScreen());
-        } else
-            try { //This makes it so that, if it errors, it just skips the frame as opposed to stopping the entire program
-                getScreen().render(Gdx.graphics.getDeltaTime());
-            } catch (NullPointerException ignored) {
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
+        }
+    }
+
+    @Override
+    public void hide() {
+        loadingStage.dispose();
+    }
+
+    @Override
+    public void pause() {
+        if (getScreen() == this) return;
+        super.pause();
+    }
+
+    @Override
+    public void resume() {
+        if (getScreen() == this) return;
+        super.pause();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        if (getScreen() == this) return;
+        if (getScreen() != null) {
+            getScreen().resize(width, height);
+        }
+    }
+
+    @Override
+    public void dispose() {
+        if (getScreen() != null) {
+            getScreen().dispose();
+        }
+        manager.dispose();
+        skin.dispose();
+    }
+
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(34 / 256f, 34 / 256f, 34 / 256f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        getScreen().render(Gdx.graphics.getDeltaTime());
     }
 }
