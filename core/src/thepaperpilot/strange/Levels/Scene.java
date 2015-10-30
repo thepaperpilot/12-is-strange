@@ -11,10 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thepaperpilot.strange.Entities.RightClickIndicator;
-import thepaperpilot.strange.Item;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 
@@ -130,24 +128,7 @@ public class Scene implements Screen{
     public void updateInventory() {
         inventoryTable.clearChildren();
         for (int i = 0; i < Main.inventory.size(); i++) {
-            Button item = new Button(Main.skin, "toggle");
-            item.add(new ImageButton(Main.inventory.get(i).image.getDrawable())).padBottom(1).row();
-            Label invLabel = new Label(Main.inventory.get(i).name, Main.skin);
-            invLabel.setAlignment(Align.center);
-            item.add(invLabel);
-            inventoryTable.left().add(item).pad(2).height(32);
-            if (Main.selected.contains(Main.inventory.get(i)))
-                item.toggle();
-            final int index = i;
-            item.addListener(new ClickListener(Input.Buttons.LEFT) {
-                public void clicked(InputEvent event, float x, float y) {
-                    if (Main.selected.contains(Main.inventory.get(index))) {
-                        Main.selected.remove(Main.inventory.get(index));
-                    } else Main.selected.add(Main.inventory.get(index));
-                    Item.combine();
-                    thepaperpilot.strange.Scene.updateInventory();
-                }
-            });
+            inventoryTable.left().add(level.inventory.get(i)).pad(2).height(32);
         }
     }
 
