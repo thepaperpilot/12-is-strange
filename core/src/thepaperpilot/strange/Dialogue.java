@@ -49,7 +49,7 @@ public class Dialogue extends Table {
     }
 
     public static Dialogue readDialogue(String fileName) {
-        return new Dialogue(json.fromJson(DialoguePrototype.class, LinePrototype.class, Gdx.files.internal(fileName)));
+        return new Dialogue(json.fromJson(DialoguePrototype.class, LinePrototype.class, Gdx.files.internal("dialogue/" + fileName + ".json")));
     }
 
     // I'm going to leave this here as an example of how to write a dialogue and have it export to JSON.
