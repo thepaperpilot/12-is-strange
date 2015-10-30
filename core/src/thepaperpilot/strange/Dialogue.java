@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Json;
+import thepaperpilot.strange.Levels.Effect;
+import thepaperpilot.strange.Levels.Level;
 
 import java.util.ArrayList;
 
@@ -66,11 +68,11 @@ public class Dialogue extends Table {
     }
 
     static class Line {
-        public String name;
-        public String message;
-        public Drawable face;
+        String name;
+        String message;
+        Drawable face;
 
-        public Line(LinePrototype prototype) {
+        Line(LinePrototype prototype) {
             name = prototype.name;
             message = prototype.message;
             if (prototype.face != null) {
@@ -79,14 +81,40 @@ public class Dialogue extends Table {
         }
     }
 
-    public static class DialoguePrototype {
-        public LinePrototype[] dialogue;
+    static class Option extends Label{
+        Effect[] effects;
+
+        Option(OptionPrototype prototype, Level level) {
+            super(prototype.message, Main.skin);
+
+            effects = new Effect[prototype.effects.length];
+            for (int i = 0; i < prototype.effects.length; i++) {
+                effects[i] = new Effect(prototype.effects[i], level);
+            }
+
+            addListener(new ClickListener(Input.Buttons.LEFT) {
+                public void clicked(InputEvent event, float x, float y) {
+                    for(Effect effect : effects) {
+                        effect.run();
+                    }
+                }
+            });
+        }
     }
 
-    public static class LinePrototype {
-        public String name;
-        public String message;
+    static class DialoguePrototype {
+        LinePrototype[] dialogue;
+    }
 
-        public String face;
+    static class LinePrototype {
+        String name;
+        String message;
+
+        String face;
+    }
+
+    static class OptionPrototype {
+        String message;
+        Effect.EffectPrototype[] effects;
     }
 }

@@ -1,0 +1,12 @@
+{
+  dialogue: [
+    {
+      name: Max
+      message: Alyssa! Do you know why that door over there is locked?
+      face: maxcloseup
+      options: [
+
+      ]
+    }
+  ]
+}
