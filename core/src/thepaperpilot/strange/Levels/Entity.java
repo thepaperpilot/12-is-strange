@@ -15,7 +15,7 @@ public class Entity extends Image {
     Type type;
     final Map<String, String> attributes;
     String name;
-    Item[] requiredItems;
+    String[] requiredItems;
     Effect[] successEffects;
     Effect[] failEffects;
     Effect[] doneEffects;
@@ -29,18 +29,12 @@ public class Entity extends Image {
         this.scene = scene;
         type = Type.valueOf(prototype.type);
         attributes = prototype.attributes;
+        requiredItems = prototype.requiredItems;
         updateAppearance();
         setPosition(prototype.x, prototype.y);
 
         if (prototype.visible)
             scene.stage.addActor(this);
-
-        if (prototype.requiredItems != null) {
-            requiredItems = new Item[prototype.requiredItems.length];
-            for (int i = 0; i < prototype.requiredItems.length; i++) {
-                requiredItems[i] = scene.level.items.get(prototype.requiredItems[i]);
-            }
-        }
 
         if (prototype.successEffects != null) {
             successEffects = new Effect[prototype.successEffects.length];
@@ -56,13 +50,15 @@ public class Entity extends Image {
             }
         }
 
-        if (prototype.doneEffects == null) {
-            doneEffects = successEffects;
-        } else {
+        if (prototype.doneEffects != null) {
             doneEffects = new Effect[prototype.doneEffects.length];
             for (int i = 0; i < prototype.doneEffects.length; i++) {
                 doneEffects[i] = new Effect(prototype.doneEffects[i], scene.level);
             }
+        }
+
+        if (prototype.successEffects == null) {
+            successEffects = doneEffects;
         }
     }
 
@@ -111,8 +107,8 @@ public class Entity extends Image {
             }
         } else if (locked) {
             boolean success = true;
-            for (Item item : requiredItems) {
-                if (!scene.level.inventory.contains(item)) {
+            for (String item : requiredItems) {
+                if (!scene.level.inventory.contains(scene.level.items.get(item))) {
                     success = false;
                     break;
                 }

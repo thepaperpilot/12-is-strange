@@ -137,7 +137,7 @@ public class Scene implements Screen {
     public void updateInventory() {
         inventoryTable.clearChildren();
         for (int i = 0; i < level.inventory.size(); i++) {
-            inventoryTable.left().add(level.inventory.get(i)).pad(2).height(32);
+            inventoryTable.left().add(new Item(level.inventory.get(i))).pad(2).height(32);
         }
     }
 

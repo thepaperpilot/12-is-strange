@@ -2,6 +2,7 @@ package thepaperpilot.strange;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -76,7 +77,7 @@ public class Dialogue extends Table {
         name.setText(nextLine.name);
         messageLabel.setText(nextLine.message);
         message.clearChildren();
-        message.add(messageLabel).left().padBottom(5).row();
+        message.add(messageLabel).expandX().fillX().left().padBottom(5).row();
         if (nextLine.options != null) {
             message.row();
             for (int i = 0; i < nextLine.options.length; i++) {
@@ -121,6 +122,7 @@ public class Dialogue extends Table {
 
             addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
+                    Main.manager.get("audio/select.wav", Sound.class).play();
                     for (Effect effect : effects) {
                         effect.run();
                     }

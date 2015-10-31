@@ -72,7 +72,6 @@ scenes: [
 						type: ADD_ITEM
 						attributes: {
 							class: java.util.HashMap
-							targetScene: first
 							targetItem: gun
 						}
 					}
@@ -80,7 +79,6 @@ scenes: [
 						type: REMOVE_ITEM
 						attributes: {
 							class: java.util.HashMap
-							targetScene: first
 							targetItem: hammer
 						}
 					}
@@ -119,7 +117,6 @@ scenes: [
 						type: ADD_ITEM
 						attributes: {
 							class: java.util.HashMap
-							targetScene: first
 							targetItem: soap
 						}
 					}
@@ -212,6 +209,7 @@ scenes: [
 						type: SAY
 						attributes: {
 							class: java.util.HashMap
+							targetScene: second
 							message: aww. it looks so happy now!
 						}
 					}
@@ -240,8 +238,154 @@ scenes: [
 						type: ADD_ITEM
 						attributes: {
 							class: java.util.HashMap
-							targetScene: second
 							targetItem: dog bone
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: third
+		background: school
+		previous: first
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 3
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door2
+				type: IMAGE
+				visible: true
+				x: 48
+				y: 16
+				requiredItems: [
+					keys
+				]
+				successEffects: [
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: keys
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: it's locked
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: AlyssaSoapPuzzle
+				}
+				name: alyssa
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 14
+				requiredItems: [
+					soap
+				]
+				successEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: thank you alyssa!
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: keys
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: soap
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							dialogue: Alyssa1
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: I already have her the soap. Wasn't the tutorial enough?
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: sodaWorld
+				}
+				name: soda
+				type: IMAGE
+				visible: true
+				x: 80
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							targetEntity: soda
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: soda
 						}
 					}
 				]
@@ -320,6 +464,10 @@ items: [
 	}
 	{
 		name: soda
+		texture: soda
+	}
+	{
+		name: sugar
 		texture: sugar
 	}
 	{

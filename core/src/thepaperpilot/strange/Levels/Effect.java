@@ -65,6 +65,7 @@ public class Effect {
                 scene = level.scenes.get(attributes.get("targetScene"));
                 scene.ui.addActor(Dialogue.readDialogue(attributes.get("dialogue"), level));
             case CHANGE_SCREEN:
+                Main.manager.get("audio/error.wav", Sound.class).play();
                 scene = level.scenes.get(attributes.get("targetScene"));
                 Main.changeScreen(scene);
                 break;

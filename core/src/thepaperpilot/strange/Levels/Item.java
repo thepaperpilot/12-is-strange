@@ -12,28 +12,36 @@ import thepaperpilot.strange.Main;
 
 public class Item extends Button {
     String name;
+    String texture;
+    Level level;
 
     public Item(ItemPrototype prototype, final Level level) {
         super(Main.skin, "toggle");
 
-        this.name = prototype.name;
+        texture = prototype.texture;
+        name = prototype.name;
+        this.level = level;
+    }
 
-        add(new ImageButton(new TextureRegionDrawable(Main.entities.findRegion(prototype.texture + "Inv")))).padBottom(1).row();
-        Label invLabel = new Label(name, Main.skin);
-        invLabel.setAlignment(Align.center);
+    public Item(final Item item) {
+        super(Main.skin, "toggle");
+
+        add(new ImageButton(new TextureRegionDrawable(Main.entities.findRegion(item.texture + "Inv")))).padBottom(1).row();
+        Label invLabel = new Label(item.name, Main.skin);
         add(invLabel);
 
-        if (level.selected.contains(this))
+        if (item.level.selected.contains(item.level.items.get(item.name)))
             toggle();
 
         addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                if (level.selected.contains(Item.this)) {
-                    level.selected.remove(Item.this);
-                } else level.selected.add(Item.this);
+                Item thisItem = item.level.items.get(item.name);
+                if (item.level.selected.contains(thisItem)) {
+                    item.level.selected.remove(thisItem);
+                } else item.level.selected.add(thisItem);
 
-                level.combine();
-                level.updateInventory();
+                item.level.combine();
+                item.level.updateInventory();
             }
         });
     }
