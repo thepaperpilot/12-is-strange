@@ -1,4 +1,4 @@
-package thepaperpilot.strange;
+package thepaperpilot.strange.Levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -12,8 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Json;
-import thepaperpilot.strange.Levels.Effect;
-import thepaperpilot.strange.Levels.Level;
+import thepaperpilot.strange.Main;
 
 import java.util.ArrayList;
 

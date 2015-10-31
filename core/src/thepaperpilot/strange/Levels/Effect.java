@@ -1,7 +1,7 @@
 package thepaperpilot.strange.Levels;
 
 import com.badlogic.gdx.audio.Sound;
-import thepaperpilot.strange.Dialogue;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import thepaperpilot.strange.Main;
 
 import java.util.HashMap;
@@ -23,13 +23,19 @@ public class Effect {
             case REMOVE_ENTITY:
                 Scene scene = level.scenes.get(attributes.get("targetScene"));
                 Entity entity = scene.entities.get(attributes.get("targetEntity"));
+                entity.visible = false;
                 entity.remove();
                 break;
             case ADD_ENTITY:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
+                entity.visible = true;
                 scene.stage.addActor(entity);
                 break;
+            case MOVE_ENTITY:
+                scene = level.scenes.get(attributes.get("targetScene"));
+                entity = scene.entities.get(attributes.get("targetEntity"));
+                entity.addAction(Actions.moveBy(Float.valueOf(attributes.get("moveX")), Float.valueOf(attributes.get("moveY")), Float.valueOf(attributes.get("time"))));
             case REMOVE_ITEM:
                 Item item = level.items.get(attributes.get("targetItem"));
                 level.inventory.remove(item);
@@ -48,15 +54,15 @@ public class Effect {
             case CHANGE_APPEARANCE:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
-                if(attributes.get("type") != null)
+                if (attributes.get("type") != null)
                     entity.type = Entity.Type.valueOf(attributes.get("type"));
-                if(attributes.get("texture") != null)
+                if (attributes.get("texture") != null)
                     entity.attributes.put("texture", attributes.get("texture"));
-                if(attributes.get("numFrames") != null)
+                if (attributes.get("numFrames") != null)
                     entity.attributes.put("numFrames", attributes.get("numFrames"));
-                if(attributes.get("speed") != null)
+                if (attributes.get("speed") != null)
                     entity.attributes.put("speed", attributes.get("speed"));
-                if(attributes.get("time") != null)
+                if (attributes.get("time") != null)
                     entity.attributes.put("time", attributes.get("time"));
                 entity.updateAppearance();
                 break;
@@ -82,6 +88,7 @@ public class Effect {
     public enum Type {
         REMOVE_ENTITY,
         ADD_ENTITY,
+        MOVE_ENTITY,
         REMOVE_ITEM,
         ADD_ITEM,
         REMOVE_BARRIER,

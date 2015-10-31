@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Entity extends Image {
-    Type type;
     final Map<String, String> attributes;
+    Type type;
     String name;
     String[] requiredItems;
     Effect[] successEffects;
@@ -23,6 +23,7 @@ public class Entity extends Image {
     Animation animation;
     Scene scene;
     boolean locked = true;
+    boolean visible;
 
     public Entity(EntityPrototype prototype, Scene scene) {
         name = prototype.name;

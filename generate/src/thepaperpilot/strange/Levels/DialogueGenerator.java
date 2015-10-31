@@ -1,11 +1,10 @@
-package thepaperpilot.strange;
+package thepaperpilot.strange.Levels;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.utils.Json;
-import thepaperpilot.strange.Levels.Effect;
 
 public class DialogueGenerator {
     private final static Json json = new Json();
