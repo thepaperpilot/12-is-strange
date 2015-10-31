@@ -503,11 +503,6 @@ public class LevelGenerator {
                 entity.attributes.put("texture", "crowdCameraPuzzle");
                 effects = new ArrayList<Effect.EffectPrototype>();
                 effect = new Effect.EffectPrototype();
-                effect.type = "ADD_ENTITY";
-                effect.attributes.put("targetScene", "sixth");
-                effect.attributes.put("targetEntity", "door2");
-                effects.add(effect);
-                effect = new Effect.EffectPrototype();
                 effect.type = "ADD_ITEM";
                 effect.attributes.put("targetItem", "photo");
                 effects.add(effect);
