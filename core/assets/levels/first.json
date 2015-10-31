@@ -154,13 +154,14 @@ scenes: [
 				x: 81
 				y: 10
 				requiredItems: [
-					hammer
+					cat food
 				]
 				successEffects: [
 					{
 						type: CHANGE_APPEARANCE
 						attributes: {
 							class: java.util.HashMap
+							numFrames: 2
 							targetScene: second
 							targetEntity: cat1
 							texture: catEating
@@ -179,7 +180,7 @@ scenes: [
 						attributes: {
 							class: java.util.HashMap
 							targetScene: fourth
-							targetEntity: cat food
+							targetEntity: sugar
 						}
 					}
 					{
@@ -190,7 +191,15 @@ scenes: [
 							targetScene: fourth
 							targetEntity: bird
 							texture: blueJayIdle
+							type: ANIMATION
 							speed: 0.16666667
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: cat food
 						}
 					}
 				]
@@ -391,6 +400,238 @@ scenes: [
 				]
 			}
 		]
+	}
+	{
+		name: fourth
+		background: outside
+		previous: third
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 4
+				}
+				type: CLOCK
+				visible: true
+				x: 148
+				y: 55
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: tirestack
+				}
+				name: tirestack
+				type: IMAGE
+				visible: true
+				x: 230
+				y: 13
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: stairs
+				}
+				name: stairs
+				type: IMAGE
+				visible: true
+				y: 7
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					texture: dogIdle
+					speed: 0.16666667
+				}
+				name: dog1
+				type: ANIMATION
+				visible: true
+				x: 160
+				y: 13
+				requiredItems: [
+					dog bone
+				]
+				successEffects: [
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							numFrames: 2
+							targetScene: fourth
+							targetEntity: dog1
+							texture: dogHappy
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							message: look how cute it is!
+						}
+					}
+					{
+						type: REMOVE_BARRIER
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetObstacle: dog
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: dog bone
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							message: This dog won't let me through. It looks hungry
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							message: The dog is much happier now that it has a bone
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: blueJayDead
+				}
+				name: bird
+				type: IMAGE
+				visible: true
+				x: 73
+				y: 10
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: catFoodWorld
+				}
+				name: cat food
+				type: IMAGE
+				visible: true
+				x: 170
+				y: 13
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: cat food
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: cat food
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: weedKillerWorld
+				}
+				name: weed killer
+				type: IMAGE
+				visible: true
+				x: 21
+				y: 7
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: weed killer
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: weed killer
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: sugarWorld
+				}
+				name: sugar
+				type: IMAGE
+				visible: true
+				x: 120
+				y: 10
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: sugar
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: sugar
+						}
+					}
+				]
+			}
+		]
+		obstacles: {
+			class: java.util.HashMap
+			dog: {
+				x: 160
+				width: 16
+				height: 144
+			}
+		}
 	}
 ]
 items: [

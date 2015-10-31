@@ -102,31 +102,25 @@ public class Entity extends Image {
 
     public void onTouch() {
         if (requiredItems == null) {
-            for (Effect effect : successEffects) {
-                effect.run();
-            }
+            if (successEffects != null)
+                for (Effect effect : successEffects) effect.run();
         } else if (locked) {
             boolean success = true;
             for (String item : requiredItems) {
-                if (!scene.level.inventory.contains(scene.level.items.get(item))) {
+                if (!scene.level.selected.contains(scene.level.items.get(item))) {
                     success = false;
                     break;
                 }
             }
             if (success) {
                 locked = false;
-                for (Effect effect : successEffects) {
-                    effect.run();
-                }
+                if (successEffects != null) for (Effect effect : successEffects) effect.run();
             } else {
-                for (Effect effect : failEffects) {
-                    effect.run();
-                }
+                if (failEffects != null)
+                    for (Effect effect : failEffects) effect.run();
             }
-        } else {
-            for (Effect effect : doneEffects) {
-                effect.run();
-            }
+        } else if (doneEffects != null) for (Effect effect : doneEffects) {
+            effect.run();
         }
     }
 

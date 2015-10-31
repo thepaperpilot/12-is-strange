@@ -42,19 +42,22 @@ public class Effect {
                 level.inventory.add(item);
                 level.updateInventory();
                 break;
+            case REMOVE_BARRIER:
+                scene = level.scenes.get(attributes.get("targetScene"));
+                scene.obstacles.remove(attributes.get("targetObstacle"));
             case CHANGE_APPEARANCE:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
                 if(attributes.get("type") != null)
                     entity.type = Entity.Type.valueOf(attributes.get("type"));
                 if(attributes.get("texture") != null)
-                    entity.attributes.put("texture", attributes.get("type"));
+                    entity.attributes.put("texture", attributes.get("texture"));
                 if(attributes.get("numFrames") != null)
-                    entity.attributes.put("numFrames", attributes.get("type"));
+                    entity.attributes.put("numFrames", attributes.get("numFrames"));
                 if(attributes.get("speed") != null)
-                    entity.attributes.put("speed", attributes.get("type"));
+                    entity.attributes.put("speed", attributes.get("speed"));
                 if(attributes.get("time") != null)
-                    entity.attributes.put("time", attributes.get("type"));
+                    entity.attributes.put("time", attributes.get("time"));
                 entity.updateAppearance();
                 break;
             case SAY:
@@ -81,11 +84,12 @@ public class Effect {
         ADD_ENTITY,
         REMOVE_ITEM,
         ADD_ITEM,
+        REMOVE_BARRIER,
         CHANGE_APPEARANCE,
         SAY,
         DIALOGUE,
         CHANGE_SCREEN,
-        CHANGE_LEVEL;
+        CHANGE_LEVEL
     }
 
     public static class EffectPrototype {

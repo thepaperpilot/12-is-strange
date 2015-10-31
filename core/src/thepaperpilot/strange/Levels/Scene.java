@@ -19,7 +19,6 @@ import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class Scene implements Screen {
     Image background;
     Map<String, Entity> entities = new HashMap<String, Entity>();
     Entity target;
-    ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
+    Map<String, Rectangle> obstacles = new HashMap<String, Rectangle>();
     Stage stage;
     Stage ui;
     String previous;
@@ -40,6 +39,7 @@ public class Scene implements Screen {
     public Scene(final ScenePrototype prototype, final Level level) {
         name = prototype.name;
         this.level = level;
+        obstacles = prototype.obstacles;
         background = new Image(Main.backgrounds.findRegion(prototype.background));
 
         stage = new Stage(new StretchViewport(256, 144));
@@ -54,7 +54,7 @@ public class Scene implements Screen {
                 public void clicked(InputEvent event, float x, float y) {
                     target = entity;
                     x = (int) entity.getX();
-                    for (Rectangle obstacle : obstacles) {
+                    for (Rectangle obstacle : obstacles.values()) {
                         if (x >= obstacle.x - max.getWidth() / 2f && max.getX() <= obstacle.x) {
                             x = obstacle.x - max.getWidth() / 2f - 2;
                             if (entity.getX() < x)
@@ -79,7 +79,7 @@ public class Scene implements Screen {
 
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                for (Rectangle obstacle : obstacles) {
+                for (Rectangle obstacle : obstacles.values()) {
                     if (x >= obstacle.x && max.getX() <= obstacle.x)
                         x = obstacle.x - 2;
                     if (x <= obstacle.x + obstacle.width && max.getX() >= obstacle.x)
@@ -218,5 +218,6 @@ public class Scene implements Screen {
         String background;
         String previous;
         Entity.EntityPrototype[] entities;
+        Map<String, Rectangle> obstacles = new HashMap<String, Rectangle>();
     }
 }
