@@ -92,7 +92,7 @@ public class Effect {
                 Main.changeScreen(scene);
                 break;
             case CHANGE_LEVEL:
-                Level level = Level.readLevel(attributes.get("targetLevel"));
+                Level level = Level.readLevel("levels/" + attributes.get("targetLevel") + ".json");
                 Main.changeScreen(level.firstScene);
                 break;
             case RUN_EFFECT:
