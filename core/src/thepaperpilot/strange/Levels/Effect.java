@@ -35,7 +35,7 @@ public class Effect {
             case MOVE_ENTITY:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
-                entity.addAction(Actions.moveBy(Float.valueOf(attributes.get("moveX")), Float.valueOf(attributes.get("moveY")), Float.valueOf(attributes.get("time"))));
+                entity.addAction(Actions.moveTo(Float.valueOf(attributes.get("newX")), Float.valueOf(attributes.get("newY")), Float.valueOf(attributes.get("time"))));
                 break;
             case REMOVE_ITEM:
                 Item item = level.items.get(attributes.get("targetItem"));
