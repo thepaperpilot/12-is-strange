@@ -1305,10 +1305,18 @@ scenes: [
 				]
 				successEffects: [
 					{
-						type: CHANGE_SCREEN
+						type: REMOVE_ITEM
 						attributes: {
 							class: java.util.HashMap
-							targetScene: tenth
+							targetItem: usb
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: ninth
+							message: now warren will let me past
 						}
 					}
 				]
@@ -1319,6 +1327,15 @@ scenes: [
 							class: java.util.HashMap
 							targetScene: ninth
 							dialogue: Warren1
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: tenth
 						}
 					}
 				]
