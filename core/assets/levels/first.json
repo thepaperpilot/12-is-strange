@@ -1460,6 +1460,92 @@ scenes: [
 			}
 		]
 	}
+	{
+		name: eleventh
+		background: bathroom
+		previous: tenth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 11
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: detective
+				}
+				name: warren
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 10
+				requiredItems: [
+					phone
+					photo
+					files
+				]
+				successEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eleventh
+							message: pleasure doing business
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: phone
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: photo
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: files
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eleventh
+							dialogue: Detective1
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eleventh
+							dialogue: "He may have been mysterious, but at least he was helpful"
+						}
+					}
+				]
+			}
+		]
+	}
 ]
 items: [
 	{

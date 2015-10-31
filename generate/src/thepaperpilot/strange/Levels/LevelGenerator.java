@@ -829,6 +829,53 @@ public class LevelGenerator {
                 scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
                 scenes.add(scene);
 
+                scene = new Scene.ScenePrototype("eleventh", "bathroom", "tenth");
+                entities = new ArrayList<Entity.EntityPrototype>();
+                entity = new Entity.EntityPrototype(null, "CLOCK", 192, 96, true, null);
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "11");
+                entities.add(entity);
+                // detective
+                entity = new Entity.EntityPrototype("warren", "IMAGE", 192, 10, true, new String[]{"phone", "photo", "files"});
+                entity.attributes.put("texture", "detective");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "eleventh");
+                effect.attributes.put("message", "pleasure doing business");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ITEM";
+                effect.attributes.put("targetItem", "phone");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ITEM";
+                effect.attributes.put("targetItem", "photo");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ITEM";
+                effect.attributes.put("targetItem", "files");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "DIALOGUE";
+                effect.attributes.put("targetScene", "eleventh");
+                effect.attributes.put("dialogue", "Detective1");
+                effects.add(effect);
+                entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "eleventh");
+                effect.attributes.put("dialogue", "He may have been mysterious, but at least he was helpful");
+                effects.add(effect);
+                entity.doneEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
+                scenes.add(scene);
+
                 levelPrototype.scenes = Arrays.copyOf(scenes.toArray(), scenes.size(), Scene.ScenePrototype[].class);
 
                 ArrayList<Item.ItemPrototype> items = new ArrayList<Item.ItemPrototype>();
