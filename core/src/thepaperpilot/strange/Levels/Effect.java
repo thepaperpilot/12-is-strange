@@ -45,7 +45,16 @@ public class Effect {
             case CHANGE_APPEARANCE:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
-                entity.attributes.putAll(attributes);
+                if(attributes.get("type") != null)
+                    entity.type = Entity.Type.valueOf(attributes.get("type"));
+                if(attributes.get("texture") != null)
+                    entity.attributes.put("texture", attributes.get("type"));
+                if(attributes.get("numFrames") != null)
+                    entity.attributes.put("numFrames", attributes.get("type"));
+                if(attributes.get("speed") != null)
+                    entity.attributes.put("speed", attributes.get("type"));
+                if(attributes.get("time") != null)
+                    entity.attributes.put("time", attributes.get("type"));
                 entity.updateAppearance();
                 break;
             case SAY:

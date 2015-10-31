@@ -127,6 +127,127 @@ scenes: [
 			}
 		]
 	}
+	{
+		name: second
+		background: outside
+		previous: first
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 2
+				}
+				type: CLOCK
+				visible: true
+				x: 148
+				y: 55
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					texture: catIdle
+					speed: 0.16666667
+				}
+				name: cat1
+				type: ANIMATION
+				visible: true
+				x: 81
+				y: 10
+				requiredItems: [
+					hammer
+				]
+				successEffects: [
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							targetEntity: cat1
+							texture: catEating
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							message: aww. it looks so happy now!
+						}
+					}
+					{
+						type: ADD_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: cat food
+						}
+					}
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							numFrames: 14
+							targetScene: fourth
+							targetEntity: bird
+							texture: blueJayIdle
+							speed: 0.16666667
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							message: This cat looks bored. I hear cats hunt birds when they're bored.
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							message: aww. it looks so happy now!
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: dogBoneWorld
+				}
+				name: dogBone
+				type: IMAGE
+				visible: true
+				x: 200
+				y: 14
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							targetEntity: dogBone
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							targetItem: dog bone
+						}
+					}
+				]
+			}
+		]
+	}
 ]
 items: [
 	{

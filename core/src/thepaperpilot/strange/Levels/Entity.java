@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Entity extends Image {
-    final Type type;
+    Type type;
     final Map<String, String> attributes;
     String name;
     Item[] requiredItems;
