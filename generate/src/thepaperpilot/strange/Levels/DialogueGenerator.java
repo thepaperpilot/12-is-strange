@@ -36,8 +36,19 @@ public class DialogueGenerator {
                 lines.add(line);
                 line = new Dialogue.LinePrototype();
                 line.name = "Max";
-                line.message = "Oh, and one last thing. There isn't actually currently a way to restart the game. No worries, that'll change, I've already worked out how to structure the scenes such that I can reset them all pretty easily. But for now, do me a solid and press refresh or re-open the application or whatever it is you kids do these days, and pretend it happened automatically. Cool? Cool.";
+                line.message = "I guess that just leaves one last option...";
                 line.face = "maxcloseup";
+                ArrayList<Dialogue.OptionPrototype> options = new ArrayList<Dialogue.OptionPrototype>();
+                Dialogue.OptionPrototype option = new Dialogue.OptionPrototype();
+                option.message = "Restart Game";
+                ArrayList<Effect.EffectPrototype> effects = new ArrayList<Effect.EffectPrototype>();
+                Effect.EffectPrototype effect = new Effect.EffectPrototype();
+                effect.type = "CHANGE_LEVEL";
+                effect.attributes.put("targetLevel", "first");
+                effects.add(effect);
+                option.effects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                options.add(option);
+                line.options = Arrays.copyOf(options.toArray(), options.size(), Dialogue.OptionPrototype[].class);
                 lines.add(line);
                 dialoguePrototype.dialogue = Arrays.copyOf(lines.toArray(), lines.size(), Dialogue.LinePrototype[].class);
 
@@ -55,11 +66,11 @@ public class DialogueGenerator {
                 line.name = "Max";
                 line.message = "Should I go outside the school?";
                 line.face = "maxcloseup";
-                ArrayList<Dialogue.OptionPrototype> options = new ArrayList<Dialogue.OptionPrototype>();
-                Dialogue.OptionPrototype option = new Dialogue.OptionPrototype();
+                options = new ArrayList<Dialogue.OptionPrototype>();
+                option = new Dialogue.OptionPrototype();
                 option.message = "Go outside";
-                ArrayList<Effect.EffectPrototype> effects = new ArrayList<Effect.EffectPrototype>();
-                Effect.EffectPrototype effect = new Effect.EffectPrototype();
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
                 effect.type = "CHANGE_SCREEN";
                 effect.attributes.put("targetScene", "second");
                 effects.add(effect);

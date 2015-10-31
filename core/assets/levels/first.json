@@ -1485,8 +1485,8 @@ scenes: [
 				name: warren
 				type: IMAGE
 				visible: true
-				x: 192
-				y: 10
+				x: 48
+				y: 16
 				requiredItems: [
 					phone
 					photo
@@ -1499,6 +1499,13 @@ scenes: [
 							class: java.util.HashMap
 							targetScene: eleventh
 							message: pleasure doing business
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fortune cookie
 						}
 					}
 					{
@@ -1539,7 +1546,77 @@ scenes: [
 						attributes: {
 							class: java.util.HashMap
 							targetScene: eleventh
-							dialogue: "He may have been mysterious, but at least he was helpful"
+							message: "He may have been mysterious, but at least he was helpful"
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: twelfth
+		background: school
+		previous: tenth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 12
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoorKeypad
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 48
+				y: 16
+				requiredItems: [
+					fortune cookie code
+				]
+				successEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: twelfth
+							message: it worked! how exciting!
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fortune cookie code
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: twelfth
+							message: it's locked with a keypad. Now where could I find the code?
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: twelfth
+							dialogue: Final1
 						}
 					}
 				]
