@@ -44,7 +44,7 @@ public class Level {
         outer:
         for (int i = 0; i < combinations.keySet().size(); i++) {
             Item[] combo = (Item[]) combinations.keySet().toArray()[i];
-            if (Main.selected.size() != combo.length) continue;
+            if (selected.size() != combo.length) continue;
             for (Item item : selected) {
                 boolean found = false;
                 for (Item comboItem : combo) {

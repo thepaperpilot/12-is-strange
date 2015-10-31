@@ -36,6 +36,7 @@ public class Effect {
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
                 entity.addAction(Actions.moveBy(Float.valueOf(attributes.get("moveX")), Float.valueOf(attributes.get("moveY")), Float.valueOf(attributes.get("time"))));
+                break;
             case REMOVE_ITEM:
                 Item item = level.items.get(attributes.get("targetItem"));
                 level.inventory.remove(item);
@@ -51,6 +52,7 @@ public class Effect {
             case REMOVE_BARRIER:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 scene.obstacles.remove(attributes.get("targetObstacle"));
+                break;
             case CHANGE_APPEARANCE:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
@@ -64,6 +66,10 @@ public class Effect {
                     entity.attributes.put("speed", attributes.get("speed"));
                 if (attributes.get("time") != null)
                     entity.attributes.put("time", attributes.get("time"));
+                if (attributes.get("loop") != null)
+                    entity.attributes.put("loop", attributes.get("loop"));
+                if (attributes.get("flip") != null)
+                    entity.attributes.put("flip", attributes.get("flip"));
                 entity.updateAppearance();
                 break;
             case SAY:
@@ -73,6 +79,13 @@ public class Effect {
             case DIALOGUE:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 scene.ui.addActor(Dialogue.readDialogue(attributes.get("dialogue"), level));
+                break;
+            case PLAY_SOUND:
+                Main.manager.get("audio/" + attributes.get("sound") + ".wav", Sound.class).play();
+                break;
+            case CUTSCENE:
+                Main.changeScreen(Cutscene.readCutscene(attributes.get("cutscene"), level.scenes.get(attributes.get("targetScene")), level));
+                break;
             case CHANGE_SCREEN:
                 Main.manager.get("audio/error.wav", Sound.class).play();
                 scene = level.scenes.get(attributes.get("targetScene"));
@@ -81,6 +94,13 @@ public class Effect {
             case CHANGE_LEVEL:
                 Level level = Level.readLevel(attributes.get("targetLevel"));
                 Main.changeScreen(level.firstScene);
+                break;
+            case RUN_EFFECT:
+                EffectPrototype prototype = new EffectPrototype();
+                prototype.type = attributes.get("effect");
+                if(prototype.type.equals("RUN_EFFECT"))
+                    return; // nice try!
+                prototype.attributes = attributes;
                 break;
         }
     }
@@ -95,8 +115,11 @@ public class Effect {
         CHANGE_APPEARANCE,
         SAY,
         DIALOGUE,
+        PLAY_SOUND,
+        CUTSCENE,
         CHANGE_SCREEN,
-        CHANGE_LEVEL
+        CHANGE_LEVEL,
+        RUN_EFFECT // used in cutscenes
     }
 
     public static class EffectPrototype {

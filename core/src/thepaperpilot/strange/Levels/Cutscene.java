@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Main;
 
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class Cutscene implements Screen {
     private Stage stage;
     private Stage ui;
     private Scene previous;
-    private Max max;
+    private Entity max;
 
     public Cutscene(CutscenePrototype cutscenePrototype, Scene scene, Level level) {
         previous = scene;
@@ -44,9 +43,14 @@ public class Cutscene implements Screen {
         stage.addActor(new Image(scene.background.getDrawable()));
 
         for (int i = 0; i < scene.entities.size(); i++) {
-            stage.addActor((Actor) scene.entities.values().toArray()[i]);
+            if(((Entity) scene.entities.values().toArray()[i]).visible)
+                stage.addActor((Actor) scene.entities.values().toArray()[i]);
         }
-        stage.addActor(max = new Max((int) scene.max.getX(), (int) scene.max.getY()));
+        Entity.EntityPrototype maxPrototype = new Entity.EntityPrototype("max", "ANIMATION", (int) scene.max.getX(), (int) scene.max.getY(), true, null);
+        maxPrototype.attributes.put("texture", "maxIdle");
+        maxPrototype.attributes.put("numFrames", "28");
+        maxPrototype.attributes.put("speed", ".1");
+        stage.addActor(max = new Entity(maxPrototype, previous));
 
         inventoryTable = new Table(Main.skin);
         inventoryTable.setSize(ui.getWidth() - 30, 38);
@@ -94,7 +98,8 @@ public class Cutscene implements Screen {
                 if (((Entity) previous.entities.values().toArray()[i]).visible)
                     previous.stage.addActor((Actor) previous.entities.values().toArray()[i]);
             }
-            previous.max = max;
+            previous.max.setX(max.getX());
+            previous.max.setY(max.getY());
             previous.stage.addActor(previous.max);
             Main.changeScreen(previous);
             return;
@@ -117,7 +122,7 @@ public class Cutscene implements Screen {
     @Override
     public void render(float delta) {
         time += delta;
-        if (time > lines.get(line).length) next();
+        if (time > lines.get(line - 1).length) next();
 
         stage.act();
         stage.draw();
@@ -163,33 +168,31 @@ public class Cutscene implements Screen {
                         switch (type) {
                             case REMOVE_ENTITY:
                                 Entity entity = scene.previous.entities.get(attributes.get("targetEntity"));
+                                if (attributes.get("targetEntity").equals("max"))
+                                    entity = scene.max;
                                 entity.visible = false;
                                 entity.remove();
                                 break;
                             case ADD_ENTITY:
                                 entity = scene.previous.entities.get(attributes.get("targetEntity"));
+                                if (attributes.get("targetEntity").equals("max"))
+                                    entity = scene.max;
                                 entity.visible = true;
                                 scene.stage.addActor(entity);
                                 break;
                             case MOVE_ENTITY:
                                 entity = scene.previous.entities.get(attributes.get("targetEntity"));
-                                entity.addAction(Actions.moveBy(Float.valueOf(attributes.get("moveX")), Float.valueOf(attributes.get("moveY")), Float.valueOf(attributes.get("time"))));
-                            case REMOVE_ITEM:
-                                Item item = level.items.get(attributes.get("targetItem"));
-                                level.inventory.remove(item);
-                                level.selected.remove(item);
-                                level.updateInventory();
-                                break;
-                            case ADD_ITEM:
-                                Main.manager.get("audio/pickup.wav", Sound.class).play();
-                                item = level.items.get(attributes.get("targetItem"));
-                                level.inventory.add(item);
-                                level.updateInventory();
+                                if (attributes.get("targetEntity").equals("max"))
+                                    entity = scene.max;
+                                entity.addAction(Actions.moveTo(Float.valueOf(attributes.get("newX")), Float.valueOf(attributes.get("newY")), Float.valueOf(attributes.get("time"))));
                                 break;
                             case REMOVE_BARRIER:
                                 scene.previous.obstacles.remove(attributes.get("targetObstacle"));
+                                break;
                             case CHANGE_APPEARANCE:
                                 entity = scene.previous.entities.get(attributes.get("targetEntity"));
+                                if (attributes.get("targetEntity").equals("max"))
+                                    entity = scene.max;
                                 if (attributes.get("type") != null)
                                     entity.type = Entity.Type.valueOf(attributes.get("type"));
                                 if (attributes.get("texture") != null)
@@ -200,6 +203,10 @@ public class Cutscene implements Screen {
                                     entity.attributes.put("speed", attributes.get("speed"));
                                 if (attributes.get("time") != null)
                                     entity.attributes.put("time", attributes.get("time"));
+                                if (attributes.get("loop") != null)
+                                    entity.attributes.put("loop", attributes.get("loop"));
+                                if (attributes.get("flip") != null)
+                                    entity.attributes.put("flip", attributes.get("flip"));
                                 entity.updateAppearance();
                                 break;
                             case SAY:
@@ -207,13 +214,9 @@ public class Cutscene implements Screen {
                                 break;
                             case DIALOGUE:
                                 scene.ui.addActor(Dialogue.readDialogue(attributes.get("dialogue"), level));
-                            case CHANGE_SCREEN:
-                                Main.manager.get("audio/error.wav", Sound.class).play();
-                                Main.changeScreen(scene);
                                 break;
-                            case CHANGE_LEVEL:
-                                Level level = Level.readLevel(attributes.get("targetLevel"));
-                                Main.changeScreen(level.firstScene);
+                            default:
+                                super.run();
                                 break;
                         }
                     }

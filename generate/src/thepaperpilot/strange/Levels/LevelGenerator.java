@@ -374,6 +374,66 @@ public class LevelGenerator {
                 scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
                 scenes.add(scene);
 
+                scene = new Scene.ScenePrototype("fifth", "junkyard", "fourth");
+                entities = new ArrayList<Entity.EntityPrototype>();
+                /* There isn't a good spot for a clock on the junkyard map
+                entity = new Entity.EntityPrototype(null, "CLOCK", 148, 55, true, null);
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "5");
+                entities.add(entity); */
+                // dogBone
+                entity = new Entity.EntityPrototype("usb", "IMAGE", 80, 16, true, null);
+                entity.attributes.put("texture", "usbWorld");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ENTITY";
+                effect.attributes.put("targetScene", "fifth");
+                effect.attributes.put("targetEntity", "usb");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "usb");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                entity = new Entity.EntityPrototype("duct tape", "IMAGE", 40, 16, true, null);
+                entity.attributes.put("texture", "ductTapeWorld");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ENTITY";
+                effect.attributes.put("targetScene", "fifth");
+                effect.attributes.put("targetEntity", "duct tape");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "duct tape");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                entity = new Entity.EntityPrototype("car", "IMAGE", 80, 16, true, null); // TODO String[]{"gun", "bottles"}
+                entity.attributes.put("texture", "carPuzzle");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "CUTSCENE";
+                effect.attributes.put("targetScene", "fifth");
+                effect.attributes.put("cutscene", "junkyard");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "fifth");
+                effect.attributes.put("message", "I should use this car to break some bottles. I'll need some bottles and a gun");
+                effects.add(effect);
+                entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                entity = new Entity.EntityPrototype("bottles", "IMAGE", 140, 16, false, null);
+                entity.attributes.put("texture", "bottlesWorld");
+                entities.add(entity);
+                scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
+                scenes.add(scene);
+
                 levelPrototype.scenes = Arrays.copyOf(scenes.toArray(), scenes.size(), Scene.ScenePrototype[].class);
 
                 ArrayList<Item.ItemPrototype> items = new ArrayList<Item.ItemPrototype>();

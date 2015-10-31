@@ -1,0 +1,157 @@
+{
+scenes: [
+	{
+		time: 2
+		effects: [
+			{
+				type: CHANGE_APPEARANCE
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					targetEntity: max
+					texture: maxWalk
+				}
+			}
+			{
+				type: MOVE_ENTITY
+				attributes: {
+					class: java.util.HashMap
+					targetEntity: max
+					newY: 10
+					newX: 140
+					time: 2
+				}
+			}
+		]
+	}
+	{
+		time: 0.5
+		effects: [
+			{
+				type: CHANGE_APPEARANCE
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 28
+					targetEntity: max
+					texture: maxIdle
+				}
+			}
+		]
+	}
+	{
+		time: 4
+		effects: [
+			{
+				type: ADD_ENTITY
+				attributes: {
+					class: java.util.HashMap
+					targetEntity: bottles
+				}
+			}
+			{
+				type: REMOVE_ITEM
+				attributes: {
+					class: java.util.HashMap
+					targetItem: bottles
+				}
+			}
+			{
+				type: MOVE_ENTITY
+				attributes: {
+					class: java.util.HashMap
+					targetEntity: max
+					newY: 10
+					newX: 50
+					time: 4
+				}
+			}
+			{
+				type: CHANGE_APPEARANCE
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					targetEntity: max
+					texture: maxWalk
+					flip: "true"
+				}
+			}
+		]
+	}
+	{
+		time: 0.7
+		effects: [
+			{
+				type: CHANGE_APPEARANCE
+				attributes: {
+					class: java.util.HashMap
+					targetEntity: max
+					texture: maxShooting
+					flip: "false"
+				}
+			}
+		]
+	}
+	{
+		time: 0.7
+		effects: [
+			{
+				type: PLAY_SOUND
+				attributes: {
+					class: java.util.HashMap
+					sound: explosion
+				}
+			}
+			{
+				type: REMOVE_ITEM
+				attributes: {
+					class: java.util.HashMap
+					targetItem: gun
+				}
+			}
+			{
+				type: MOVE_ENTITY
+				attributes: {
+					class: java.util.HashMap
+					targetEntity: car
+					newY: 16
+					newX: 90
+					time: 1.7
+				}
+			}
+		]
+	}
+	{
+		time: 1
+		effects: [
+			{
+				type: CHANGE_APPEARANCE
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 28
+					targetEntity: max
+					texture: maxIdle
+				}
+			}
+		]
+	}
+	{
+		time: 1
+		effects: [
+			{
+				type: PLAY_SOUND
+				attributes: {
+					class: java.util.HashMap
+					sound: error
+				}
+			}
+			{
+				type: REMOVE_ENTITY
+				attributes: {
+					class: java.util.HashMap
+					targetEntity: bottles
+				}
+			}
+		]
+	}
+]
+}

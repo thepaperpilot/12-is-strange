@@ -53,16 +53,16 @@ public class Scene implements Screen {
             entity.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
                     target = entity;
-                    x = (int) entity.getX();
+                    x = entity.getX();
                     for (Rectangle obstacle : obstacles.values()) {
-                        if (x >= obstacle.x - max.getWidth() / 2f && max.getX() <= obstacle.x) {
+                        if (entity.getX() >= obstacle.x - max.getWidth() / 2f && max.getX() <= obstacle.x) {
                             x = obstacle.x - max.getWidth() / 2f - 2;
-                            if (entity.getX() < x)
+                            if (obstacle.x < entity.getX())
                                 target = null;
                         }
-                        if (x <= obstacle.x + obstacle.width + max.getWidth() / 2f && max.getX() >= obstacle.x) {
+                        else if (entity.getX() <= obstacle.x + obstacle.width + max.getWidth() / 2f && max.getX() >= obstacle.x) {
                             x = obstacle.x + obstacle.width + max.getWidth() / 2f + 2;
-                            if (entity.getX() > x)
+                            if (obstacle.x + obstacle.width > entity.getX() + entity.getWidth())
                                 target = null;
                         }
                     }

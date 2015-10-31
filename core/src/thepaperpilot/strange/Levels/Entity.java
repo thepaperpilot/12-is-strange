@@ -24,17 +24,20 @@ public class Entity extends Image {
     Scene scene;
     boolean locked = true;
     boolean visible;
+    private boolean loop = true;
+    private boolean flip;
 
     public Entity(EntityPrototype prototype, Scene scene) {
         name = prototype.name;
         this.scene = scene;
+        this.visible = prototype.visible;
         type = Type.valueOf(prototype.type);
         attributes = prototype.attributes;
         requiredItems = prototype.requiredItems;
         updateAppearance();
         setPosition(prototype.x, prototype.y);
 
-        if (prototype.visible)
+        if (visible)
             scene.stage.addActor(this);
 
         if (prototype.successEffects != null) {
@@ -77,6 +80,11 @@ public class Entity extends Image {
                 TextureRegion[][] tmp = animSheet.split((int) getWidth(), (int) getHeight());
                 TextureRegion[] frames = tmp[0];
                 animation = new Animation(Float.parseFloat(attributes.get("speed")), frames);
+                loop = true;
+                if (attributes.get("loop") != null)
+                    loop = Boolean.valueOf(attributes.get("loop"));
+                flip = Boolean.valueOf(attributes.get("flip"));
+                time = 0;
                 break;
             case CLOCK:
                 animSheet = Main.animations.findRegion(attributes.get("texture"));
@@ -96,9 +104,12 @@ public class Entity extends Image {
     public void act(float delta) {
         if (type == Type.ANIMATION) {
             time += Gdx.graphics.getDeltaTime();
-            TextureRegion currentFrame = new TextureRegion(animation.getKeyFrame(time, true));
+            TextureRegion currentFrame = new TextureRegion(animation.getKeyFrame(time, loop));
+            if(flip)
+                currentFrame.flip(true, false);
             setDrawable(new TextureRegionDrawable(currentFrame));
         }
+        super.act(delta);
     }
 
     public void onTouch() {

@@ -640,6 +640,110 @@ scenes: [
 			}
 		}
 	}
+	{
+		name: fifth
+		background: junkyard
+		previous: fourth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: usbWorld
+				}
+				name: usb
+				type: IMAGE
+				visible: true
+				x: 80
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							targetEntity: usb
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: usb
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: ductTapeWorld
+				}
+				name: duct tape
+				type: IMAGE
+				visible: true
+				x: 40
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							targetEntity: duct tape
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: duct tape
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: carPuzzle
+				}
+				name: car
+				type: IMAGE
+				visible: true
+				x: 80
+				y: 16
+				successEffects: [
+					{
+						type: CUTSCENE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							cutscene: junkyard
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							message: I should use this car to break some bottles. I'll need some bottles and a gun
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: bottlesWorld
+				}
+				name: bottles
+				type: IMAGE
+				x: 140
+				y: 16
+			}
+		]
+	}
 ]
 items: [
 	{
@@ -744,5 +848,5 @@ combinations: [
 		result: fortune cookie code
 	}
 ]
-first: first
+first: fifth
 }
