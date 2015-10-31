@@ -15,6 +15,7 @@ import thepaperpilot.strange.Entities.Clock;
 import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Item;
+import thepaperpilot.strange.Levels.Level;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Scene;
 
@@ -44,7 +45,7 @@ public class MenuScreen implements Screen {
                     @Override
                     public void run() {
                         Main.reverse = true;
-                        Main.changeScreen(Scene.FIRST.screen);
+                        Main.changeScreen(Level.readLevel("levels/first.json").firstScene);
                     }
                 })));
             }
@@ -64,11 +65,11 @@ public class MenuScreen implements Screen {
         stage.addActor(cat);
 
         backgrounds = new Image[]{
-                new Image(Main.backgrounds.findRegion("schoolBackground")),
-                new Image(Main.backgrounds.findRegion("bathroomBackground")),
-                new Image(Main.backgrounds.findRegion("outsideBackground")),
-                new Image(Main.backgrounds.findRegion("junkyardBackground")),
-                new Image(Main.backgrounds.findRegion("vortexBackground"))
+                new Image(Main.backgrounds.findRegion("school")),
+                new Image(Main.backgrounds.findRegion("bathroom")),
+                new Image(Main.backgrounds.findRegion("outside")),
+                new Image(Main.backgrounds.findRegion("junkyard")),
+                new Image(Main.backgrounds.findRegion("vortex"))
         };
         background = backgrounds[ran.nextInt(backgrounds.length)];
         stage.addActor(background);

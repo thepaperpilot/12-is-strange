@@ -1,8 +1,10 @@
 package thepaperpilot.strange.Levels;
 
+import com.badlogic.gdx.audio.Sound;
 import thepaperpilot.strange.Dialogue;
 import thepaperpilot.strange.Main;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Effect {
@@ -32,10 +34,13 @@ public class Effect {
                 Item item = level.items.get(attributes.get("targetItem"));
                 level.inventory.remove(item);
                 level.selected.remove(item);
+                level.updateInventory();
                 break;
             case ADD_ITEM:
+                Main.manager.get("audio/pickup.wav", Sound.class).play();
                 item = level.items.get(attributes.get("targetItem"));
                 level.inventory.add(item);
+                level.updateInventory();
                 break;
             case CHANGE_APPEARANCE:
                 scene = level.scenes.get(attributes.get("targetScene"));
@@ -46,9 +51,10 @@ public class Effect {
             case SAY:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 scene.say(attributes.get("message"));
+                break;
             case DIALOGUE:
                 scene = level.scenes.get(attributes.get("targetScene"));
-                scene.ui.addActor(Dialogue.readDialogue(attributes.get("dialogue")));
+                scene.ui.addActor(Dialogue.readDialogue(attributes.get("dialogue"), level));
             case CHANGE_SCREEN:
                 scene = level.scenes.get(attributes.get("targetScene"));
                 Main.changeScreen(scene);
@@ -58,11 +64,6 @@ public class Effect {
                 Main.changeScreen(level.firstScene);
                 break;
         }
-    }
-
-    public static class EffectPrototype {
-        public String type;
-        public Map<String, String> attributes;
     }
 
     public enum Type {
@@ -75,5 +76,10 @@ public class Effect {
         DIALOGUE,
         CHANGE_SCREEN,
         CHANGE_LEVEL;
+    }
+
+    public static class EffectPrototype {
+        public String type;
+        public Map<String, String> attributes = new HashMap<String, String>();
     }
 }

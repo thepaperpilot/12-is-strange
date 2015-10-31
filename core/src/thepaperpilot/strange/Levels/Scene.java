@@ -9,31 +9,35 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Scene implements Screen{
+public class Scene implements Screen {
     Table inventoryTable;
     String name;
     Image background;
     Map<String, Entity> entities = new HashMap<String, Entity>();
-    Entity targetEntity;
-    int target;
-    Rectangle[] obstacles;
+    Entity target;
+    ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
     Stage stage;
     Stage ui;
     String previous;
     boolean transition;
     Level level;
+    Max max;
 
-    public Scene(ScenePrototype prototype, final Level level) {
+    public Scene(final ScenePrototype prototype, final Level level) {
         name = prototype.name;
         this.level = level;
         background = new Image(Main.backgrounds.findRegion(prototype.background));
@@ -48,21 +52,21 @@ public class Scene implements Screen{
 
             entity.addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
-                    targetEntity = entity;
+                    target = entity;
                     x = (int) entity.getX();
                     for (Rectangle obstacle : obstacles) {
-                        if (x >= obstacle.x - entities.get("max").getWidth() / 2f && entities.get("max").getX() <= obstacle.x) {
-                            x = obstacle.x - entities.get("max").getWidth() / 2f - 2;
+                        if (x >= obstacle.x - max.getWidth() / 2f && max.getX() <= obstacle.x) {
+                            x = obstacle.x - max.getWidth() / 2f - 2;
                             if (entity.getX() < x)
-                                targetEntity = null;
+                                target = null;
                         }
-                        if (x <= obstacle.x + obstacle.width + entities.get("max").getWidth() / 2f && entities.get("max").getX() >= obstacle.x) {
-                            x = obstacle.x + obstacle.width + entities.get("max").getWidth() / 2f + 2;
+                        if (x <= obstacle.x + obstacle.width + max.getWidth() / 2f && max.getX() >= obstacle.x) {
+                            x = obstacle.x + obstacle.width + max.getWidth() / 2f + 2;
                             if (entity.getX() > x)
-                                targetEntity = null;
+                                target = null;
                         }
                     }
-                    target = (int) x;
+                    max.target = (int) x;
                     event.reset();
                 }
             });
@@ -70,35 +74,40 @@ public class Scene implements Screen{
             entities.put(entityPrototype.name, entity);
         }
 
+        max = new Max(64, 10);
+        stage.addActor(max);
+
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 for (Rectangle obstacle : obstacles) {
-                    if (x >= obstacle.x && entities.get("max").getX() <= obstacle.x)
+                    if (x >= obstacle.x && max.getX() <= obstacle.x)
                         x = obstacle.x - 2;
-                    if (x <= obstacle.x + obstacle.width && entities.get("max").getX() >= obstacle.x)
+                    if (x <= obstacle.x + obstacle.width && max.getX() >= obstacle.x)
                         x = obstacle.x + obstacle.width + 2;
                 }
-                target = (int) (x - entities.get("max").getWidth() / 2);
-                targetEntity = null;
+                max.target = (int) (x - max.getWidth() / 2);
+                target = null;
             }
         });
 
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                transition = true;
-                Main.manager.get("audio/rewind.wav", Sound.class).play(.4f); // 40% volume, because its really loud
-                stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        Main.reverse = true;
-                        transition = false;
-                        Main.changeScreen(level.scenes.get(previous));
-                    }
-                }), Actions.fadeIn(0)));
+                if (prototype.previous != null) {
+                    transition = true;
+                    Main.manager.get("audio/rewind.wav", Sound.class).play(.4f); // 40% volume, because its really loud
+                    stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            Main.reverse = true;
+                            transition = false;
+                            Main.changeScreen(level.scenes.get(previous));
+                        }
+                    }), Actions.fadeIn(0)));
+                }
             }
         });
 
-        if(prototype.previous != null) {
+        if (prototype.previous != null) {
             previous = prototype.previous;
             Table table = new Table(Main.skin);
             table.setFillParent(true);
@@ -127,7 +136,7 @@ public class Scene implements Screen{
 
     public void updateInventory() {
         inventoryTable.clearChildren();
-        for (int i = 0; i < Main.inventory.size(); i++) {
+        for (int i = 0; i < level.inventory.size(); i++) {
             inventoryTable.left().add(level.inventory.get(i)).pad(2).height(32);
         }
     }
@@ -135,7 +144,7 @@ public class Scene implements Screen{
     @Override
     public void show() {
         Gdx.input.setInputProcessor(new InputMultiplexer(ui, stage));
-        target = (int) entities.get("max").getX();
+        max.target = (int) max.getX();
         if (Main.reverse) {
             Main.reverse = false;
             transition = true;
@@ -153,9 +162,9 @@ public class Scene implements Screen{
         if (transition)
             ChoicesScreen.renderParticles(delta);
 
-        if (targetEntity != null && entities.get("max").getX() == target) {
-            targetEntity.onTouch();
-            targetEntity = null;
+        if (target != null && max.getX() == max.target) {
+            target.onTouch();
+            target = null;
         }
 
         stage.act(delta);
@@ -194,7 +203,7 @@ public class Scene implements Screen{
     public void say(String message) {
         Main.manager.get("audio/error.wav", Sound.class).play();
         final Label label = new Label(message, Main.skin);
-        label.setPosition((int) ((entities.get("max").getX() + entities.get("max").getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
+        label.setPosition((int) ((max.getX() + max.getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
         label.addAction(Actions.sequence(Actions.moveBy(0, 0, 1f), Actions.parallel(Actions.moveBy(0, 50, 1), Actions.fadeOut(1)), Actions.run(new Runnable() {
             @Override
             public void run() {

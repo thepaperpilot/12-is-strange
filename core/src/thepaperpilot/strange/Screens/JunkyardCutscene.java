@@ -106,7 +106,7 @@ public class JunkyardCutscene implements Screen {
                 carMoving = true;
                 shooting = false;
             }
-        } else if (max.x == max.target && !carMoving) {
+        } else if (max.getX() == max.target && !carMoving) {
             if (bottlesPlaced) {
                 max.shooting = true;
                 shooting = true;

@@ -81,7 +81,7 @@ public enum Scene {
             };
             new Puzzle(new Image(Main.entities.findRegion("AlyssaSoapPuzzle")).getDrawable(), screen, 192, 10, Item.SOAP) {
                 public void onFail() {
-                    screen.ui.addActor(Dialogue.readDialogue("Alyssa1"));
+                    //screen.ui.addActor(Dialogue.readDialogue("Alyssa1"));
                 }
 
                 public void onSuccess() {
@@ -294,7 +294,7 @@ public enum Scene {
         public void init() {
             new Puzzle(new Image(Main.entities.findRegion("warrenPuzzle")).getDrawable(), screen, 192, 10, Item.USB) {
                 public void onFail() {
-                    screen.ui.addActor(Dialogue.readDialogue("Warren1"));
+                    //screen.ui.addActor(Dialogue.readDialogue("Warren1"));
                 }
 
                 public void open() {
@@ -338,7 +338,7 @@ public enum Scene {
         public void init() {
             new Puzzle(new Image(Main.entities.findRegion("detective")).getDrawable(), screen, 48, 16, new Item[]{Item.NOTEBOOK, Item.PHONE, Item.PHOTO, Item.FILES}) {
                 public void onFail() {
-                    screen.ui.addActor(Dialogue.readDialogue("Detective1"));
+                    //screen.ui.addActor(Dialogue.readDialogue("Detective1"));
                 }
 
                 public void onSuccess() {
@@ -374,6 +374,7 @@ public enum Scene {
         }
     },
     FINAL(12, "school") { //placeholder, obviously
+
         public void init() {
             screen.stage.clear();
             screen.ui.clear();
@@ -381,7 +382,7 @@ public enum Scene {
             goodbye.setFillParent(true);
             goodbye.bottom().add(new Label("Thanks for Playing!", Main.skin, "large")).padBottom(20);
             screen.ui.addActor(goodbye);
-            screen.ui.addActor(Dialogue.readDialogue("Final1"));
+            //screen.ui.addActor(Dialogue.readDialogue("Final1"));
         }
 
         public void previous() {
@@ -394,7 +395,7 @@ public enum Scene {
 
     Scene(int scene, String bg) {
         this.scene = scene - 1;
-        screen = new GameScreen(this, new Image(Main.backgrounds.findRegion(bg + "Background")));
+        screen = new GameScreen(this, new Image(Main.backgrounds.findRegion(bg)));
         init();
     }
 

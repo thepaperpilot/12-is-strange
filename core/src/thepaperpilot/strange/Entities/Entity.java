@@ -24,12 +24,12 @@ public class Entity extends Image {
                 game.target = Entity.this;
                 x = (int) Entity.this.getX();
                 for (Rectangle obstacle : game.obstacles) {
-                    if (x >= obstacle.x - game.max.getWidth() / 2f && game.max.x <= obstacle.x) {
+                    if (x >= obstacle.x - game.max.getWidth() / 2f && game.max.getX() <= obstacle.x) {
                         x = obstacle.x - game.max.getWidth() / 2f - 2;
                         if (Entity.this.getX() < x)
                             game.target = null;
                     }
-                    if (x <= obstacle.x + obstacle.width + game.max.getWidth() / 2f && game.max.x >= obstacle.x) {
+                    if (x <= obstacle.x + obstacle.width + game.max.getWidth() / 2f && game.max.getX() >= obstacle.x) {
                         x = obstacle.x + obstacle.width + game.max.getWidth() / 2f + 2;
                         if (Entity.this.getX() > x)
                             game.target = null;

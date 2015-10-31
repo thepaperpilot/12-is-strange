@@ -1,0 +1,231 @@
+{
+scenes: [
+	{
+		name: first
+		background: bathroom
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 1
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: schoolDoor1
+				type: IMAGE
+				visible: true
+				x: 10
+				y: 32
+				successEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							dialogue: door1
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: fireAlarmPuzzle
+				}
+				name: fireAlarm
+				type: IMAGE
+				visible: true
+				x: 210
+				y: 60
+				requiredItems: [
+					hammer
+				]
+				successEffects: [
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							targetEntity: fireAlarm
+							texture: fireAlarmPuzzleBroken
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							message: whoah! what was a gun doing in there?
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							targetItem: gun
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							targetItem: hammer
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							message: I need to find something to break this with
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: soapWorld
+				}
+				name: soap
+				type: IMAGE
+				visible: true
+				x: 230
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							targetEntity: soap
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							targetItem: soap
+						}
+					}
+				]
+			}
+		]
+	}
+]
+items: [
+	{
+		name: alcohol
+		texture: alcohol
+	}
+	{
+		name: bottles
+		texture: bottles
+	}
+	{
+		name: camera
+		texture: camera
+	}
+	{
+		name: cat food
+		texture: catFood
+	}
+	{
+		name: dog bone
+		texture: dogBone
+	}
+	{
+		name: duct tape
+		texture: ductTape
+	}
+	{
+		name: files
+		texture: files
+	}
+	{
+		name: fire extinguisher
+		texture: fireExtinguish
+	}
+	{
+		name: fortune cookie code
+		texture: fortuneCookieCode
+	}
+	{
+		name: fortune cookie
+		texture: fortuneCookie
+	}
+	{
+		name: gun
+		texture: gun
+	}
+	{
+		name: hammer
+		texture: hammer
+	}
+	{
+		name: keys
+		texture: keys
+	}
+	{
+		name: make-shift bomb
+		texture: makeShiftBomb
+	}
+	{
+		name: notebook
+		texture: notebook
+	}
+	{
+		name: phone
+		texture: phone
+	}
+	{
+		name: soap
+		texture: soap
+	}
+	{
+		name: soda
+		texture: sugar
+	}
+	{
+		name: usb
+		texture: usb
+	}
+	{
+		name: weed killer
+		texture: weedKiller
+	}
+]
+combinations: [
+	{
+		ingredients: [
+			duct tape
+			soda
+			sugar
+			weed killer
+		]
+		result: make-shift bomb
+	}
+	{
+		ingredients: [
+			fortune cookie
+		]
+		result: fortune cookie code
+	}
+]
+first: first
+}

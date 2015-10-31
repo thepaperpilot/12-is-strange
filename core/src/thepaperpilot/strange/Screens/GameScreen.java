@@ -61,9 +61,9 @@ public class GameScreen implements Screen {
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 for (Rectangle obstacle : obstacles) {
-                    if (x >= obstacle.x && max.x <= obstacle.x)
+                    if (x >= obstacle.x && max.getX() <= obstacle.x)
                         x = obstacle.x - 2;
-                    if (x <= obstacle.x + obstacle.width && max.x >= obstacle.x)
+                    if (x <= obstacle.x + obstacle.width && max.getX() >= obstacle.x)
                         x = obstacle.x + obstacle.width + 2;
                 }
                 max.target = (int) (x - max.getWidth() / 2);
@@ -96,7 +96,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(new InputMultiplexer(ui, stage));
-        max.target = (int) max.x;
+        max.target = (int) max.getX();
         if (Main.reverse) {
             Main.reverse = false;
             transition = true;
@@ -177,7 +177,7 @@ public class GameScreen implements Screen {
     public void say(String message) {
         Main.manager.get("audio/error.wav", Sound.class).play();
         final Label label = new Label(message, Main.skin);
-        label.setPosition((int) ((max.x + max.getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
+        label.setPosition((int) ((max.getX() + max.getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
         label.addAction(Actions.sequence(Actions.moveBy(0, 0, 1f), Actions.parallel(Actions.moveBy(0, 50, 1), Actions.fadeOut(1)), Actions.run(new Runnable() {
             @Override
             public void run() {

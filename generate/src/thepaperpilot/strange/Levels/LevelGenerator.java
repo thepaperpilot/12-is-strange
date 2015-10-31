@@ -1,0 +1,177 @@
+package thepaperpilot.strange.Levels;
+
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.utils.Json;
+
+public class LevelGenerator {
+    private final static Json json = new Json();
+
+    public static void main(String[] args) {
+        new LwjglApplication(new Game() {
+            @Override
+            public void create() {
+                Level.LevelPrototype levelPrototype = new Level.LevelPrototype();
+                levelPrototype.first = "first";
+
+                levelPrototype.scenes = new Scene.ScenePrototype[1];
+                levelPrototype.scenes[0] = new Scene.ScenePrototype();
+                Scene.ScenePrototype scene = levelPrototype.scenes[0];
+                scene.name = "first";
+                scene.background = "bathroom";
+                scene.entities = new Entity.EntityPrototype[4];
+                scene.entities[0] = new Entity.EntityPrototype();
+                Entity.EntityPrototype entity = scene.entities[0];
+                entity.type = "CLOCK";
+                entity.x = 192;
+                entity.y = 96;
+                entity.visible = true;
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "1");
+                scene.entities[1] = new Entity.EntityPrototype();
+                entity = scene.entities[1];
+                entity.type = "IMAGE";
+                entity.name = "schoolDoor1";
+                entity.x = 10;
+                entity.y = 32;
+                entity.visible = true;
+                entity.attributes.put("texture", "schoolDoor");
+                entity.successEffects = new Effect.EffectPrototype[1];
+                entity.successEffects[0] = new Effect.EffectPrototype();
+                entity.successEffects[0].type = "DIALOGUE";
+                entity.successEffects[0].attributes.put("targetScene", "first");
+                entity.successEffects[0].attributes.put("dialogue", "door1");
+                scene.entities[2] = new Entity.EntityPrototype();
+                entity = scene.entities[2];
+                entity.type = "IMAGE";
+                entity.name = "fireAlarm";
+                entity.x = 210;
+                entity.y = 60;
+                entity.visible = true;
+                entity.attributes.put("texture", "fireAlarmPuzzle");
+                entity.requiredItems = new String[]{"hammer"};
+                entity.successEffects = new Effect.EffectPrototype[4];
+                entity.successEffects[0] = new Effect.EffectPrototype();
+                entity.successEffects[0].type = "CHANGE_APPEARANCE";
+                entity.successEffects[0].attributes.put("targetScene", "first");
+                entity.successEffects[0].attributes.put("targetEntity", "fireAlarm");
+                entity.successEffects[0].attributes.put("texture", "fireAlarmPuzzleBroken");
+                entity.successEffects[1] = new Effect.EffectPrototype();
+                entity.successEffects[1].type = "SAY";
+                entity.successEffects[1].attributes.put("targetScene", "first");
+                entity.successEffects[1].attributes.put("message", "whoah! what was a gun doing in there?");
+                entity.successEffects[2] = new Effect.EffectPrototype();
+                entity.successEffects[2].type = "ADD_ITEM";
+                entity.successEffects[2].attributes.put("targetScene", "first");
+                entity.successEffects[2].attributes.put("targetItem", "gun");
+                entity.successEffects[3] = new Effect.EffectPrototype();
+                entity.successEffects[3].type = "REMOVE_ITEM";
+                entity.successEffects[3].attributes.put("targetScene", "first");
+                entity.successEffects[3].attributes.put("targetItem", "hammer");
+                entity.failEffects = new Effect.EffectPrototype[1];
+                entity.failEffects[0] = new Effect.EffectPrototype();
+                entity.failEffects[0].type = "SAY";
+                entity.failEffects[0].attributes.put("targetScene", "first");
+                entity.failEffects[0].attributes.put("message", "I need to find something to break this with");
+                scene.entities[3] = new Entity.EntityPrototype();
+                entity = scene.entities[3];
+                entity.type = "IMAGE";
+                entity.name = "soap";
+                entity.x = 230;
+                entity.y = 16;
+                entity.visible = true;
+                entity.attributes.put("texture", "soapWorld");
+                entity.successEffects = new Effect.EffectPrototype[2];
+                entity.successEffects[0] = new Effect.EffectPrototype();
+                entity.successEffects[0].type = "REMOVE_ENTITY";
+                entity.successEffects[0].attributes.put("targetScene", "first");
+                entity.successEffects[0].attributes.put("targetEntity", "soap");
+                entity.successEffects[1] = new Effect.EffectPrototype();
+                entity.successEffects[1].type = "ADD_ITEM";
+                entity.successEffects[1].attributes.put("targetScene", "first");
+                entity.successEffects[1].attributes.put("targetItem", "soap");
+
+                levelPrototype.items = new Item.ItemPrototype[20];
+                levelPrototype.items[0] = new Item.ItemPrototype();
+                levelPrototype.items[0].name = "alcohol";
+                levelPrototype.items[0].texture = "alcohol";
+                levelPrototype.items[1] = new Item.ItemPrototype();
+                levelPrototype.items[1].name = "bottles";
+                levelPrototype.items[1].texture = "bottles";
+                levelPrototype.items[2] = new Item.ItemPrototype();
+                levelPrototype.items[2].name = "camera";
+                levelPrototype.items[2].texture = "camera";
+                levelPrototype.items[3] = new Item.ItemPrototype();
+                levelPrototype.items[3].name = "cat food";
+                levelPrototype.items[3].texture = "catFood";
+                levelPrototype.items[4] = new Item.ItemPrototype();
+                levelPrototype.items[4].name = "dog bone";
+                levelPrototype.items[4].texture = "dogBone";
+                levelPrototype.items[5] = new Item.ItemPrototype();
+                levelPrototype.items[5].name = "duct tape";
+                levelPrototype.items[5].texture = "ductTape";
+                levelPrototype.items[6] = new Item.ItemPrototype();
+                levelPrototype.items[6].name = "files";
+                levelPrototype.items[6].texture = "files";
+                levelPrototype.items[7] = new Item.ItemPrototype();
+                levelPrototype.items[7].name = "fire extinguisher";
+                levelPrototype.items[7].texture = "fireExtinguish";
+                levelPrototype.items[8] = new Item.ItemPrototype();
+                levelPrototype.items[8].name = "fortune cookie code";
+                levelPrototype.items[8].texture = "fortuneCookieCode";
+                levelPrototype.items[9] = new Item.ItemPrototype();
+                levelPrototype.items[9].name = "fortune cookie";
+                levelPrototype.items[9].texture = "fortuneCookie";
+                levelPrototype.items[10] = new Item.ItemPrototype();
+                levelPrototype.items[10].name = "gun";
+                levelPrototype.items[10].texture = "gun";
+                levelPrototype.items[11] = new Item.ItemPrototype();
+                levelPrototype.items[11].name = "hammer";
+                levelPrototype.items[11].texture = "hammer";
+                levelPrototype.items[12] = new Item.ItemPrototype();
+                levelPrototype.items[12].name = "keys";
+                levelPrototype.items[12].texture = "keys";
+                levelPrototype.items[13] = new Item.ItemPrototype();
+                levelPrototype.items[13].name = "make-shift bomb";
+                levelPrototype.items[13].texture = "makeShiftBomb";
+                levelPrototype.items[14] = new Item.ItemPrototype();
+                levelPrototype.items[14].name = "notebook";
+                levelPrototype.items[14].texture = "notebook";
+                levelPrototype.items[15] = new Item.ItemPrototype();
+                levelPrototype.items[15].name = "phone";
+                levelPrototype.items[15].texture = "phone";
+                levelPrototype.items[16] = new Item.ItemPrototype();
+                levelPrototype.items[16].name = "soap";
+                levelPrototype.items[16].texture = "soap";
+                levelPrototype.items[17] = new Item.ItemPrototype();
+                levelPrototype.items[17].name = "soda";
+                levelPrototype.items[17].texture = "sugar";
+                levelPrototype.items[18] = new Item.ItemPrototype();
+                levelPrototype.items[18].name = "usb";
+                levelPrototype.items[18].texture = "usb";
+                levelPrototype.items[19] = new Item.ItemPrototype();
+                levelPrototype.items[19].name = "weed killer";
+                levelPrototype.items[19].texture = "weedKiller";
+
+                levelPrototype.combinations = new Item.CombinationPrototype[2];
+                levelPrototype.combinations[0] = new Item.CombinationPrototype();
+                levelPrototype.combinations[0].ingredients = new String[]{"duct tape", "soda", "sugar", "weed killer"};
+                levelPrototype.combinations[0].result = "make-shift bomb";
+                levelPrototype.combinations[1] = new Item.CombinationPrototype();
+                levelPrototype.combinations[1].ingredients = new String[]{"fortune cookie"};
+                levelPrototype.combinations[1].result = "fortune cookie code";
+
+                String fileName = "first.json";
+                String output = json.prettyPrint(levelPrototype);
+                System.out.println(Gdx.files.getExternalStoragePath() + fileName);
+                System.out.println(output);
+                Gdx.files.external(fileName).writeString(output, false);
+
+                Gdx.app.exit();
+            }
+        }, new LwjglApplicationConfiguration());
+    }
+}

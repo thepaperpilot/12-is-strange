@@ -31,6 +31,8 @@ public class Main extends Game implements Screen {
     private Stage loadingStage;
 
     public static void changeScreen(Screen screen) {
+        if (screen == null)
+            return;
         instance.setScreen(screen);
     }
 

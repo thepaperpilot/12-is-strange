@@ -18,28 +18,33 @@ public class Item extends Button {
 
         this.name = prototype.name;
 
-        add(new ImageButton(new TextureRegionDrawable(Main.entities.findRegion(prototype.texture)))).padBottom(1).row();
+        add(new ImageButton(new TextureRegionDrawable(Main.entities.findRegion(prototype.texture + "Inv")))).padBottom(1).row();
         Label invLabel = new Label(name, Main.skin);
         invLabel.setAlignment(Align.center);
         add(invLabel);
 
-        if(level.selected.contains(this))
+        if (level.selected.contains(this))
             toggle();
 
         addListener(new ClickListener(Input.Buttons.LEFT) {
-           public void clicked(InputEvent event, float x, float y) {
-               if(level.selected.contains(Item.this)) {
-                   level.selected.remove(Item.this);
-               } else level.selected.add(Item.this);
+            public void clicked(InputEvent event, float x, float y) {
+                if (level.selected.contains(Item.this)) {
+                    level.selected.remove(Item.this);
+                } else level.selected.add(Item.this);
 
-               level.combine();
-               level.updateInventory();
-           }
+                level.combine();
+                level.updateInventory();
+            }
         });
     }
 
     public static class ItemPrototype {
         String name;
         String texture;
+    }
+
+    public static class CombinationPrototype {
+        public String[] ingredients;
+        public String result;
     }
 }
