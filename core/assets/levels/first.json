@@ -934,6 +934,19 @@ scenes: [
 					}
 				]
 			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 4
+					texture: explosion
+					loop: "false"
+					speed: 0.1
+				}
+				name: explosion
+				type: ANIMATION
+				x: 48
+				y: 24
+			}
 		]
 		obstacles: {
 			class: java.util.HashMap
@@ -944,6 +957,101 @@ scenes: [
 				height: 50
 			}
 		}
+	}
+	{
+		name: office
+		background: office
+		previous: fourth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 6
+				}
+				type: CLOCK
+				visible: true
+				x: 100
+				y: 57
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: breakableDoorPuzzle
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 4
+				y: 16
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: cameraWorld
+				}
+				name: camera
+				type: IMAGE
+				visible: true
+				x: 46
+				y: 33
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: camera
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: office
+							targetEntity: camera
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: filesWorld
+				}
+				name: files
+				type: IMAGE
+				visible: true
+				x: 71
+				y: 30
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: files
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: office
+							targetEntity: files
+						}
+					}
+				]
+			}
+		]
 	}
 ]
 items: [
@@ -1049,5 +1157,5 @@ combinations: [
 		result: fortune cookie code
 	}
 ]
-first: first
+first: office
 }

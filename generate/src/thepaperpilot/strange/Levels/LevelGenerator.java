@@ -542,10 +542,63 @@ public class LevelGenerator {
                 effects.add(effect);
                 entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);
+                // explosion
                 entity = new Entity.EntityPrototype("explosion", "ANIMATION", 48, 24, false, null);
                 entity.attributes.put("texture", "explosion");
                 entity.attributes.put("numFrames", "4");
+                entity.attributes.put("speed", ".1");
                 entity.attributes.put("loop", "false");
+                entities.add(entity);
+                scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
+                scenes.add(scene);
+
+                scene = new Scene.ScenePrototype("office", "office", "fourth");
+                entities = new ArrayList<Entity.EntityPrototype>();
+                entity = new Entity.EntityPrototype(null, "CLOCK", 100, 57, true, null);
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "6");
+                entities.add(entity);
+                // door
+                entity = new Entity.EntityPrototype("door", "IMAGE", 4, 16, true, null);
+                entity.attributes.put("texture", "breakableDoorPuzzle");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "CHANGE_SCREEN";
+                effect.attributes.put("targetScene", "sixth");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                // camera
+                entity = new Entity.EntityPrototype("camera", "IMAGE", 46, 33, true, null);
+                entity.attributes.put("texture", "cameraWorld");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "camera");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ENTITY";
+                effect.attributes.put("targetScene", "office");
+                effect.attributes.put("targetEntity", "camera");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                // files
+                entity = new Entity.EntityPrototype("files", "IMAGE", 71, 30, true, null);
+                entity.attributes.put("texture", "filesWorld");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "files");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ENTITY";
+                effect.attributes.put("targetScene", "office");
+                effect.attributes.put("targetEntity", "files");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
                 scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
                 scenes.add(scene);
 

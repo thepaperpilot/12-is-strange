@@ -19,6 +19,7 @@ import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
 import thepaperpilot.strange.Screens.ChoicesScreen;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,36 +43,42 @@ public class Scene implements Screen {
         obstacles = prototype.obstacles;
         background = new Image(Main.backgrounds.findRegion(prototype.background));
 
-        stage = new Stage(new StretchViewport(256, 144));
+        stage = new Stage(new StretchViewport(background.getWidth(), background.getHeight()));
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         ui = new Stage(new StretchViewport(640, 360));
 
         stage.addActor(background);
 
         for (Entity.EntityPrototype entityPrototype : prototype.entities) {
-            final Entity entity = new Entity(entityPrototype, this);
+            try {
+                final Entity entity = new Entity(entityPrototype, this);
 
-            entity.addListener(new ClickListener(Input.Buttons.LEFT) {
-                public void clicked(InputEvent event, float x, float y) {
-                    target = entity;
-                    x = entity.getX();
-                    for (Rectangle obstacle : obstacles.values()) {
-                        if (entity.getX() >= obstacle.x - max.getWidth() / 2f && max.getX() <= obstacle.x) {
-                            x = obstacle.x - max.getWidth() / 2f - 2;
-                            if (obstacle.x < entity.getX())
-                                target = null;
+                entity.addListener(new ClickListener(Input.Buttons.LEFT) {
+                    public void clicked(InputEvent event, float x, float y) {
+                        target = entity;
+                        x = entity.getX();
+                        for (Rectangle obstacle : obstacles.values()) {
+                            if (entity.getX() >= obstacle.x - max.getWidth() / 2f && max.getX() <= obstacle.x) {
+                                x = obstacle.x - max.getWidth() / 2f - 2;
+                                if (obstacle.x < entity.getX())
+                                    target = null;
+                            }
+                            else if (entity.getX() <= obstacle.x + obstacle.width + max.getWidth() / 2f && max.getX() >= obstacle.x) {
+                                x = obstacle.x + obstacle.width + max.getWidth() / 2f + 2;
+                                if (obstacle.x + obstacle.width > entity.getX() + entity.getWidth())
+                                    target = null;
+                            }
                         }
-                        else if (entity.getX() <= obstacle.x + obstacle.width + max.getWidth() / 2f && max.getX() >= obstacle.x) {
-                            x = obstacle.x + obstacle.width + max.getWidth() / 2f + 2;
-                            if (obstacle.x + obstacle.width > entity.getX() + entity.getWidth())
-                                target = null;
-                        }
+                        max.target = (int) x;
+                        event.reset();
                     }
-                    max.target = (int) x;
-                    event.reset();
-                }
-            });
+                });
 
-            entities.put(entityPrototype.name, entity);
+                entities.put(entityPrototype.name, entity);
+            } catch (NullPointerException e) {
+                Gdx.app.log("Can't create entity", "entity \"" + entityPrototype.name + "\" could not be created in scene " + name, e);
+                Gdx.app.exit(); // If it tries to continue it just looks weird. It stops rendering stage. Crazy.
+            }
         }
 
         max = new Max(64, 10);
