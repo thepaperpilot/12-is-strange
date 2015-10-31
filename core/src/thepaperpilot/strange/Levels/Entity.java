@@ -108,6 +108,10 @@ public class Entity extends Image {
             if(flip)
                 currentFrame.flip(true, false);
             setDrawable(new TextureRegionDrawable(currentFrame));
+            if (!loop && time > animation.getAnimationDuration()) {
+                visible = false;
+                remove();
+            }
         }
         super.act(delta);
     }

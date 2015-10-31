@@ -21,7 +21,7 @@ scenes: [
 					class: java.util.HashMap
 					texture: schoolDoor
 				}
-				name: schoolDoor1
+				name: door
 				type: IMAGE
 				visible: true
 				x: 10
@@ -148,7 +148,7 @@ scenes: [
 					texture: catIdle
 					speed: 0.16666667
 				}
-				name: cat1
+				name: cat
 				type: ANIMATION
 				visible: true
 				x: 81
@@ -163,7 +163,7 @@ scenes: [
 							class: java.util.HashMap
 							numFrames: 2
 							targetScene: second
-							targetEntity: cat1
+							targetEntity: cat
 							texture: catEating
 						}
 					}
@@ -276,7 +276,7 @@ scenes: [
 					class: java.util.HashMap
 					texture: schoolDoor
 				}
-				name: door2
+				name: door
 				type: IMAGE
 				visible: true
 				x: 48
@@ -711,6 +711,10 @@ scenes: [
 				visible: true
 				x: 80
 				y: 16
+				requiredItems: [
+					gun
+					bottles
+				]
 				successEffects: [
 					{
 						type: CUTSCENE
@@ -743,6 +747,203 @@ scenes: [
 				y: 16
 			}
 		]
+	}
+	{
+		name: sixth
+		background: school
+		previous: fourth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 6
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 48
+				y: 16
+				requiredItems: [
+					make-shift bomb
+				]
+				successEffects: [
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: make-shift bomb
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: I sure hope no one heard that
+						}
+					}
+					{
+						type: PLAY_SOUND
+						attributes: {
+							class: java.util.HashMap
+							sound: explosion
+						}
+					}
+					{
+						type: ADD_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: explosion
+						}
+					}
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: door
+							texture: breakableDoorPuzzle
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: "it's locked. I think I can blow it open\nusing some sugar, weed killer, duct tape, and a soda can"
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: office
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door2
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 16
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: crowdCameraPuzzle
+				}
+				name: crowd
+				type: IMAGE
+				visible: true
+				x: 180
+				y: 14
+				requiredItems: [
+					camera
+				]
+				successEffects: [
+					{
+						type: ADD_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: door2
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: photo
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: camera
+						}
+					}
+					{
+						type: REMOVE_BARRIER
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetObstacle: crowd
+						}
+					}
+					{
+						type: MOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: crowd
+							newY: 14
+							newX: 250
+							time: 4
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: they're going away. Must be camera shy
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: This crowd of people would make a great shot
+						}
+					}
+				]
+			}
+		]
+		obstacles: {
+			class: java.util.HashMap
+			crowd: {
+				x: 190
+				y: 14
+				width: 50
+				height: 50
+			}
+		}
 	}
 ]
 items: [
@@ -848,5 +1049,5 @@ combinations: [
 		result: fortune cookie code
 	}
 ]
-first: fifth
+first: first
 }

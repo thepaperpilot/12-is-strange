@@ -27,8 +27,8 @@ public class LevelGenerator {
                 entity.attributes.put("numFrames", "12");
                 entity.attributes.put("time", "1");
                 entities.add(entity);
-                // schoolDoor1
-                entity = new Entity.EntityPrototype("schoolDoor1", "IMAGE", 10, 32, true, null);
+                // door
+                entity = new Entity.EntityPrototype("door", "IMAGE", 10, 32, true, null);
                 entity.attributes.put("texture", "schoolDoor");
                 ArrayList<Effect.EffectPrototype> effects = new ArrayList<Effect.EffectPrototype>();
                 Effect.EffectPrototype effect = new Effect.EffectPrototype();
@@ -95,8 +95,8 @@ public class LevelGenerator {
                 entity.attributes.put("numFrames", "12");
                 entity.attributes.put("time", "2");
                 entities.add(entity);
-                // cat1
-                entity = new Entity.EntityPrototype("cat1", "ANIMATION", 81, 10, true, new String[]{"cat food"});
+                // cat
+                entity = new Entity.EntityPrototype("cat", "ANIMATION", 81, 10, true, new String[]{"cat food"});
                 entity.attributes.put("texture", "catIdle");
                 entity.attributes.put("numFrames", "14");
                 entity.attributes.put("speed", Float.toString(1 / 6f));
@@ -104,7 +104,7 @@ public class LevelGenerator {
                 effect = new Effect.EffectPrototype();
                 effect.type = "CHANGE_APPEARANCE";
                 effect.attributes.put("targetScene", "second");
-                effect.attributes.put("targetEntity", "cat1");
+                effect.attributes.put("targetEntity", "cat");
                 effect.attributes.put("texture", "catEating");
                 effect.attributes.put("numFrames", "2");
                 effects.add(effect);
@@ -172,8 +172,8 @@ public class LevelGenerator {
                 entity.attributes.put("numFrames", "12");
                 entity.attributes.put("time", "3");
                 entities.add(entity);
-                // door2
-                entity = new Entity.EntityPrototype("door2", "IMAGE", 48, 16, true, new String[]{"keys"});
+                // door
+                entity = new Entity.EntityPrototype("door", "IMAGE", 48, 16, true, new String[]{"keys"});
                 entity.attributes.put("texture", "schoolDoor");
                 effects = new ArrayList<Effect.EffectPrototype>();
                 effect = new Effect.EffectPrototype();
@@ -382,7 +382,7 @@ public class LevelGenerator {
                 entity.attributes.put("numFrames", "12");
                 entity.attributes.put("time", "5");
                 entities.add(entity); */
-                // dogBone
+                // usb
                 entity = new Entity.EntityPrototype("usb", "IMAGE", 80, 16, true, null);
                 entity.attributes.put("texture", "usbWorld");
                 effects = new ArrayList<Effect.EffectPrototype>();
@@ -397,6 +397,7 @@ public class LevelGenerator {
                 effects.add(effect);
                 entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);
+                // duct tape
                 entity = new Entity.EntityPrototype("duct tape", "IMAGE", 40, 16, true, null);
                 entity.attributes.put("texture", "ductTapeWorld");
                 effects = new ArrayList<Effect.EffectPrototype>();
@@ -411,7 +412,8 @@ public class LevelGenerator {
                 effects.add(effect);
                 entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);
-                entity = new Entity.EntityPrototype("car", "IMAGE", 80, 16, true, null); // TODO String[]{"gun", "bottles"}
+                // car
+                entity = new Entity.EntityPrototype("car", "IMAGE", 80, 16, true, new String[]{"gun", "bottles"});
                 entity.attributes.put("texture", "carPuzzle");
                 effects = new ArrayList<Effect.EffectPrototype>();
                 effect = new Effect.EffectPrototype();
@@ -428,9 +430,122 @@ public class LevelGenerator {
                 effects.add(effect);
                 entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);
+                // bottles
                 entity = new Entity.EntityPrototype("bottles", "IMAGE", 140, 16, false, null);
                 entity.attributes.put("texture", "bottlesWorld");
                 entities.add(entity);
+                scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
+                scenes.add(scene);
+
+                scene = new Scene.ScenePrototype("sixth", "school", "fourth");
+                scene.obstacles.put("crowd", new Rectangle(190, 14, 50, 50));
+                entities = new ArrayList<Entity.EntityPrototype>();
+                entity = new Entity.EntityPrototype(null, "CLOCK", 192, 96, true, null);
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "6");
+                entities.add(entity);
+                // door
+                entity = new Entity.EntityPrototype("door", "IMAGE", 48, 16, true, new String[]{"make-shift bomb"});
+                entity.attributes.put("texture", "schoolDoor");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "CHANGE_SCREEN";
+                effect.attributes.put("targetScene", "office");
+                effects.add(effect);
+                entity.doneEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ITEM";
+                effect.attributes.put("targetItem", "make-shift bomb");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("message", "I sure hope no one heard that");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "PLAY_SOUND";
+                effect.attributes.put("sound", "explosion");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ENTITY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("targetEntity", "explosion");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "CHANGE_APPEARANCE";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("targetEntity", "door");
+                effect.attributes.put("texture", "breakableDoorPuzzle");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("message", "it's locked. I think I can blow it open\nusing some sugar, weed killer, duct tape, and a soda can");
+                effects.add(effect);
+                entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                // door2
+                entity = new Entity.EntityPrototype("door2", "IMAGE", 192, 16, true, null);
+                entity.attributes.put("texture", "schoolDoor");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "CHANGE_SCREEN";
+                effect.attributes.put("targetScene", "seventh");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                // crowd
+                entity = new Entity.EntityPrototype("crowd", "IMAGE", 180, 14, true, new String[]{"camera"});
+                entity.attributes.put("texture", "crowdCameraPuzzle");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ENTITY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("targetEntity", "door2");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "photo");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ITEM";
+                effect.attributes.put("targetItem", "camera");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_BARRIER";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("targetObstacle", "crowd");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "MOVE_ENTITY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("targetEntity", "crowd");
+                effect.attributes.put("newX", "250");
+                effect.attributes.put("newY", "14");
+                effect.attributes.put("time", "4");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("message", "they're going away. Must be camera shy");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("message", "This crowd of people would make a great shot");
+                effects.add(effect);
+                entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                entity = new Entity.EntityPrototype("explosion", "ANIMATION", 48, 24, false, null);
+                entity.attributes.put("texture", "explosion");
+                entity.attributes.put("numFrames", "4");
+                entity.attributes.put("loop", "false");
                 scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
                 scenes.add(scene);
 
