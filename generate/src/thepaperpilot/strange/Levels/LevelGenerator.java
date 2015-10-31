@@ -696,7 +696,7 @@ public class LevelGenerator {
                 effect.attributes.put("targetScene", "eighth");
                 effect.attributes.put("message", "I bribed the bouncer with alcohol, and now he'll let me in the VIP area");
                 effects.add(effect);
-                entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entity.doneEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);
                 // bottles
                 entity = new Entity.EntityPrototype("bottles", "IMAGE", 225, 13, true, null);
@@ -731,6 +731,33 @@ public class LevelGenerator {
                 scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
                 scenes.add(scene);
 
+                scene = new Scene.ScenePrototype("ninth", "school", "seventh");
+                entities = new ArrayList<Entity.EntityPrototype>();
+                entity = new Entity.EntityPrototype(null, "CLOCK", 192, 96, true, null);
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "9");
+                entities.add(entity);
+                // warren
+                entity = new Entity.EntityPrototype("warren", "IMAGE", 192, 10, true, new String[]{"usb"});
+                entity.attributes.put("texture", "warrenPuzzle");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "CHANGE_SCREEN";
+                effect.attributes.put("targetScene", "tenth");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "DIALOGUE";
+                effect.attributes.put("targetScene", "ninth");
+                effect.attributes.put("dialogue", "Warren1");
+                effects.add(effect);
+                entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
+                scenes.add(scene);
+
                 levelPrototype.scenes = Arrays.copyOf(scenes.toArray(), scenes.size(), Scene.ScenePrototype[].class);
 
                 ArrayList<Item.ItemPrototype> items = new ArrayList<Item.ItemPrototype>();
@@ -750,6 +777,7 @@ public class LevelGenerator {
                 items.add(new Item.ItemPrototype("make-shift bomb", "makeShiftBomb"));
                 items.add(new Item.ItemPrototype("notebook", "notebook"));
                 items.add(new Item.ItemPrototype("phone", "phone"));
+                items.add(new Item.ItemPrototype("photo", "photo"));
                 items.add(new Item.ItemPrototype("soap", "soap"));
                 items.add(new Item.ItemPrototype("soda", "soda"));
                 items.add(new Item.ItemPrototype("sugar", "sugar"));

@@ -1200,6 +1200,16 @@ scenes: [
 						attributes: {
 							class: java.util.HashMap
 							targetScene: eighth
+							message: I'm not allowed in the VIP area. Maybe if I brought him some alcohol
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
 							message: "I bribed the bouncer with alcohol, and now he'll let me in the VIP area"
 						}
 					}
@@ -1270,6 +1280,58 @@ scenes: [
 				height: 60
 			}
 		}
+	}
+	{
+		name: ninth
+		background: school
+		previous: seventh
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 9
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: warrenPuzzle
+				}
+				name: warren
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 10
+				requiredItems: [
+					usb
+				]
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: tenth
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: ninth
+							dialogue: Warren1
+						}
+					}
+				]
+			}
+		]
 	}
 ]
 items: [

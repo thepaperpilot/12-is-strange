@@ -186,6 +186,20 @@ public class Cutscene implements Screen {
                                     entity = scene.max;
                                 entity.addAction(Actions.moveTo(Float.valueOf(attributes.get("newX")), Float.valueOf(attributes.get("newY")), Float.valueOf(attributes.get("time"))));
                                 break;
+                            case REMOVE_ITEM:
+                                Item item = level.items.get(attributes.get("targetItem"));
+                                level.inventory.remove(item);
+                                level.selected.remove(item);
+                                level.updateInventory();
+                                scene.updateInventory();
+                                break;
+                            case ADD_ITEM:
+                                Main.manager.get("audio/pickup.wav", Sound.class).play();
+                                item = level.items.get(attributes.get("targetItem"));
+                                level.inventory.add(item);
+                                level.updateInventory();
+                                scene.updateInventory();
+                                break;
                             case REMOVE_BARRIER:
                                 scene.previous.obstacles.remove(attributes.get("targetObstacle"));
                                 break;
