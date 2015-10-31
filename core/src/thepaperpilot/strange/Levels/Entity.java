@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Entity extends Image {
-    final Map<String, String> attributes;
+    public final Map<String, String> attributes;
     Type type;
     String name;
     String[] requiredItems;
@@ -147,7 +147,7 @@ public class Entity extends Image {
     }
 
     public static class EntityPrototype {
-        Map<String, String> attributes = new HashMap<String, String>();
+        public Map<String, String> attributes = new HashMap<String, String>();
         String name;
         String type;
         boolean visible;

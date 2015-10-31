@@ -17,9 +17,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thepaperpilot.strange.Entities.Max;
 import thepaperpilot.strange.Entities.RightClickIndicator;
 import thepaperpilot.strange.Main;
-import thepaperpilot.strange.Screens.ChoicesScreen;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -166,7 +164,7 @@ public class Scene implements Screen {
     @Override
     public void render(float delta) {
         if (transition)
-            ChoicesScreen.renderParticles(delta);
+            Main.renderParticles(delta);
 
         if (target != null && max.getX() == max.target) {
             target.onTouch();
