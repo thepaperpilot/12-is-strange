@@ -874,14 +874,6 @@ scenes: [
 				]
 				successEffects: [
 					{
-						type: ADD_ENTITY
-						attributes: {
-							class: java.util.HashMap
-							targetScene: sixth
-							targetEntity: door2
-						}
-					}
-					{
 						type: ADD_ITEM
 						attributes: {
 							class: java.util.HashMap
