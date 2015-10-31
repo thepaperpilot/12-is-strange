@@ -229,7 +229,7 @@ public class LevelGenerator {
                 effect = new Effect.EffectPrototype();
                 effect.type = "DIALOGUE";
                 effect.attributes.put("targetScene", "third");
-                effect.attributes.put("dialogue", "Alyssa1");
+                effect.attributes.put("dialogue", "alyssa");
                 effects.add(effect);
                 entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);
@@ -757,7 +757,7 @@ public class LevelGenerator {
                 effect = new Effect.EffectPrototype();
                 effect.type = "DIALOGUE";
                 effect.attributes.put("targetScene", "ninth");
-                effect.attributes.put("dialogue", "Warren1");
+                effect.attributes.put("dialogue", "warren");
                 effects.add(effect);
                 entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);
@@ -872,7 +872,7 @@ public class LevelGenerator {
                 effect = new Effect.EffectPrototype();
                 effect.type = "DIALOGUE";
                 effect.attributes.put("targetScene", "eleventh");
-                effect.attributes.put("dialogue", "Detective1");
+                effect.attributes.put("dialogue", "detective");
                 effects.add(effect);
                 entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 effects = new ArrayList<Effect.EffectPrototype>();
@@ -918,7 +918,7 @@ public class LevelGenerator {
                 effect = new Effect.EffectPrototype();
                 effect.type = "DIALOGUE";
                 effect.attributes.put("targetScene", "twelfth");
-                effect.attributes.put("dialogue", "Final1");
+                effect.attributes.put("dialogue", "final");
                 effects.add(effect);
                 entity.doneEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
                 entities.add(entity);

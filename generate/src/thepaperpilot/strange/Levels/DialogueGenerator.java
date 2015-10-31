@@ -51,7 +51,7 @@ public class DialogueGenerator {
                 lines.add(line);
                 dialoguePrototype.dialogue = Arrays.copyOf(lines.toArray(), lines.size(), Dialogue.LinePrototype[].class);
 
-                fileName = "alyssa1.json";
+                fileName = "alyssa.json";
                 output = json.prettyPrint(dialoguePrototype);
                 System.out.println(Gdx.files.getExternalStoragePath() + fileName);
                 System.out.println(output);
@@ -128,7 +128,7 @@ public class DialogueGenerator {
                 lines.add(line);
                 dialoguePrototype.dialogue = Arrays.copyOf(lines.toArray(), lines.size(), Dialogue.LinePrototype[].class);
 
-                fileName = "detective1.json";
+                fileName = "detective.json";
                 output = json.prettyPrint(dialoguePrototype);
                 System.out.println(Gdx.files.getExternalStoragePath() + fileName);
                 System.out.println(output);
@@ -242,7 +242,7 @@ public class DialogueGenerator {
                 lines.add(line);
                 dialoguePrototype.dialogue = Arrays.copyOf(lines.toArray(), lines.size(), Dialogue.LinePrototype[].class);
 
-                fileName = "final1.json";
+                fileName = "final.json";
                 output = json.prettyPrint(dialoguePrototype);
                 System.out.println(Gdx.files.getExternalStoragePath() + fileName);
                 System.out.println(output);
@@ -274,7 +274,7 @@ public class DialogueGenerator {
                 lines.add(line);
                 dialoguePrototype.dialogue = Arrays.copyOf(lines.toArray(), lines.size(), Dialogue.LinePrototype[].class);
 
-                fileName = "warren1.json";
+                fileName = "warren.json";
                 output = json.prettyPrint(dialoguePrototype);
                 System.out.println(Gdx.files.getExternalStoragePath() + fileName);
                 System.out.println(output);
