@@ -72,6 +72,34 @@ public class DialogueGenerator {
                 System.out.println(output);
                 Gdx.files.external(fileName).writeString(output, false);
 
+                // balloon
+                dialoguePrototype = new Dialogue.DialoguePrototype();
+                dialoguePrototype.dialogue = new Dialogue.LinePrototype[1];
+                linePrototype = new Dialogue.LinePrototype();
+                linePrototype.name = "Max";
+                linePrototype.message = "Do I have time to go party?";
+                linePrototype.face = "maxcloseup";
+                linePrototype.options = new Dialogue.OptionPrototype[2];
+                linePrototype.options[0] = new Dialogue.OptionPrototype();
+                linePrototype.options[0].message = "Get rekt";
+                linePrototype.options[0].effects = new Effect.EffectPrototype[1];
+                linePrototype.options[0].effects[0] = new Effect.EffectPrototype();
+                linePrototype.options[0].effects[0].type = "CHANGE_SCREEN";
+                linePrototype.options[0].effects[0].attributes.put("targetScene", "eigth");
+                linePrototype.options[1] = new Dialogue.OptionPrototype();
+                linePrototype.options[1].message = "Stay in school";
+                linePrototype.options[1].effects = new Effect.EffectPrototype[1];
+                linePrototype.options[1].effects[0] = new Effect.EffectPrototype();
+                linePrototype.options[1].effects[0].type = "CHANGE_SCREEN";
+                linePrototype.options[1].effects[0].attributes.put("targetScene", "ninth");
+                dialoguePrototype.dialogue[0] = linePrototype;
+
+                fileName = "balloon.json";
+                output = json.prettyPrint(dialoguePrototype);
+                System.out.println(Gdx.files.getExternalStoragePath() + fileName);
+                System.out.println(output);
+                Gdx.files.external(fileName).writeString(output, false);
+
                 Gdx.app.exit();
             }
         }, new LwjglApplicationConfiguration());

@@ -76,8 +76,7 @@ public class Scene implements Screen {
 
                 entities.put(entityPrototype.name, entity);
             } catch (NullPointerException e) {
-                Gdx.app.log("Can't create entity", "entity \"" + entityPrototype.name + "\" could not be created in scene " + name, e);
-                Gdx.app.exit(); // If it tries to continue it just looks weird. It stops rendering stage. Crazy.
+                Gdx.app.log("Couldn't create entity", "entity \"" + entityPrototype.name + "\" could not be created in scene \"" + name + "\"", e);
             }
         }
 

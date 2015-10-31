@@ -602,6 +602,60 @@ public class LevelGenerator {
                 scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
                 scenes.add(scene);
 
+                scene = new Scene.ScenePrototype("seventh", "junkyard", "sixth");
+                entities = new ArrayList<Entity.EntityPrototype>();
+                /* There isn't a good spot for a clock on the junkyard map
+                entity = new Entity.EntityPrototype(null, "CLOCK", 148, 55, true, null);
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "5");
+                entities.add(entity); */
+                // balloon
+                entity = new Entity.EntityPrototype("balloon", "ANIMATION", 230, 13, true, null);
+                entity.attributes.put("texture", "balloon");
+                entity.attributes.put("numFrames", "14");
+                entity.attributes.put("speed", ".1");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "DIALOGUE";
+                effect.attributes.put("targetScene", "seventh");
+                effect.attributes.put("dialogue", "balloon");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                // alcohol
+                entity = new Entity.EntityPrototype("alcohol", "IMAGE", 15, 32, true, null);
+                entity.attributes.put("texture", "alcoholWorld");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "alcohol");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ENTITY";
+                effect.attributes.put("targetScene", "seventh");
+                effect.attributes.put("targetEntity", "alcohol");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                // hammer
+                entity = new Entity.EntityPrototype("hammer", "IMAGE", 170, 16, true, null);
+                entity.attributes.put("texture", "hammerWorld");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "hammer");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ENTITY";
+                effect.attributes.put("targetScene", "seventh");
+                effect.attributes.put("targetEntity", "hammer");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
+                scenes.add(scene);
+
                 levelPrototype.scenes = Arrays.copyOf(scenes.toArray(), scenes.size(), Scene.ScenePrototype[].class);
 
                 ArrayList<Item.ItemPrototype> items = new ArrayList<Item.ItemPrototype>();

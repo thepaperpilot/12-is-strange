@@ -1053,6 +1053,92 @@ scenes: [
 			}
 		]
 	}
+	{
+		name: seventh
+		background: junkyard
+		previous: sixth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					texture: balloon
+					speed: 0.1
+				}
+				name: balloon
+				type: ANIMATION
+				visible: true
+				x: 230
+				y: 13
+				successEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+							dialogue: balloon
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: alcoholWorld
+				}
+				name: alcohol
+				type: IMAGE
+				visible: true
+				x: 15
+				y: 32
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: alcohol
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+							targetEntity: alcohol
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: hammerWorld
+				}
+				name: hammer
+				type: IMAGE
+				visible: true
+				x: 170
+				y: 16
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: hammer
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+							targetEntity: hammer
+						}
+					}
+				]
+			}
+		]
+	}
 ]
 items: [
 	{
@@ -1157,5 +1243,5 @@ combinations: [
 		result: fortune cookie code
 	}
 ]
-first: office
+first: first
 }
