@@ -219,5 +219,15 @@ public class Scene implements Screen {
         String previous;
         Entity.EntityPrototype[] entities;
         Map<String, Rectangle> obstacles = new HashMap<String, Rectangle>();
+
+        public ScenePrototype() {
+
+        }
+
+        public ScenePrototype(String name, String background, String previous) {
+            this.name = name;
+            this.background = background;
+            this.previous = previous;
+        }
     }
 }

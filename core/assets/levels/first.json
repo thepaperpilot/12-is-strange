@@ -292,6 +292,14 @@ scenes: [
 							targetItem: keys
 						}
 					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: the door unlocked!
+						}
+					}
 				]
 				failEffects: [
 					{
@@ -602,7 +610,6 @@ scenes: [
 				}
 				name: sugar
 				type: IMAGE
-				visible: true
 				x: 120
 				y: 10
 				successEffects: [

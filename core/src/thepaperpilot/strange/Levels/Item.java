@@ -48,10 +48,28 @@ public class Item extends Button {
     public static class ItemPrototype {
         String name;
         String texture;
+
+        public ItemPrototype() {
+
+        }
+
+        public ItemPrototype(String name, String texture) {
+            this.name = name;
+            this.texture = texture;
+        }
     }
 
     public static class CombinationPrototype {
         public String[] ingredients;
         public String result;
+
+        public CombinationPrototype() {
+
+        }
+
+        public CombinationPrototype(String[] ingredients, String result) {
+            this.ingredients = ingredients;
+            this.result = result;
+        }
     }
 }

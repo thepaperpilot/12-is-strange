@@ -73,5 +73,13 @@ public class Level {
         Item.ItemPrototype[] items;
         Item.CombinationPrototype[] combinations;
         String first;
+
+        public LevelPrototype(){
+
+        }
+
+        public LevelPrototype(String first) {
+            this.first = first;
+        }
     }
 }

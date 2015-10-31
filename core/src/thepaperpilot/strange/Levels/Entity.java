@@ -142,5 +142,18 @@ public class Entity extends Image {
         Effect.EffectPrototype[] successEffects;
         Effect.EffectPrototype[] failEffects;
         Effect.EffectPrototype[] doneEffects;
+
+        public EntityPrototype() {
+
+        }
+
+        public EntityPrototype(String name, String type, int x, int y, boolean visible, String[] requiredItems) {
+            this.name = name;
+            this.type = type;
+            this.visible = visible;
+            this.x = x;
+            this.y = y;
+            this.requiredItems = requiredItems;
+        }
     }
 }
