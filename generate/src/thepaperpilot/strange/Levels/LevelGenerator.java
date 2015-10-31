@@ -779,7 +779,7 @@ public class LevelGenerator {
                 entity.attributes.put("loop", "false");
                 entities.add(entity);
                 // door
-                entity = new Entity.EntityPrototype("door", "IMAGE", 192, 10, true, new String[]{"fire extinguisher"});
+                entity = new Entity.EntityPrototype("door", "IMAGE", 4, 16, true, new String[]{"fire extinguisher"});
                 entity.attributes.put("texture", "schoolDoor");
                 effects = new ArrayList<Effect.EffectPrototype>();
                 effect = new Effect.EffectPrototype();

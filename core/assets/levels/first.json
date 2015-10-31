@@ -1380,8 +1380,8 @@ scenes: [
 				name: door
 				type: IMAGE
 				visible: true
-				x: 192
-				y: 10
+				x: 4
+				y: 16
 				requiredItems: [
 					fire extinguisher
 				]
