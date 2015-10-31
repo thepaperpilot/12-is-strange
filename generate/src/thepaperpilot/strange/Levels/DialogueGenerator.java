@@ -85,7 +85,7 @@ public class DialogueGenerator {
                 linePrototype.options[0].effects = new Effect.EffectPrototype[1];
                 linePrototype.options[0].effects[0] = new Effect.EffectPrototype();
                 linePrototype.options[0].effects[0].type = "CHANGE_SCREEN";
-                linePrototype.options[0].effects[0].attributes.put("targetScene", "eigth");
+                linePrototype.options[0].effects[0].attributes.put("targetScene", "eighth");
                 linePrototype.options[1] = new Dialogue.OptionPrototype();
                 linePrototype.options[1].message = "Stay in school";
                 linePrototype.options[1].effects = new Effect.EffectPrototype[1];

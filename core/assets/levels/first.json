@@ -1139,6 +1139,138 @@ scenes: [
 			}
 		]
 	}
+	{
+		name: eighth
+		background: vortex
+		previous: seventh
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 8
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: bouncer
+				}
+				name: bouncer
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 10
+				requiredItems: [
+					alcohol
+				]
+				successEffects: [
+					{
+						type: REMOVE_BARRIER
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							targetObstacle: bouncer
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							message: here you go
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: alcohol
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							message: "I bribed the bouncer with alcohol, and now he'll let me in the VIP area"
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: bottlesWorld
+				}
+				name: bottles
+				type: IMAGE
+				visible: true
+				x: 225
+				y: 13
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: bottles
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							targetEntity: bottles
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: fireExtinguishWorld
+				}
+				name: fire extinguisher
+				type: IMAGE
+				visible: true
+				x: 10
+				y: 16
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fire extinguisher
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							targetEntity: fire extinguisher
+						}
+					}
+				]
+			}
+		]
+		obstacles: {
+			class: java.util.HashMap
+			bouncer: {
+				x: 192
+				width: 16
+				height: 60
+			}
+		}
+	}
 ]
 items: [
 	{
