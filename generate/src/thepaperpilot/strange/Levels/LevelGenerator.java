@@ -758,6 +758,77 @@ public class LevelGenerator {
                 scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
                 scenes.add(scene);
 
+                scene = new Scene.ScenePrototype("tenth", "dorm", "ninth");
+                entities = new ArrayList<Entity.EntityPrototype>();
+                entity = new Entity.EntityPrototype(null, "CLOCK", 100, 57, true, null);
+                entity.attributes.put("texture", "clock");
+                entity.attributes.put("numFrames", "12");
+                entity.attributes.put("time", "10");
+                entities.add(entity);
+                // explosion
+                entity = new Entity.EntityPrototype("explosion", "ANIMATION", 48, 24, false, null);
+                entity.attributes.put("texture", "explosion");
+                entity.attributes.put("numFrames", "4");
+                entity.attributes.put("speed", ".1");
+                entity.attributes.put("loop", "false");
+                entities.add(entity);
+                // door
+                entity = new Entity.EntityPrototype("door", "IMAGE", 192, 10, true, new String[]{"fire extinguisher"});
+                entity.attributes.put("texture", "schoolDoor");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "DIALOGUE";
+                effect.attributes.put("targetScene", "tenth");
+                effect.attributes.put("dialogue", "door2");
+                effects.add(effect);
+                entity.doneEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ITEM";
+                effect.attributes.put("targetItem", "fire extinguisher");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "PLAY_SOUND";
+                effect.attributes.put("sound", "explosion");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ENTITY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("targetEntity", "explosion");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "CHANGE_APPEARANCE";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("targetEntity", "door");
+                effect.attributes.put("texture", "breakableDoorPuzzle");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "SAY";
+                effect.attributes.put("targetScene", "sixth");
+                effect.attributes.put("message", "it's locked, but the handle looks damaged. Something heavy could probably break it off");
+                effects.add(effect);
+                entity.failEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                // phone
+                entity = new Entity.EntityPrototype("phone", "IMAGE", 56, 13, true, null);
+                entity.attributes.put("texture", "phoneWorld");
+                effects = new ArrayList<Effect.EffectPrototype>();
+                effect = new Effect.EffectPrototype();
+                effect.type = "ADD_ITEM";
+                effect.attributes.put("targetItem", "phone");
+                effects.add(effect);
+                effect = new Effect.EffectPrototype();
+                effect.type = "REMOVE_ENTITY";
+                effect.attributes.put("targetScene", "tenth");
+                effect.attributes.put("targetEntity", "phone");
+                effects.add(effect);
+                entity.successEffects = Arrays.copyOf(effects.toArray(), effects.size(), Effect.EffectPrototype[].class);
+                entities.add(entity);
+                scene.entities = Arrays.copyOf(entities.toArray(), entities.size(), Entity.EntityPrototype[].class);
+                scenes.add(scene);
+
                 levelPrototype.scenes = Arrays.copyOf(scenes.toArray(), scenes.size(), Scene.ScenePrototype[].class);
 
                 ArrayList<Item.ItemPrototype> items = new ArrayList<Item.ItemPrototype>();

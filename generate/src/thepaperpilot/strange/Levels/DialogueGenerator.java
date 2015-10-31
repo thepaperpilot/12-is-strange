@@ -100,6 +100,34 @@ public class DialogueGenerator {
                 System.out.println(output);
                 Gdx.files.external(fileName).writeString(output, false);
 
+                // door2
+                dialoguePrototype = new Dialogue.DialoguePrototype();
+                dialoguePrototype.dialogue = new Dialogue.LinePrototype[1];
+                linePrototype = new Dialogue.LinePrototype();
+                linePrototype.name = "Max";
+                linePrototype.message = "Should I go the halls or the restroom?";
+                linePrototype.face = "maxcloseup";
+                linePrototype.options = new Dialogue.OptionPrototype[2];
+                linePrototype.options[0] = new Dialogue.OptionPrototype();
+                linePrototype.options[0].message = "I have to go REALLY BADLY";
+                linePrototype.options[0].effects = new Effect.EffectPrototype[1];
+                linePrototype.options[0].effects[0] = new Effect.EffectPrototype();
+                linePrototype.options[0].effects[0].type = "CHANGE_SCREEN";
+                linePrototype.options[0].effects[0].attributes.put("targetScene", "eleventh");
+                linePrototype.options[1] = new Dialogue.OptionPrototype();
+                linePrototype.options[1].message = "I can hold it";
+                linePrototype.options[1].effects = new Effect.EffectPrototype[1];
+                linePrototype.options[1].effects[0] = new Effect.EffectPrototype();
+                linePrototype.options[1].effects[0].type = "CHANGE_SCREEN";
+                linePrototype.options[1].effects[0].attributes.put("targetScene", "twelfth");
+                dialoguePrototype.dialogue[0] = linePrototype;
+
+                fileName = "door2.json";
+                output = json.prettyPrint(dialoguePrototype);
+                System.out.println(Gdx.files.getExternalStoragePath() + fileName);
+                System.out.println(output);
+                Gdx.files.external(fileName).writeString(output, false);
+
                 Gdx.app.exit();
             }
         }, new LwjglApplicationConfiguration());

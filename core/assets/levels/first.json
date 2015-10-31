@@ -1333,6 +1333,133 @@ scenes: [
 			}
 		]
 	}
+	{
+		name: tenth
+		background: dorm
+		previous: ninth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 10
+				}
+				type: CLOCK
+				visible: true
+				x: 100
+				y: 57
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 4
+					texture: explosion
+					loop: "false"
+					speed: 0.1
+				}
+				name: explosion
+				type: ANIMATION
+				x: 48
+				y: 24
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 10
+				requiredItems: [
+					fire extinguisher
+				]
+				successEffects: [
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fire extinguisher
+						}
+					}
+					{
+						type: PLAY_SOUND
+						attributes: {
+							class: java.util.HashMap
+							sound: explosion
+						}
+					}
+					{
+						type: ADD_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: explosion
+						}
+					}
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: door
+							texture: breakableDoorPuzzle
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: "it's locked, but the handle looks damaged. Something heavy could probably break it off"
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: tenth
+							dialogue: door2
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: phoneWorld
+				}
+				name: phone
+				type: IMAGE
+				visible: true
+				x: 56
+				y: 13
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: phone
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: tenth
+							targetEntity: phone
+						}
+					}
+				]
+			}
+		]
+	}
 ]
 items: [
 	{
@@ -1398,6 +1525,10 @@ items: [
 	{
 		name: phone
 		texture: phone
+	}
+	{
+		name: photo
+		texture: photo
 	}
 	{
 		name: soap
