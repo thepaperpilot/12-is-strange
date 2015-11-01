@@ -17,8 +17,22 @@ dialogue: [
 	}
 	{
 		name: Max
-		message: "Oh, and one last thing. There isn't actually currently a way to restart the game. No worries, that'll change, I've already worked out how to structure the scenes such that I can reset them all pretty easily. But for now, do me a solid and press refresh or re-open the application or whatever it is you kids do these days, and pretend it happened automatically. Cool? Cool."
+		message: I guess that just leaves one last option...
 		face: maxcloseup
+		options: [
+			{
+				message: Restart Game
+				effects: [
+					{
+						type: CHANGE_LEVEL
+						attributes: {
+							class: java.util.HashMap
+							targetLevel: first
+						}
+					}
+				]
+			}
+		]
 	}
 ]
 }

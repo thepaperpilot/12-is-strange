@@ -1,0 +1,35 @@
+{
+dialogue: [
+	{
+		name: Max
+		message: Should I go outside the school?
+		face: maxcloseup
+		options: [
+			{
+				message: Go outside
+				effects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+						}
+					}
+				]
+			}
+			{
+				message: Stay in school
+				effects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+						}
+					}
+				]
+			}
+		]
+	}
+]
+}

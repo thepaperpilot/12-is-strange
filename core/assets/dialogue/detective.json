@@ -17,7 +17,7 @@ dialogue: [
 	}
 	{
 		name: ???
-		message: "I am not. You'll understand in time. But, before you get this, I'm going to need something from you. Return back here when you have a phone, photo, notebook, and files."
+		message: "I am not. You'll understand in time. But, before you get this, I'm going to need something from you. Return back here when you have a phone, photo, and files."
 		face: detective
 	}
 	{

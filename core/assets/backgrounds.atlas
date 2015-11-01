@@ -2,7 +2,7 @@ backgrounds.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-bathroomBackground
+bathroom
   rotate: false
   xy: 2, 2
   size: 256, 144
@@ -16,42 +16,42 @@ butterfly
   orig: 256, 144
   offset: 0, 0
   index: -1
-dormBackground
+dorm
   rotate: false
   xy: 1550, 2
   size: 128, 80
   orig: 128, 80
   offset: 0, 0
   index: -1
-junkyardBackground
+junkyard
   rotate: false
   xy: 518, 2
   size: 256, 144
   orig: 256, 144
   offset: 0, 0
   index: -1
-officeBackground
+office
   rotate: false
   xy: 1680, 2
   size: 128, 80
   orig: 128, 80
   offset: 0, 0
   index: -1
-outsideBackground
+outside
   rotate: false
   xy: 776, 2
   size: 256, 144
   orig: 256, 144
   offset: 0, 0
   index: -1
-schoolBackground
+school
   rotate: false
   xy: 1034, 2
   size: 256, 144
   orig: 256, 144
   offset: 0, 0
   index: -1
-vortexBackground
+vortex
   rotate: false
   xy: 1292, 2
   size: 256, 144

@@ -10,13 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import thepaperpilot.strange.Entities.AnimatedPuzzle;
-import thepaperpilot.strange.Entities.Clock;
-import thepaperpilot.strange.Entities.Entity;
 import thepaperpilot.strange.Entities.Max;
-import thepaperpilot.strange.Item;
+import thepaperpilot.strange.Levels.Entity;
+import thepaperpilot.strange.Levels.Level;
 import thepaperpilot.strange.Main;
-import thepaperpilot.strange.Scene;
 
 import java.util.Random;
 
@@ -26,7 +23,7 @@ public class MenuScreen implements Screen {
     private Image background;
     private Stage stage;
     private Max max;
-    private Clock clock;
+    private Entity clock;
     private float time;
 
     @Override
@@ -44,7 +41,7 @@ public class MenuScreen implements Screen {
                     @Override
                     public void run() {
                         Main.reverse = true;
-                        Main.changeScreen(Scene.FIRST.screen);
+                        Main.changeScreen(Level.readLevel("levels/first.json").firstScene);
                     }
                 })));
             }
@@ -55,20 +52,27 @@ public class MenuScreen implements Screen {
         table.add(start);
         stage.addActor(table);
 
-        clock = new Clock(ran.nextInt(12), 3 * (int) stage.getWidth() / 4, (int) stage.getHeight() / 2);
+        Entity.EntityPrototype clockPrototype = new Entity.EntityPrototype(null, "CLOCK", 3 * (int) stage.getWidth() / 4, (int) stage.getHeight() / 2, false, null);
+        clockPrototype.attributes.put("texture", "clock");
+        clockPrototype.attributes.put("numFrames", "12");
+        clockPrototype.attributes.put("time", "12");
+        clock = new Entity(clockPrototype, null);
         max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
         stage.addActor(clock);
-        Entity cat = new AnimatedPuzzle(Scene.FIRST.screen, (int) stage.getWidth() / 3, 10, Main.animations.findRegion("catIdle"), 14, 1 / 6f, new Item[0]);
-        cat.remove();
+        Entity.EntityPrototype catPrototype = new Entity.EntityPrototype(null, "ANIMATION", (int) stage.getWidth() / 3, 10, false, null);
+        catPrototype.attributes.put("texture", "catIdle");
+        catPrototype.attributes.put("numFrames", "14");
+        catPrototype.attributes.put("speed", Float.toString(1 / 6f));
+        Entity cat = new Entity(catPrototype, null);
         stage.addActor(cat);
 
         backgrounds = new Image[]{
-                new Image(Main.backgrounds.findRegion("schoolBackground")),
-                new Image(Main.backgrounds.findRegion("bathroomBackground")),
-                new Image(Main.backgrounds.findRegion("outsideBackground")),
-                new Image(Main.backgrounds.findRegion("junkyardBackground")),
-                new Image(Main.backgrounds.findRegion("vortexBackground"))
+                new Image(Main.backgrounds.findRegion("school")),
+                new Image(Main.backgrounds.findRegion("bathroom")),
+                new Image(Main.backgrounds.findRegion("outside")),
+                new Image(Main.backgrounds.findRegion("junkyard")),
+                new Image(Main.backgrounds.findRegion("vortex"))
         };
         background = backgrounds[ran.nextInt(backgrounds.length)];
         stage.addActor(background);
@@ -95,10 +99,11 @@ public class MenuScreen implements Screen {
                 })));
             if (ran.nextInt(3) == 0)
                 max.target = ran.nextInt((int) stage.getWidth());
-            clock.setTime(ran.nextInt(12));
+            clock.attributes.put("time", String.valueOf(1 + ran.nextInt(12)));
+            clock.updateAppearance();
             time = 0;
         }
-        ChoicesScreen.renderParticles(delta);
+        Main.renderParticles(delta);
         stage.act(delta);
         stage.draw();
     }

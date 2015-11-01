@@ -1,0 +1,35 @@
+{
+dialogue: [
+	{
+		name: Max
+		message: Do I have time to go party?
+		face: maxcloseup
+		options: [
+			{
+				message: Get rekt
+				effects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+						}
+					}
+				]
+			}
+			{
+				message: Stay in school
+				effects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: ninth
+						}
+					}
+				]
+			}
+		]
+	}
+]
+}

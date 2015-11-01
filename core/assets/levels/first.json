@@ -1,0 +1,1744 @@
+{
+scenes: [
+	{
+		name: first
+		background: bathroom
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 1
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 10
+				y: 32
+				successEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							dialogue: door1
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: fireAlarmPuzzle
+				}
+				name: fireAlarm
+				type: IMAGE
+				visible: true
+				x: 210
+				y: 60
+				requiredItems: [
+					hammer
+				]
+				successEffects: [
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							targetEntity: fireAlarm
+							texture: fireAlarmPuzzleBroken
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							message: whoah! what was a gun doing in there?
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: gun
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: hammer
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							message: I need to find something to break this with
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: soapWorld
+				}
+				name: soap
+				type: IMAGE
+				visible: true
+				x: 230
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: first
+							targetEntity: soap
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: soap
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: second
+		background: outside
+		previous: first
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 2
+				}
+				type: CLOCK
+				visible: true
+				x: 148
+				y: 55
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					texture: catIdle
+					speed: 0.16666667
+				}
+				name: cat
+				type: ANIMATION
+				visible: true
+				x: 81
+				y: 10
+				requiredItems: [
+					cat food
+				]
+				successEffects: [
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							numFrames: 2
+							targetScene: second
+							targetEntity: cat
+							texture: catEating
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							message: aww. it looks so happy now!
+						}
+					}
+					{
+						type: ADD_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: sugar
+						}
+					}
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							numFrames: 14
+							targetScene: fourth
+							targetEntity: bird
+							texture: blueJayIdle
+							type: ANIMATION
+							speed: 0.16666667
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: cat food
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							message: This cat looks bored. I hear cats hunt birds when they're bored.
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							message: aww. it looks so happy now!
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: dogBoneWorld
+				}
+				name: dogBone
+				type: IMAGE
+				visible: true
+				x: 200
+				y: 14
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: second
+							targetEntity: dogBone
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: dog bone
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: third
+		background: school
+		previous: first
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 3
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 48
+				y: 16
+				requiredItems: [
+					keys
+				]
+				successEffects: [
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: keys
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: the door unlocked!
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: it's locked
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: AlyssaSoapPuzzle
+				}
+				name: alyssa
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 14
+				requiredItems: [
+					soap
+				]
+				successEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: thank you alyssa!
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: keys
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: soap
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							dialogue: alyssa
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							message: I already have her the soap. Wasn't the tutorial enough?
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: sodaWorld
+				}
+				name: soda
+				type: IMAGE
+				visible: true
+				x: 80
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: third
+							targetEntity: soda
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: soda
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: fourth
+		background: outside
+		previous: third
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 4
+				}
+				type: CLOCK
+				visible: true
+				x: 148
+				y: 55
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: tirestack
+				}
+				name: tirestack
+				type: IMAGE
+				visible: true
+				x: 230
+				y: 13
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: stairs
+				}
+				name: stairs
+				type: IMAGE
+				visible: true
+				y: 7
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					texture: dogIdle
+					speed: 0.16666667
+				}
+				name: dog1
+				type: ANIMATION
+				visible: true
+				x: 160
+				y: 13
+				requiredItems: [
+					dog bone
+				]
+				successEffects: [
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							numFrames: 2
+							targetScene: fourth
+							targetEntity: dog1
+							texture: dogHappy
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							message: look how cute it is!
+						}
+					}
+					{
+						type: REMOVE_BARRIER
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetObstacle: dog
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: dog bone
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							message: This dog won't let me through. It looks hungry
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							message: The dog is much happier now that it has a bone
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: blueJayDead
+				}
+				name: bird
+				type: IMAGE
+				visible: true
+				x: 73
+				y: 10
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: catFoodWorld
+				}
+				name: cat food
+				type: IMAGE
+				visible: true
+				x: 170
+				y: 13
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: cat food
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: cat food
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: weedKillerWorld
+				}
+				name: weed killer
+				type: IMAGE
+				visible: true
+				x: 21
+				y: 7
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: weed killer
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: weed killer
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: sugarWorld
+				}
+				name: sugar
+				type: IMAGE
+				x: 120
+				y: 10
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fourth
+							targetEntity: sugar
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: sugar
+						}
+					}
+				]
+			}
+		]
+		obstacles: {
+			class: java.util.HashMap
+			dog: {
+				x: 160
+				width: 16
+				height: 144
+			}
+		}
+	}
+	{
+		name: fifth
+		background: junkyard
+		previous: fourth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: usbWorld
+				}
+				name: usb
+				type: IMAGE
+				visible: true
+				x: 80
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							targetEntity: usb
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: usb
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: ductTapeWorld
+				}
+				name: duct tape
+				type: IMAGE
+				visible: true
+				x: 40
+				y: 16
+				successEffects: [
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							targetEntity: duct tape
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: duct tape
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: carPuzzle
+				}
+				name: car
+				type: IMAGE
+				visible: true
+				x: 80
+				y: 16
+				requiredItems: [
+					gun
+					bottles
+				]
+				successEffects: [
+					{
+						type: CUTSCENE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							cutscene: junkyard
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: fifth
+							message: I should use this car to break some bottles. I'll need some bottles and a gun
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: bottlesWorld
+				}
+				name: bottles
+				type: IMAGE
+				x: 140
+				y: 16
+			}
+		]
+	}
+	{
+		name: sixth
+		background: school
+		previous: fourth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 6
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 48
+				y: 16
+				requiredItems: [
+					make-shift bomb
+				]
+				successEffects: [
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: make-shift bomb
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: I sure hope no one heard that
+						}
+					}
+					{
+						type: PLAY_SOUND
+						attributes: {
+							class: java.util.HashMap
+							sound: explosion
+						}
+					}
+					{
+						type: ADD_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: explosion
+						}
+					}
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: door
+							texture: breakableDoorPuzzle
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: "it's locked. I think I can blow it open\nusing some sugar, weed killer, duct tape, and a soda can"
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: office
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door2
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 16
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: crowdCameraPuzzle
+				}
+				name: crowd
+				type: IMAGE
+				visible: true
+				x: 180
+				y: 14
+				requiredItems: [
+					camera
+				]
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: photo
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: camera
+						}
+					}
+					{
+						type: REMOVE_BARRIER
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetObstacle: crowd
+						}
+					}
+					{
+						type: MOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: crowd
+							newY: 14
+							newX: 250
+							time: 4
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: they're going away. Must be camera shy
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: This crowd of people would make a great shot
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 4
+					texture: explosion
+					loop: "false"
+					speed: 0.1
+				}
+				name: explosion
+				type: ANIMATION
+				x: 48
+				y: 24
+			}
+		]
+		obstacles: {
+			class: java.util.HashMap
+			crowd: {
+				x: 190
+				y: 14
+				width: 50
+				height: 50
+			}
+		}
+	}
+	{
+		name: office
+		background: office
+		previous: fourth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 6
+				}
+				type: CLOCK
+				visible: true
+				x: 100
+				y: 57
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: breakableDoorPuzzle
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 4
+				y: 16
+				successEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: cameraWorld
+				}
+				name: camera
+				type: IMAGE
+				visible: true
+				x: 46
+				y: 33
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: camera
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: office
+							targetEntity: camera
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: filesWorld
+				}
+				name: files
+				type: IMAGE
+				visible: true
+				x: 71
+				y: 30
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: files
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: office
+							targetEntity: files
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: seventh
+		background: junkyard
+		previous: sixth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 14
+					texture: balloon
+					speed: 0.1
+				}
+				name: balloon
+				type: ANIMATION
+				visible: true
+				x: 230
+				y: 13
+				successEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+							dialogue: balloon
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: alcoholWorld
+				}
+				name: alcohol
+				type: IMAGE
+				visible: true
+				x: 15
+				y: 32
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: alcohol
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+							targetEntity: alcohol
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: hammerWorld
+				}
+				name: hammer
+				type: IMAGE
+				visible: true
+				x: 170
+				y: 16
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: hammer
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: seventh
+							targetEntity: hammer
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: eighth
+		background: vortex
+		previous: seventh
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 8
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: bouncer
+				}
+				name: bouncer
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 10
+				requiredItems: [
+					alcohol
+				]
+				successEffects: [
+					{
+						type: REMOVE_BARRIER
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							targetObstacle: bouncer
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							message: here you go
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: alcohol
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							message: I'm not allowed in the VIP area. Maybe if I brought him some alcohol
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							message: "I bribed the bouncer with alcohol, and now he'll let me in the VIP area"
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: bottlesWorld
+				}
+				name: bottles
+				type: IMAGE
+				visible: true
+				x: 225
+				y: 13
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: bottles
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							targetEntity: bottles
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: fireExtinguishWorld
+				}
+				name: fire extinguisher
+				type: IMAGE
+				visible: true
+				x: 10
+				y: 16
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fire extinguisher
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eighth
+							targetEntity: fire extinguisher
+						}
+					}
+				]
+			}
+		]
+		obstacles: {
+			class: java.util.HashMap
+			bouncer: {
+				x: 192
+				width: 16
+				height: 60
+			}
+		}
+	}
+	{
+		name: ninth
+		background: school
+		previous: seventh
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 9
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: warrenPuzzle
+				}
+				name: warren
+				type: IMAGE
+				visible: true
+				x: 192
+				y: 10
+				requiredItems: [
+					usb
+				]
+				successEffects: [
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: usb
+						}
+					}
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: ninth
+							message: now warren will let me past
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: ninth
+							dialogue: warren
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: tenth
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: tenth
+		background: dorm
+		previous: ninth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 10
+				}
+				type: CLOCK
+				visible: true
+				x: 100
+				y: 57
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 4
+					texture: explosion
+					loop: "false"
+					speed: 0.1
+				}
+				name: explosion
+				type: ANIMATION
+				x: 48
+				y: 24
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoor
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 4
+				y: 16
+				requiredItems: [
+					fire extinguisher
+				]
+				successEffects: [
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fire extinguisher
+						}
+					}
+					{
+						type: PLAY_SOUND
+						attributes: {
+							class: java.util.HashMap
+							sound: explosion
+						}
+					}
+					{
+						type: ADD_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: explosion
+						}
+					}
+					{
+						type: CHANGE_APPEARANCE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							targetEntity: door
+							texture: breakableDoorPuzzle
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: sixth
+							message: "it's locked, but the handle looks damaged. Something heavy could probably break it off"
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: tenth
+							dialogue: door2
+						}
+					}
+				]
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: phoneWorld
+				}
+				name: phone
+				type: IMAGE
+				visible: true
+				x: 56
+				y: 13
+				successEffects: [
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: phone
+						}
+					}
+					{
+						type: REMOVE_ENTITY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: tenth
+							targetEntity: phone
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: eleventh
+		background: bathroom
+		previous: tenth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 11
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: detective
+				}
+				name: warren
+				type: IMAGE
+				visible: true
+				x: 48
+				y: 16
+				requiredItems: [
+					phone
+					photo
+					files
+				]
+				successEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eleventh
+							message: pleasure doing business
+						}
+					}
+					{
+						type: ADD_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fortune cookie
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: phone
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: photo
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: files
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eleventh
+							dialogue: detective
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eleventh
+							message: "He may have been mysterious, but at least he was helpful"
+						}
+					}
+				]
+			}
+		]
+	}
+	{
+		name: twelfth
+		background: school
+		previous: tenth
+		entities: [
+			{
+				attributes: {
+					class: java.util.HashMap
+					numFrames: 12
+					texture: clock
+					time: 12
+				}
+				type: CLOCK
+				visible: true
+				x: 192
+				y: 96
+			}
+			{
+				attributes: {
+					class: java.util.HashMap
+					texture: schoolDoorKeypad
+				}
+				name: door
+				type: IMAGE
+				visible: true
+				x: 48
+				y: 16
+				requiredItems: [
+					fortune cookie code
+				]
+				successEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: twelfth
+							message: it worked! how exciting!
+						}
+					}
+					{
+						type: REMOVE_ITEM
+						attributes: {
+							class: java.util.HashMap
+							targetItem: fortune cookie code
+						}
+					}
+				]
+				failEffects: [
+					{
+						type: SAY
+						attributes: {
+							class: java.util.HashMap
+							targetScene: twelfth
+							message: it's locked with a keypad. Now where could I find the code?
+						}
+					}
+				]
+				doneEffects: [
+					{
+						type: DIALOGUE
+						attributes: {
+							class: java.util.HashMap
+							targetScene: twelfth
+							dialogue: final
+						}
+					}
+				]
+			}
+		]
+	}
+]
+items: [
+	{
+		name: alcohol
+		texture: alcohol
+	}
+	{
+		name: bottles
+		texture: bottles
+	}
+	{
+		name: camera
+		texture: camera
+	}
+	{
+		name: cat food
+		texture: catFood
+	}
+	{
+		name: dog bone
+		texture: dogBone
+	}
+	{
+		name: duct tape
+		texture: ductTape
+	}
+	{
+		name: files
+		texture: files
+	}
+	{
+		name: fire extinguisher
+		texture: fireExtinguish
+	}
+	{
+		name: fortune cookie code
+		texture: fortuneCookieCode
+	}
+	{
+		name: fortune cookie
+		texture: fortuneCookie
+	}
+	{
+		name: gun
+		texture: gun
+	}
+	{
+		name: hammer
+		texture: hammer
+	}
+	{
+		name: keys
+		texture: keys
+	}
+	{
+		name: make-shift bomb
+		texture: makeShiftBomb
+	}
+	{
+		name: notebook
+		texture: notebook
+	}
+	{
+		name: phone
+		texture: phone
+	}
+	{
+		name: photo
+		texture: photo
+	}
+	{
+		name: soap
+		texture: soap
+	}
+	{
+		name: soda
+		texture: soda
+	}
+	{
+		name: sugar
+		texture: sugar
+	}
+	{
+		name: usb
+		texture: usb
+	}
+	{
+		name: weed killer
+		texture: weedKiller
+	}
+]
+combinations: [
+	{
+		ingredients: [
+			duct tape
+			soda
+			sugar
+			weed killer
+		]
+		result: make-shift bomb
+	}
+	{
+		ingredients: [
+			fortune cookie
+		]
+		result: fortune cookie code
+	}
+]
+first: first
+}

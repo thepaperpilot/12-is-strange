@@ -1,0 +1,35 @@
+{
+dialogue: [
+	{
+		name: Max
+		message: Should I go the halls or the restroom?
+		face: maxcloseup
+		options: [
+			{
+				message: I have to go REALLY BADLY
+				effects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: eleventh
+						}
+					}
+				]
+			}
+			{
+				message: I can hold it
+				effects: [
+					{
+						type: CHANGE_SCREEN
+						attributes: {
+							class: java.util.HashMap
+							targetScene: twelfth
+						}
+					}
+				]
+			}
+		]
+	}
+]
+}

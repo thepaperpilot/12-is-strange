@@ -16,7 +16,7 @@ dialogue: [
 		face: maxcloseup
 	}
 	{
-		name: Alyssa
+		name: Warren
 		message: "Awesome. After you get it back, there's some guy looking for you. Something about a code. He looked kinda creepy. Anyways, I'll show you where he is once you get me my flash drive back."
 		face: warrenPuzzle
 	}
