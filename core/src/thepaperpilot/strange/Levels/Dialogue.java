@@ -62,7 +62,7 @@ public class Dialogue extends Table {
     }
 
     public static Dialogue readDialogue(String fileName, Level level) {
-        return new Dialogue(json.fromJson(DialoguePrototype.class, LinePrototype.class, Gdx.files.internal("dialogue/" + fileName + ".json")), level);
+        return new Dialogue(json.fromJson(DialoguePrototype.class, Gdx.files.internal("dialogue/" + fileName + ".json")), level);
     }
 
     private void next() {
@@ -130,18 +130,18 @@ public class Dialogue extends Table {
         }
     }
 
-    static class DialoguePrototype {
+    public static class DialoguePrototype {
         LinePrototype[] dialogue;
     }
 
-    static class LinePrototype {
+    public static class LinePrototype {
         String name;
         String message;
         String face;
         OptionPrototype[] options;
     }
 
-    static class OptionPrototype {
+    public static class OptionPrototype {
         String message;
         Effect.EffectPrototype[] effects;
     }

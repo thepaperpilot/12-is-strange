@@ -239,11 +239,11 @@ public class Cutscene implements Screen {
         }
     }
 
-    static class CutscenePrototype {
+    public static class CutscenePrototype {
         LinePrototype[] scenes;
     }
 
-    static class LinePrototype {
+    public static class LinePrototype {
         float time;
         Effect.EffectPrototype[] effects;
     }

@@ -9,5 +9,5 @@
 
     <set-configuration-property name="gdx.assetpath" value="../core/assets"/>
 
-    <extend-configuration-property name="gdx.reflect.include" value="thepaperpilot.strange.Levels.Dialogue" />
+    <extend-configuration-property name="gdx.reflect.include" value="thepaperpilot.strange.Levels" />
 </module>

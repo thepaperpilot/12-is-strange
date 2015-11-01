@@ -364,7 +364,7 @@ scenes: [
 						attributes: {
 							class: java.util.HashMap
 							targetScene: third
-							dialogue: Alyssa1
+							dialogue: alyssa
 						}
 					}
 				]
@@ -1326,7 +1326,7 @@ scenes: [
 						attributes: {
 							class: java.util.HashMap
 							targetScene: ninth
-							dialogue: Warren1
+							dialogue: warren
 						}
 					}
 				]
@@ -1545,7 +1545,7 @@ scenes: [
 						attributes: {
 							class: java.util.HashMap
 							targetScene: eleventh
-							dialogue: Detective1
+							dialogue: detective
 						}
 					}
 				]
@@ -1625,7 +1625,7 @@ scenes: [
 						attributes: {
 							class: java.util.HashMap
 							targetScene: twelfth
-							dialogue: Final1
+							dialogue: final
 						}
 					}
 				]
