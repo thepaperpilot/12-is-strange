@@ -1,0 +1,71 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{setspace}
+\usepackage{dirtytalk}
+\doublespacing
+\usepackage[letterpaper,margin=0.75in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{12-is-Strange}
+\chead{Design Document}
+\rhead{thepaperpilot}
+\rfoot{Page \thepage}
+
+\begin{document}
+  \tableofcontents
+
+  \section{Story}
+
+  \subsection{Characters}
+  \subsubsection*{Sam}
+  I like short, gender neutral names, but of course not \say{Max}, so I think the main character should be named \say{Sam}. I don't have their personality set up yet. Actually, they probably shouldn't have one, to make it easier for the player to project onto them.
+
+  \subsubsection*{Friends}
+  First off, I'd like to mention these are all adults in, like, their late 20s to early 30s, as is Sam. The main character is traveling with several others:
+  \begin{itemize}
+     \item \emph{Best Friend:} Character with whom Sam has a giant bromantic relationship. BFFs, etc. Being open source and having a story is kind of an issue, but I feel putting spoilers in a file marked \say{story} should be allowed, so I'll just say it: Best Friend is already dead, game is about Sam dealing with loss, it'll get super emotional late game (ideally. If we can't pull it off the story should be changed). Just to hit it home more, make this character spirited and energetic.
+
+    \item \emph{Support Character/Love Interest:} Character providing support to Sam, prolly jealous of Best Friend. Yep, clich\'e as hell. We can deal with making things unique and dynamic once everything's written out. Nothing is set in stone, that's why we use version control.
+
+    \item \emph{Comic Relief:} You gotta have one. Just don't over use it
+  \end{itemize}
+
+  \subsubsection*{Big Bad Evil Guy}
+  Because games also need a BBEG. This guy is basically emotionless. Make his movements/actions cold and sudden, without grace or passion. A complete opposite from Best Friend. In case it's not subtle enough, BBEG is a physical manifestation of grief, in an abstract kind of way. Or just, how I picture grief. Prolly that second one.
+
+  \subsection{Plot}
+  \subsubsection*{Backstory/Introduction}
+  Sam and company(including BBEG) are a team of spelunkers. They go down caves for adventure. It's a hobby, but one they take passionately. So this one time they find some cool thing, prolly worth a lot or something. But it's all special, and is the trigger for Sams' powers. When BBEG sees that he becomes Mr. Traitor and grabs the thing and runs, causing a collapse or something that traps Sam and the rest of the team. Before BBEG grabbed the artifact, Sam touched it, and got time travel powers. Sam then uses these powers to escape, specifically by preventing the collapse from occurring, so everyone sees BBEG running off, and then the team ventures off to find BBEG.
+
+  \subsubsection*{Level themes}
+  Every level will have a different theme relating to one of the 5 stages of grief in the K\"ubler-Ross model. Remember, Best Friend is dead and this is Sam's way of dealing with it. The actual cause of Best Friend's death is ambiguous, and unnecessary to the themes of the story. Keep in mind each of these levels will be made up of many different areas, and will even include different sets of areas being unlocked, inside of one giant level. Point is, these are large levels.
+  \begin{enumerate}[1.]
+    \item \emph{Denial:} Introduce characters, having fun, etc. Nothing seems to be wrong. BBEG becomes a bad guy, and entire team goes after them, but together, secure in their own attachments to each other. Give players choices that are, in the grand scheme of things, pointless. \say{A first world problem}
+    \item \emph{Anger:} Player and company begin arguing amongst themselves instead of focusing on getting BBEG, allowing BBEG to slip further and further away. Characters act irrationally. Give players choices where all options have clear negative effects.
+    \item \emph{Bargaining:} BBEG does bad things, things start getting more desperate. Characters question motives of themselves and each other. Making promises of when too much effort is being spent to just give up on BBEG, but because of bad stuff BBEG is doing, this doesn't happen. To clarify, I don't have any specific bad things that BBEG is doing, but its clear (to Sam, or at least the Player) that BBEG has time travel powers as well. This is the level where the characters find out about the cult or whatever that originally discovered the artifact, make some prophesies or something. Look, this is just an outline at this point. I'm still expecting these levels to be huge, and therefore released one at a time.
+    \item \emph{Depression:} BBEG does something so climatically horrible, the shock factor is off the scale. Maybe they kill off the comic relief. Idk. But anyways, Sam will try to stop this from happening but end up failing. Create tension, basically have 3 \say{solutions}, that all don't work. When they player finishes the last solution, something happens that makes it so she can't go back anymore.
+    \item \emph{Acceptance:} Last episode. Some stuff happens, finally scenes are Best Friend sacrificing theirself in order to defeat BBEG. Sam is cool with this. On paper I haven't really mentioned it, but the idea is that Best Friend's death has been hinted at throughout the game, and Sam has been interacting with Best Friend in ways that make a final goodbye acceptable. Regardless, do flash backs and shit to make it emotional.
+  \end{enumerate}
+
+  \section{Gameplay}
+  In the old version, each time was linked with a specific area. Now, the player will have a clock in the HUD that will allow them to reverse or accelerate time. They can be at any time they won't, in any area they want. But, they have to physically get to an area first. So, with barriers and stuff, some areas will be restricted and stuff.
+
+  Areas will change over time. Every IRL minute, one ingame hour will pass. At that point, if stuff changes, there'll be a cutscene making it happen. If the events in that cutscene kill the player or do something else we can't allow, then time will automatically rewind to the start of the previous hour. If the player tries to reverse time and the events would do something we can't allow, they are forced to stop at the beginning of the hour immediately after the event.
+
+  \section{Other Notes}
+  A lot of this story is clich\'e, but it's still original in the sense it wasn't completely ripped from LiS, let alone the puzzles. I think implementing this story will be a lot of work, and should definitely be done in spare time when other projects don't need attention. This is super ambitious, which is why it's important to break it into smaller pieces. Release each level separately, maybe even just parts of levels. But don't try to make the entire game all at once, or you'll burn out and never finish.
+
+  This design document is super small. Keep on expanding it, and collaborate on it, etc.
+
+\end{document}
