@@ -91,8 +91,6 @@ public class Main extends Game implements Screen {
             entities = manager.get("entities.atlas", TextureAtlas.class);
             skin.getFont("large").getData().setScale(.5f);
             skin.getFont("font").getData().setScale(.25f);
-            manager.get("audio/bgm.ogg", Music.class).setLooping(true);
-            manager.get("audio/bgm.ogg", Music.class).play();
 
             setScreen(new MenuScreen());
         }

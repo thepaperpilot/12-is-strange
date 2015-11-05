@@ -3,6 +3,7 @@ package thepaperpilot.strange.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -40,6 +41,8 @@ public class MenuScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
+                        Main.manager.get("audio/bgm.ogg", Music.class).setLooping(true);
+                        Main.manager.get("audio/bgm.ogg", Music.class).play();
                         Main.reverse = true;
                         Main.changeScreen(Level.readLevel("levels/first.json").firstScene);
                     }
