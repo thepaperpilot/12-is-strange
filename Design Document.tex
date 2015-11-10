@@ -63,6 +63,17 @@
 
   Areas will change over time. Every IRL minute, one ingame hour will pass. At that point, if stuff changes, there'll be a cutscene making it happen. If the events in that cutscene kill the player or do something else we can't allow, then time will automatically rewind to the start of the previous hour. If the player tries to reverse time and the events would do something we can't allow, they are forced to stop at the beginning of the hour immediately after the event.
 
+  \subsection{Time travel mechanic}
+  Clock appears on bottom of screen, half of it off the screen. It's probably either 64x64 or 128x128. It has 3 buttons. The left button goes back in time, the right button goes forward. The center button moves the clock up, and moves the button to the bottom of the clock, where clicking it will bring it back down.
+
+  Touchdown on left/right buttons sets booleans for time travelling. TouchUp resets these bools. There are events ("cutscenes") that happen at certain times. These cutscenes are much like how they were in V1, but now every action also details how the reverse it. Additonally, the cutscene has a start time, end time, and a boolean for whether or not it has happened. As time goes forward, game checks for cutscenes that should have started but haven't yet, and starts them. Going backward it checks for scenes that should have ended but haven't(sorry, I phrased that bad. Hopefully you can figure it out), and startes reversing their actions. When cutscenes are going on, the time travel booleans cannot be flipped.
+
+  When the player changes areas, simulate time travel (without showing it to the player) from the last time it was in the new area, to the current time in the world. If that world time is during a cutscene, forward to when the cutscene ends.
+
+  Also, make left/right or shift/space control time. Use static strings set in the launchers to modify instructions for showing the player how to travel through time.
+
+  To set the world time, make a float. Add delta to float every frame, and use that to set the clock's hands' rotations. Multiply (time \% 60) by 60 for the angle of the minute hand. Hour hand angle is time / 2.
+
   \section{Other Notes}
   A lot of this story is clich\'e, but it's still original in the sense it wasn't completely ripped from LiS, let alone the puzzles. I think implementing this story will be a lot of work, and should definitely be done in spare time when other projects don't need attention. This is super ambitious, which is why it's important to break it into smaller pieces. Release each level separately, maybe even just parts of levels. But don't try to make the entire game all at once, or you'll burn out and never finish.
 
@@ -73,6 +84,6 @@
 
   After \say{finishing} the cave, zoom out to have a giant landscape, with the characters traveling across it. Play some music, do some crossfades to other landscapes, and in the last one have a giant logo in the landscape, above the characters. Try making a tilt shift or something to make the logo appear to be in the environment. Maybe have clouds go over it or something. At this point the characters walk into a cave at the right edge of the screen.\\
 
-  This is where BBEG does the betrayal, and the players have to escape. The player gets their power, and this is effectively part 2 of the tutorial. Once they leave the cave the tutorial is officially \say{over}. Stop here for now. 
+  This is where BBEG does the betrayal, and the players have to escape. The player gets their power, and this is effectively part 2 of the tutorial. Once they leave the cave the tutorial is officially \say{over}. Stop here for now.
 
 \end{document}
