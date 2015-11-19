@@ -28,6 +28,7 @@ public class Entity extends Image {
     private boolean flip;
 
     public Entity(EntityPrototype prototype, Scene scene) {
+        // create the entity from the prototype
         name = prototype.name;
         this.scene = scene;
         this.visible = prototype.visible;
@@ -38,8 +39,10 @@ public class Entity extends Image {
         setPosition(prototype.x, prototype.y);
 
         if (visible)
+            // add to the stage
             scene.stage.addActor(this);
 
+        // load the effects for when this entity's puzzle is solved (if it has one)
         if (prototype.successEffects != null) {
             successEffects = new Effect[prototype.successEffects.length];
             for (int i = 0; i < prototype.successEffects.length; i++) {
@@ -47,6 +50,7 @@ public class Entity extends Image {
             }
         }
 
+        // load the effects for when this entity's puzzle is not solved (if it has one)
         if (prototype.failEffects != null) {
             failEffects = new Effect[prototype.failEffects.length];
             for (int i = 0; i < prototype.failEffects.length; i++) {
@@ -54,6 +58,7 @@ public class Entity extends Image {
             }
         }
 
+        // load the effects for when this entity's puzzle has already been solved (if it has one)
         if (prototype.doneEffects != null) {
             doneEffects = new Effect[prototype.doneEffects.length];
             for (int i = 0; i < prototype.doneEffects.length; i++) {
@@ -61,6 +66,10 @@ public class Entity extends Image {
             }
         }
 
+        // so the JSON file doesn't have to write the same thing twice,
+        // just don't add any success effects if they should be the same
+        // as the done effects. This code will copy them over
+        // (actually, its better than copying. Just copies the reference)
         if (prototype.successEffects == null) {
             successEffects = doneEffects;
         }
@@ -70,16 +79,20 @@ public class Entity extends Image {
         switch (type) {
             default:
             case IMAGE:
+                // change the entity's look to an image
                 setDrawable(new TextureRegionDrawable(Main.entities.findRegion(attributes.get("texture"))));
                 setSize(getDrawable().getMinWidth(), getDrawable().getMinHeight());
                 break;
             case ANIMATION:
+                // change the entity's look to an animation
+                // create the animation
                 TextureRegion animSheet = Main.animations.findRegion(attributes.get("texture"));
                 setHeight(animSheet.getRegionHeight());
                 setWidth(animSheet.getRegionWidth() / Integer.parseInt(attributes.get("numFrames")));
                 TextureRegion[][] tmp = animSheet.split((int) getWidth(), (int) getHeight());
                 TextureRegion[] frames = tmp[0];
                 animation = new Animation(Float.parseFloat(attributes.get("speed")), frames);
+                // set some animation-specific variables
                 loop = true;
                 if (attributes.get("loop") != null)
                     loop = Boolean.valueOf(attributes.get("loop"));
@@ -87,6 +100,7 @@ public class Entity extends Image {
                 time = 0;
                 break;
             case CLOCK:
+                // change the entity's look to a clock
                 animSheet = Main.animations.findRegion(attributes.get("texture"));
                 setHeight(animSheet.getRegionHeight());
                 setWidth(animSheet.getRegionWidth() / Integer.parseInt(attributes.get("numFrames")));
@@ -102,25 +116,33 @@ public class Entity extends Image {
     }
 
     public void act(float delta) {
+        // check if an animation
         if (type == Type.ANIMATION) {
+            // find the current frame
             time += Gdx.graphics.getDeltaTime();
             TextureRegion currentFrame = new TextureRegion(animation.getKeyFrame(time, loop));
             if(flip)
                 currentFrame.flip(true, false);
             setDrawable(new TextureRegionDrawable(currentFrame));
+            // if the animation is done and doesn't loop, remove the entity
             if (!loop && time > animation.getAnimationDuration()) {
                 visible = false;
                 remove();
             }
         }
+        // update actions
         super.act(delta);
     }
 
     public void onTouch() {
+        // check if this is a puzzle
         if (requiredItems == null) {
+            // if its not a puzzle, run successeffects
             if (successEffects != null)
                 for (Effect effect : successEffects) effect.run();
+        // if it is a puzzle, see if we've already completed it
         } else if (locked) {
+            // if we haven't completed it, check if we can now
             boolean success = true;
             for (String item : requiredItems) {
                 if (!scene.level.selected.contains(scene.level.items.get(item))) {
@@ -128,13 +150,16 @@ public class Entity extends Image {
                     break;
                 }
             }
+            // if we meet the requirements, do whatever we do when we complete the puzzle
             if (success) {
                 locked = false;
                 if (successEffects != null) for (Effect effect : successEffects) effect.run();
+            // otherwise do whatever we do when the puzzle can't be completed yet
             } else {
                 if (failEffects != null)
                     for (Effect effect : failEffects) effect.run();
             }
+        // do whatever we do when the puzzle has already been completed
         } else if (doneEffects != null) for (Effect effect : doneEffects) {
             effect.run();
         }
