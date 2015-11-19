@@ -36,25 +36,33 @@ public class Scene implements Screen {
     Max max;
 
     public Scene(final ScenePrototype prototype, final Level level) {
+        // create the scene from the prototype
         name = prototype.name;
         this.level = level;
         obstacles = prototype.obstacles;
         background = new Image(Main.backgrounds.findRegion(prototype.background));
 
+        // create a stage for the game, and one for the ui
+        // the ui has to be different because it has a higher resolution
         stage = new Stage(new StretchViewport(background.getWidth(), background.getHeight()));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         ui = new Stage(new StretchViewport(640, 360));
 
+        // add the background to the stage
         stage.addActor(background);
 
+        // add the entities to the stage
         for (Entity.EntityPrototype entityPrototype : prototype.entities) {
             try {
                 final Entity entity = new Entity(entityPrototype, this);
 
+                // add click listeners to the entity to move the player to it and activate the entity
                 entity.addListener(new ClickListener(Input.Buttons.LEFT) {
                     public void clicked(InputEvent event, float x, float y) {
                         target = entity;
                         x = entity.getX();
+                        // check for obstacles, and if needed move the target
+                        // also don't activate the entity if its past an obstacle
                         for (Rectangle obstacle : obstacles.values()) {
                             if (entity.getX() >= obstacle.x - max.getWidth() / 2f && max.getX() <= obstacle.x) {
                                 x = obstacle.x - max.getWidth() / 2f - 2;
@@ -68,6 +76,7 @@ public class Scene implements Screen {
                             }
                         }
                         max.target = (int) x;
+                        // don't continue handling the event, so the stage doesn't reset the target
                         event.reset();
                     }
                 });
@@ -78,9 +87,12 @@ public class Scene implements Screen {
             }
         }
 
+        // add Max to the scene
         max = new Max(64, 10);
         stage.addActor(max);
 
+        // make clicking somewhere bring the player to it
+        // TODO make a 2 dimensional walking space (vertical barriers)
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 for (Rectangle obstacle : obstacles.values()) {
@@ -94,6 +106,7 @@ public class Scene implements Screen {
             }
         });
 
+        // make right clicking travel back in time
         stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
                 if (prototype.previous != null) {
@@ -111,6 +124,7 @@ public class Scene implements Screen {
             }
         });
 
+        // if we can go back in time, show an indicator to the player
         if (prototype.previous != null) {
             previous = prototype.previous;
             Table table = new Table(Main.skin);
@@ -127,6 +141,7 @@ public class Scene implements Screen {
             ui.addActor(table);
         }
 
+        // add an inventory table to the ui
         inventoryTable = new Table(Main.skin);
         inventoryTable.setSize(ui.getWidth() - 30, 38);
         inventoryTable.setPosition(30, ui.getHeight() - 38);
@@ -163,14 +178,17 @@ public class Scene implements Screen {
 
     @Override
     public void render(float delta) {
+        // if we're travelling through time, show the time particles
         if (transition)
             Main.renderParticles(delta);
 
+        // if we touch an entity, activate it
         if (target != null && max.getX() == max.target) {
             target.onTouch();
             target = null;
         }
 
+        // update and render everything
         stage.act(delta);
         stage.draw();
         ui.act(delta);
@@ -205,6 +223,7 @@ public class Scene implements Screen {
     }
 
     public void say(String message) {
+        // create a label underneath the player that fades out/up
         Main.manager.get("audio/error.wav", Sound.class).play();
         final Label label = new Label(message, Main.skin);
         label.setPosition((int) ((max.getX() + max.getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
