@@ -25,13 +25,16 @@ public class Item extends Button {
     public Item(final Item item) {
         super(Main.skin, "toggle");
 
+        // create the image for the inventory list
         add(new ImageButton(new TextureRegionDrawable(Main.entities.findRegion(item.texture + "Inv")))).padBottom(1).row();
         Label invLabel = new Label(item.name, Main.skin);
         add(invLabel);
 
+        // check if we're being selected
         if (item.level.selected.contains(item.level.items.get(item.name)))
             toggle();
 
+        // add a listener to select and deselect the item
         addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 Item thisItem = item.level.items.get(item.name);
