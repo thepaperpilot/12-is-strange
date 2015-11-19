@@ -15,6 +15,7 @@ public class RightClickIndicator extends Image {
     private float time;
 
     public RightClickIndicator() {
+        // create the indicator animation
         TextureRegion indicatorSheet = Main.animations.findRegion("rightClickIndicator");
         TextureRegion[][] tmp = indicatorSheet.split(indicatorSheet.getRegionWidth() / 2, indicatorSheet.getRegionHeight());
         TextureRegion[] frames = tmp[0];
@@ -23,9 +24,12 @@ public class RightClickIndicator extends Image {
     }
 
     public void draw(Batch batch, float parentAlpha) {
+        // find the current frame of the animation
         time += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = new TextureRegion(indicator.getKeyFrame(time, true));
         setDrawable(new TextureRegionDrawable(currentFrame));
+
+        // and then draw this
         super.draw(batch, parentAlpha);
     }
 }
