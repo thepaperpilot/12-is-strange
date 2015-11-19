@@ -28,30 +28,42 @@ public class Cutscene implements Screen {
     private Entity max;
 
     public Cutscene(CutscenePrototype cutscenePrototype, Scene scene, Level level) {
+        // keep this so we can return once the cutscene is over
         previous = scene;
+
+        // our parent, used for setting up the inventory, and to pass to effects
         this.level = level;
+
+        // create the various parts of the cutscene based on the prototypes
         for (LinePrototype prototype : cutscenePrototype.scenes) {
             lines.add(new Line(prototype, this));
         }
 
+        // if our cutscene is empty, let's go ahead and not do anything
         if (lines.size() == 0)
             return;
 
+        // create our stages. One for the game stuff, one for the UI
         stage = new Stage(new StretchViewport(256, 144));
         ui = new Stage(new StretchViewport(640, 360));
 
+        // add our background to the stage
         stage.addActor(new Image(scene.background.getDrawable()));
 
+        // add the other entities to the stage
         for (int i = 0; i < scene.entities.size(); i++) {
             if(((Entity) scene.entities.values().toArray()[i]).visible)
                 stage.addActor((Actor) scene.entities.values().toArray()[i]);
         }
+
+        // add max to the stage
         Entity.EntityPrototype maxPrototype = new Entity.EntityPrototype("max", "ANIMATION", (int) scene.max.getX(), (int) scene.max.getY(), true, null);
         maxPrototype.attributes.put("texture", "maxIdle");
         maxPrototype.attributes.put("numFrames", "28");
         maxPrototype.attributes.put("speed", ".1");
         stage.addActor(max = new Entity(maxPrototype, previous));
 
+        // add the inventory table to the ui
         inventoryTable = new Table(Main.skin);
         inventoryTable.setSize(ui.getWidth() - 30, 38);
         inventoryTable.setPosition(30, ui.getHeight() - 38);
@@ -62,15 +74,21 @@ public class Cutscene implements Screen {
 
         ui.addActor(inventoryTable);
 
+        // start the cutscene
         next();
     }
 
     public static Cutscene readCutscene(String fileName, Scene scene, Level level) {
+        // load the cutscene from a file using voodoo magic (reflections)
+        // yay for libGDX for making this so easy!
+        // Also, it uses prototypes so the file can have only the necessary variables
+        // without any boilerplating
         return new Cutscene(json.fromJson(CutscenePrototype.class, LinePrototype.class, Gdx.files.internal("cutscenes/" + fileName + ".json")), scene, level);
     }
 
 
     public void say(String message) {
+        // create a label below the player that slowly fades out/upwards
         Main.manager.get("audio/error.wav", Sound.class).play();
         final Label label = new Label(message, Main.skin);
         label.setPosition((int) ((max.getX() + max.getWidth() / 2f) * ui.getWidth() / stage.getWidth() - label.getWidth() / 2f), 5);
@@ -91,7 +109,9 @@ public class Cutscene implements Screen {
     }
 
     private void next() {
+        // check if we've finished the cutscene
         if (lines.size() <= line) {
+            // update the previous screen with the updated entities after the cutscene
             previous.stage.getActors().clear();
             previous.stage.addActor(previous.background);
             for (int i = 0; i < previous.entities.size(); i++) {
@@ -101,10 +121,13 @@ public class Cutscene implements Screen {
             previous.max.setX(max.getX());
             previous.max.setY(max.getY());
             previous.stage.addActor(previous.max);
+
+            // go back to the previous scene
             Main.changeScreen(previous);
             return;
         }
 
+        // go to the next part of the cutscene
         Line nextLine = lines.get(line);
         time = 0;
         for (Effect effect : nextLine.effects) {
@@ -116,14 +139,17 @@ public class Cutscene implements Screen {
 
     @Override
     public void show() {
+        // do this so the player can't mess with the cutscene by clicking on entities and shit
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
+        // check if its time for the next part of the cutscene
         time += delta;
         if (time > lines.get(line - 1).length) next();
 
+        // update and render everything
         stage.act();
         stage.draw();
         ui.act();
@@ -160,10 +186,14 @@ public class Cutscene implements Screen {
         Effect[] effects;
 
         Line(LinePrototype prototype, final Cutscene scene) {
+            // length is the amount of time before the next part of the cutscene
             length = prototype.time;
+            // effects are the various actions that happen at each part of the animation
             effects = new Effect[prototype.effects.length];
             for (int i = 0; i < prototype.effects.length; i++) {
                 effects[i] = new Effect(prototype.effects[i], scene.level) {
+                    // we have to override all of these because the cutscene effectively masquerades as the previous scene
+                    // see the original method for comments on what the types are doing
                     public void run() {
                         switch (type) {
                             case REMOVE_ENTITY:
