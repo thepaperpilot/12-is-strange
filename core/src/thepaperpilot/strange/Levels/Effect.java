@@ -21,41 +21,54 @@ public class Effect {
     public void run() {
         switch (type) {
             case REMOVE_ENTITY:
+                // find an entity and make it invisible
+                // its still there, but is not visible to the player and can't be interacted with
+                // use ADD_ENTITY to make it visible again, and interactable
                 Scene scene = level.scenes.get(attributes.get("targetScene"));
                 Entity entity = scene.entities.get(attributes.get("targetEntity"));
                 entity.visible = false;
                 entity.remove();
                 break;
             case ADD_ENTITY:
+                // find an entity and make it visible
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
                 entity.visible = true;
                 scene.stage.addActor(entity);
                 break;
             case MOVE_ENTITY:
+                // find an entity and move it, optionally over time
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
                 entity.addAction(Actions.moveTo(Float.valueOf(attributes.get("newX")), Float.valueOf(attributes.get("newY")), Float.valueOf(attributes.get("time"))));
                 break;
             case REMOVE_ITEM:
+                // remove an item from the player's inventory
                 Item item = level.items.get(attributes.get("targetItem"));
                 level.inventory.remove(item);
                 level.selected.remove(item);
                 level.updateInventory();
                 break;
             case ADD_ITEM:
+                // add an item to the player's inventory
                 Main.manager.get("audio/pickup.wav", Sound.class).play();
                 item = level.items.get(attributes.get("targetItem"));
                 level.inventory.add(item);
                 level.updateInventory();
                 break;
             case REMOVE_BARRIER:
+                // remove a barrier that blocks player movement
                 scene = level.scenes.get(attributes.get("targetScene"));
                 scene.obstacles.remove(attributes.get("targetObstacle"));
                 break;
+            // TODO ADD_BARRIER
             case CHANGE_APPEARANCE:
+                // find an entity and change its appearance
                 scene = level.scenes.get(attributes.get("targetScene"));
                 entity = scene.entities.get(attributes.get("targetEntity"));
+                // because the appearance can be a still or an animation or something else,
+                // check for any possible attributes and pass them to the entity
+                // a bit hard-code-y for me, but meh
                 if (attributes.get("type") != null)
                     entity.type = Entity.Type.valueOf(attributes.get("type"));
                 if (attributes.get("texture") != null)
@@ -73,31 +86,39 @@ public class Effect {
                 entity.updateAppearance();
                 break;
             case SAY:
+                // create a label below the player that fades out/up
                 scene = level.scenes.get(attributes.get("targetScene"));
                 scene.say(attributes.get("message"));
                 break;
             case DIALOGUE:
+                // start a dialogue sequence
                 scene = level.scenes.get(attributes.get("targetScene"));
                 scene.ui.addActor(Dialogue.readDialogue(attributes.get("dialogue"), level));
                 break;
             case PLAY_SOUND:
+                // play a sound
                 Main.manager.get("audio/" + attributes.get("sound") + ".wav", Sound.class).play();
                 break;
             case CUTSCENE:
+                // start a cutscene sequence
                 Main.changeScreen(Cutscene.readCutscene(attributes.get("cutscene"), level.scenes.get(attributes.get("targetScene")), level));
                 break;
             case CHANGE_SCREEN:
+                // move to another area
                 Main.manager.get("audio/error.wav", Sound.class).play();
                 scene = level.scenes.get(attributes.get("targetScene"));
                 Main.changeScreen(scene);
                 break;
             case CHANGE_LEVEL:
+                // move to another level
                 Level level = Level.readLevel("levels/" + attributes.get("targetLevel") + ".json");
                 Main.changeScreen(level.firstScene);
                 break;
             case RUN_EFFECT:
+                // just a passthrough, basically
                 EffectPrototype prototype = new EffectPrototype();
                 prototype.type = attributes.get("effect");
+                // prevent infinite recursion
                 if(prototype.type.equals("RUN_EFFECT"))
                     return; // nice try!
                 prototype.attributes = attributes;
