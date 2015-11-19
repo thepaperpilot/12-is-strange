@@ -30,13 +30,16 @@ public class Dialogue extends Table {
         setFillParent(true);
         setTouchable(Touchable.enabled);
 
+        // create each part of the dialogue
         for (LinePrototype prototype : dialoguePrototype.dialogue) {
             lines.add(new Line(prototype, level));
         }
 
+        // if the dialogue is empty, let's go ahead and not do anything
         if (lines.size() == 0)
             return;
 
+        // create the dialogue ui
         face.setScale(6); // exact value TBD
         messageLabel.setAlignment(Align.topLeft);
         messageLabel.setWrap(true);
@@ -46,31 +49,41 @@ public class Dialogue extends Table {
         add(name).bottom().row();
         add(message).colspan(2).expandX().fillX().height(100).row();
 
+        // left click to advance the dialogue
         addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 next();
             }
         });
 
+        // right click to undo the conversation
+        // TODO make this enable/disable-able
         addListener(new ClickListener(Input.Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
                 remove();
             }
         });
 
+        // start the dialogue
         next();
     }
 
     public static Dialogue readDialogue(String fileName, Level level) {
+        // load the cutscene from a file using voodoo magic (reflections)
+        // yay for libGDX for making this so easy!
+        // Also, it uses prototypes so the file can have only the necessary variables
+        // without any boilerplating
         return new Dialogue(json.fromJson(DialoguePrototype.class, Gdx.files.internal("dialogue/" + fileName + ".json")), level);
     }
 
     private void next() {
+        // check if we're done with the dialogue
         if (lines.size() <= line) {
             remove();
             return;
         }
 
+        // update the dialogue ui for the next part of the dialogue
         Line nextLine = lines.get(line);
         face.setDrawable(nextLine.face);
         name.setText(nextLine.name);
@@ -96,6 +109,8 @@ public class Dialogue extends Table {
         Line(LinePrototype prototype, Level level) {
             name = prototype.name;
             message = prototype.message;
+
+            // create the face for the talker
             if (prototype.face != null) {
                 face = new Image(Main.entities.findRegion(prototype.face)).getDrawable();
             }
@@ -112,13 +127,16 @@ public class Dialogue extends Table {
         Effect[] effects;
 
         Option(OptionPrototype prototype, Level level) {
+            // indicate this is a button by preceding it with a ">"
             super("> " + prototype.message, Main.skin, "large");
 
+            // create the actions to occur when the option is selected
             effects = new Effect[prototype.effects.length];
             for (int i = 0; i < prototype.effects.length; i++) {
                 effects[i] = new Effect(prototype.effects[i], level);
             }
 
+            // do the actions when this button is clicked
             addListener(new ClickListener(Input.Buttons.LEFT) {
                 public void clicked(InputEvent event, float x, float y) {
                     Main.manager.get("audio/select.wav", Sound.class).play();
