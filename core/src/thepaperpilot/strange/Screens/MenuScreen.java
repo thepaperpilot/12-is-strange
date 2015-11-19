@@ -29,11 +29,14 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
+        // create a stage for everything
         stage = new Stage(new StretchViewport(256, 144));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
 
+        // create a title label
         Label title = new Label("12 is Strange", Main.skin, "large");
+        // create a start game button
         Button start = new TextButton("Start Game", Main.skin);
         start.addListener(new ClickListener(Input.Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
@@ -49,20 +52,24 @@ public class MenuScreen implements Screen {
                 })));
             }
         });
+        // add ui elements to the stage
         Table table = new Table(Main.skin);
         table.setFillParent(true);
         table.top().add(title).padTop(40).padBottom(10).row();
         table.add(start);
         stage.addActor(table);
 
+        // add a clock to the background scene
         Entity.EntityPrototype clockPrototype = new Entity.EntityPrototype(null, "CLOCK", 3 * (int) stage.getWidth() / 4, (int) stage.getHeight() / 2, false, null);
         clockPrototype.attributes.put("texture", "clock");
         clockPrototype.attributes.put("numFrames", "12");
         clockPrototype.attributes.put("time", "12");
         clock = new Entity(clockPrototype, null);
+        // add an AI max to the background scene
         max = new Max((int) stage.getWidth() / 4, 10);
         stage.addActor(max);
         stage.addActor(clock);
+        // add a cat to the background scene
         Entity.EntityPrototype catPrototype = new Entity.EntityPrototype(null, "ANIMATION", (int) stage.getWidth() / 3, 10, false, null);
         catPrototype.attributes.put("texture", "catIdle");
         catPrototype.attributes.put("numFrames", "14");
@@ -70,6 +77,7 @@ public class MenuScreen implements Screen {
         Entity cat = new Entity(catPrototype, null);
         stage.addActor(cat);
 
+        // make the backgrounds transition between various area backgrounds
         backgrounds = new Image[]{
                 new Image(Main.backgrounds.findRegion("school")),
                 new Image(Main.backgrounds.findRegion("bathroom")),
@@ -84,9 +92,12 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        // as time goes on, make stuff happen randomly
         time += ran.nextFloat() * delta;
         if (time > 1) {
             if (ran.nextInt(5) == 0)
+                // change the background every ~5 seconds
+                // potentially to the same background
                 background.addAction(Actions.sequence(Actions.fadeOut(.5f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -100,8 +111,12 @@ public class MenuScreen implements Screen {
                         background.addAction(Actions.fadeIn(.5f));
                     }
                 })));
+            // make max move somewhere every ~3 seconds
+            // potentially to the same spot
             if (ran.nextInt(3) == 0)
                 max.target = ran.nextInt((int) stage.getWidth());
+            // change the time on the clock every second
+            // potentially to the same time
             clock.attributes.put("time", String.valueOf(1 + ran.nextInt(12)));
             clock.updateAppearance();
             time = 0;
